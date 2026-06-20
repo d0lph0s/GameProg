@@ -1,0 +1,33 @@
+### Windows
+# Windows thumbnail cache files
+Thumbs.db
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows shortcuts
+*.lnk
+
+# Godot 4.2+ specific ignores
+~*.dll
+
+# Godot 4+ specific ignores
+.godot/
+.nomedia
+
+# Godot-specific ignores
+.import/
+export.cfg
+export_credentials.cfg
+*.tmp
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
