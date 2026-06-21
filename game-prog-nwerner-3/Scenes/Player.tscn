@@ -1,42 +1,51 @@
 [gd_scene format=3 uid="uid://c1k6grvuynkf8"]
 
 [ext_resource type="Script" uid="uid://4baq66rbvasm" path="res://Scripts/player.gd" id="1_6t5aa"]
-[ext_resource type="ArrayMesh" uid="uid://bl2l0wtn2vvdn" path="res://Art/3D/Characters/Player/HumanF_Mesh.res" id="2_vgqql"]
-[ext_resource type="Texture2D" uid="uid://cg48jojyudwq1" path="res://Art/3D/Characters/Player/HumanAnimations_ColorPalette.png" id="3_fkybt"]
+[ext_resource type="PackedScene" uid="uid://cllyag1lkur41" path="res://Scenes/PlayerModel.tscn" id="2_gntrk"]
+[ext_resource type="Shader" uid="uid://bmj4cmt61mt07" path="res://Art/2D/Shader/chromatic_abberation.gdshader" id="4_dewec"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_writ7"]
 radius = 0.4
-height = 1.6680664
+height = 1.7354004
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tdnec"]
-albedo_texture = ExtResource("3_fkybt")
-
-[sub_resource type="QuadMesh" id="QuadMesh_tdnec"]
-flip_faces = true
-size = Vector2(2, 2)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_writ7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i6fqs"]
+shader = ExtResource("4_dewec")
+shader_parameter/levels = 5
+shader_parameter/spread = 0.1
 
 [node name="Player" type="CharacterBody3D" unique_id=38466257]
 script = ExtResource("1_6t5aa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1434518248]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9340332, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96770024, 0)
 shape = SubResource("CapsuleShape3D_writ7")
 
 [node name="Mesh" type="Node3D" parent="." unique_id=902892264]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh" unique_id=680252531]
-mesh = ExtResource("2_vgqql")
-surface_material_override/0 = SubResource("StandardMaterial3D_tdnec")
+[node name="PlayerModel" parent="Mesh" unique_id=457790362 instance=ExtResource("2_gntrk")]
 
 [node name="CameraHead" type="Node3D" parent="." unique_id=268881830]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6388261, -0.15520054)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraHead" unique_id=712992366]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.35425144)
-mesh = SubResource("QuadMesh_tdnec")
-surface_material_override/0 = SubResource("ShaderMaterial_writ7")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7229743, -0.113566905)
 
 [node name="Camera3D" type="Camera3D" parent="CameraHead" unique_id=2140618423]
+
+[node name="Control" type="Control" parent="." unique_id=429013575]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1576975646]
+material = SubResource("ShaderMaterial_i6fqs")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
