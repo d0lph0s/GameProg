@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://cs4l0psoivy8d"]
+
+[ext_resource type="FontFile" uid="uid://dqkcrom88unpv" path="res://Art/2D/UI/SyneMono-Regular.ttf" id="1_3anmb"]
+
+[resource]
+default_font = ExtResource("1_3anmb")
+default_font_size = 18

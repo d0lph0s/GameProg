@@ -1,0 +1,625 @@
+[gd_scene format=3 uid="uid://drrrdqkr8skn1"]
+
+[ext_resource type="Script" uid="uid://b1e156ae7svyt" path="res://Art/3D/Weapons/weapon_modulator.gd" id="1_yltro"]
+[ext_resource type="PackedScene" uid="uid://cb3fdcg3h7ldb" path="res://Art/3D/Weapons/MW1_Platform_12ga_01.fbx" id="2_ovc61"]
+[ext_resource type="Theme" uid="uid://cs4l0psoivy8d" path="res://Art/2D/UI/MainFontTheme.tres" id="3_8qb6n"]
+[ext_resource type="Script" uid="uid://cwguagkqcww10" path="res://Scripts/weapons_menu.gd" id="4_ovc61"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_02q03"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_8qb6n"]
+sky_material = SubResource("ProceduralSkyMaterial_02q03")
+
+[sub_resource type="Environment" id="Environment_ovc61"]
+background_mode = 2
+sky = SubResource("Sky_8qb6n")
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tdnec"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02q03"]
+albedo_color = Color(0.8509804, 0.05490196, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_02q03"]
+font_size = 18
+
+[node name="Weapons" type="Node3D" unique_id=136330797]
+script = ExtResource("1_yltro")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=411253234]
+environment = SubResource("Environment_ovc61")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1551345917]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Platform" type="Node3D" parent="." unique_id=1725974123]
+
+[node name="MW1_Platform_12ga_01" parent="Platform" unique_id=1254712316 instance=ExtResource("2_ovc61")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1948369329]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.5, 0, 0)
+fov = 66.35489
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=28978261]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.34020007, 0, 0)
+mesh = SubResource("PlaneMesh_tdnec")
+surface_material_override/0 = SubResource("StandardMaterial3D_02q03")
+
+[node name="WeaponsMenu" type="Control" parent="." unique_id=910210828]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Body" type="Control" parent="WeaponsMenu" unique_id=598426572]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_8qb6n")
+script = ExtResource("4_ovc61")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WeaponsMenu/Body" unique_id=1676241197]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainerLeft" type="MarginContainer" parent="WeaponsMenu/Body/HBoxContainer" unique_id=1558863781]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft" unique_id=1782507414]
+layout_mode = 2
+
+[node name="VScrollBar" type="ScrollContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer" unique_id=1004568803]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="WeaponBodyParts" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar" unique_id=715705729]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+mouse_behavior_recursive = 2
+
+[node name="PlatformContainer" type="Control" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts" unique_id=2021481589]
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/PlatformContainer" unique_id=1148794406]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/PlatformContainer/HBoxContainer" unique_id=378137073]
+layout_mode = 2
+text = "Platform"
+label_settings = SubResource("LabelSettings_02q03")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlatformOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/PlatformContainer/HBoxContainer" unique_id=1035728029]
+layout_mode = 2
+item_count = 5
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "9mm 01"
+popup/item_1/id = 1
+popup/item_2/text = "9mm 02"
+popup/item_2/id = 2
+popup/item_3/text = "5.56mm"
+popup/item_3/id = 3
+popup/item_4/text = "12GA"
+popup/item_4/id = 4
+
+[node name="Magazine_P" type="Control" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts" unique_id=1503358341]
+visible = false
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_P" unique_id=2008411395]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="Label" type="Label" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_P/HBoxContainer" unique_id=570772167]
+layout_mode = 2
+mouse_behavior_recursive = 2
+text = "Pistol Magazine"
+label_settings = SubResource("LabelSettings_02q03")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagazinePOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_P/HBoxContainer" unique_id=736540190]
+layout_mode = 2
+mouse_behavior_recursive = 2
+item_count = 3
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Magazine 01"
+popup/item_1/id = 1
+popup/item_2/text = "Magazine 02"
+popup/item_2/id = 2
+
+[node name="Magazine_A" type="Control" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts" unique_id=522111378]
+visible = false
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_A" unique_id=1680452161]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="Label" type="Label" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_A/HBoxContainer" unique_id=319749740]
+layout_mode = 2
+mouse_behavior_recursive = 2
+text = "AR Magazine"
+label_settings = SubResource("LabelSettings_02q03")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagazineAOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_A/HBoxContainer" unique_id=566252994]
+layout_mode = 2
+mouse_behavior_recursive = 2
+item_count = 4
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Magazine 01"
+popup/item_1/id = 1
+popup/item_2/text = "Magazine 02"
+popup/item_2/id = 2
+popup/item_3/text = "Magazine 3"
+popup/item_3/id = 3
+
+[node name="Magazine_S" type="Control" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts" unique_id=660156774]
+visible = false
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_S" unique_id=820005033]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="Label" type="Label" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_S/HBoxContainer" unique_id=321824916]
+layout_mode = 2
+mouse_behavior_recursive = 2
+text = "Shotgun Magazine"
+label_settings = SubResource("LabelSettings_02q03")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagazineSOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_S/HBoxContainer" unique_id=1355029995]
+layout_mode = 2
+mouse_behavior_recursive = 2
+item_count = 3
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "6 Shell"
+popup/item_1/id = 1
+popup/item_2/text = "8 Shell"
+popup/item_2/id = 2
+
+[node name="Ammunition" type="Control" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts" unique_id=264919482]
+visible = false
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Ammunition" unique_id=531432554]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="Label" type="Label" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Ammunition/HBoxContainer" unique_id=2000907038]
+layout_mode = 2
+mouse_behavior_recursive = 2
+text = "Ammunition"
+label_settings = SubResource("LabelSettings_02q03")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AmmunitionOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Ammunition/HBoxContainer" unique_id=1173979909]
+layout_mode = 2
+mouse_behavior_recursive = 2
+item_count = 16
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "9mm"
+popup/item_1/id = 1
+popup/item_1/separator = true
+popup/item_2/text = "9mm Regular"
+popup/item_2/id = 2
+popup/item_3/text = "9mm Thunder"
+popup/item_3/id = 3
+popup/item_4/text = "9mm Incendiary"
+popup/item_4/id = 4
+popup/item_5/text = "9mm Line"
+popup/item_5/id = 5
+popup/item_6/text = "5.56mm"
+popup/item_6/id = 6
+popup/item_6/separator = true
+popup/item_7/text = "5.56mm Regular"
+popup/item_7/id = 7
+popup/item_8/text = "5.56mm Thunder"
+popup/item_8/id = 8
+popup/item_9/text = "5.56mm Incendiary"
+popup/item_9/id = 9
+popup/item_10/text = "5.56mm Line"
+popup/item_10/id = 10
+popup/item_11/text = "12GA"
+popup/item_11/id = 11
+popup/item_11/separator = true
+popup/item_12/text = "12GA Regular"
+popup/item_12/id = 12
+popup/item_13/text = "12GA Ripple"
+popup/item_13/id = 13
+popup/item_14/text = "12GA Cum"
+popup/item_14/id = 14
+popup/item_15/text = "12GA Burst"
+popup/item_15/id = 15
+
+[node name="PumpHandle" type="Control" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts" unique_id=1431090439]
+visible = false
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/PumpHandle" unique_id=1220307751]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="Label" type="Label" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/PumpHandle/HBoxContainer" unique_id=666110086]
+layout_mode = 2
+mouse_behavior_recursive = 2
+text = "Pump Handle"
+label_settings = SubResource("LabelSettings_02q03")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PumpHandleOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/PumpHandle/HBoxContainer" unique_id=711632827]
+layout_mode = 2
+mouse_behavior_recursive = 2
+item_count = 4
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Pump Handle 01"
+popup/item_1/id = 1
+popup/item_2/text = "Pump Handle 02"
+popup/item_2/id = 2
+popup/item_3/text = "Pump Handle 03"
+popup/item_3/id = 3
+
+[node name="Barrel" type="Control" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts" unique_id=1742249931]
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Barrel" unique_id=618927138]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="Label" type="Label" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Barrel/HBoxContainer" unique_id=1255055127]
+layout_mode = 2
+mouse_behavior_recursive = 2
+text = "Barrel"
+label_settings = SubResource("LabelSettings_02q03")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BarrelOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Barrel/HBoxContainer" unique_id=1212311293]
+layout_mode = 2
+mouse_behavior_recursive = 2
+item_count = 7
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "9mm 01"
+popup/item_1/id = 1
+popup/item_2/text = "9mm 02"
+popup/item_2/id = 2
+popup/item_3/text = "5.56mm 01"
+popup/item_3/id = 3
+popup/item_4/text = "5.56mm 02"
+popup/item_4/id = 4
+popup/item_5/text = "12GA 02"
+popup/item_5/id = 5
+popup/item_6/text = "12GA 01"
+popup/item_6/id = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="WeaponsMenu/Body/HBoxContainer" unique_id=1184162485]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.14
+
+[node name="CenterContainerRight" type="MarginContainer" parent="WeaponsMenu/Body/HBoxContainer" unique_id=637380744]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight" unique_id=1417138888]
+layout_mode = 2
+
+[node name="VScrollBar" type="ScrollContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer" unique_id=857065298]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="WeaponExtras" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar" unique_id=1347616257]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+mouse_behavior_recursive = 2
+
+[node name="PlatformContainer" type="Control" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras" unique_id=44381513]
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/PlatformContainer" unique_id=4312166]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/PlatformContainer/HBoxContainer" unique_id=2076094377]
+layout_mode = 2
+text = "Platform"
+label_settings = SubResource("LabelSettings_02q03")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlatformOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/PlatformContainer/HBoxContainer" unique_id=724177711]
+layout_mode = 2
+item_count = 5
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "9mm 01"
+popup/item_1/id = 1
+popup/item_2/text = "9mm 02"
+popup/item_2/id = 2
+popup/item_3/text = "5.56mm"
+popup/item_3/id = 3
+popup/item_4/text = "12GA"
+popup/item_4/id = 4
+
+[node name="Magazine_P" type="Control" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras" unique_id=482228807]
+visible = false
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/Magazine_P" unique_id=763374639]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="Label" type="Label" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/Magazine_P/HBoxContainer" unique_id=953521459]
+layout_mode = 2
+mouse_behavior_recursive = 2
+text = "Pistol Magazine"
+label_settings = SubResource("LabelSettings_02q03")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagazinePOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/Magazine_P/HBoxContainer" unique_id=529469316]
+layout_mode = 2
+mouse_behavior_recursive = 2
+item_count = 3
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Magazine 01"
+popup/item_1/id = 1
+popup/item_2/text = "Magazine 02"
+popup/item_2/id = 2
+
+[node name="Magazine_A" type="Control" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras" unique_id=508753702]
+visible = false
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/Magazine_A" unique_id=628989656]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="Label" type="Label" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/Magazine_A/HBoxContainer" unique_id=51511054]
+layout_mode = 2
+mouse_behavior_recursive = 2
+text = "AR Magazine"
+label_settings = SubResource("LabelSettings_02q03")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagazineAOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/Magazine_A/HBoxContainer" unique_id=97938220]
+layout_mode = 2
+mouse_behavior_recursive = 2
+item_count = 4
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Magazine 01"
+popup/item_1/id = 1
+popup/item_2/text = "Magazine 02"
+popup/item_2/id = 2
+popup/item_3/text = "Magazine 3"
+popup/item_3/id = 3
+
+[node name="Magazine_S" type="Control" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras" unique_id=1923507821]
+visible = false
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/Magazine_S" unique_id=2057185173]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="Label" type="Label" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/Magazine_S/HBoxContainer" unique_id=671500495]
+layout_mode = 2
+mouse_behavior_recursive = 2
+text = "Shotgun Magazine"
+label_settings = SubResource("LabelSettings_02q03")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagazineSOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/Magazine_S/HBoxContainer" unique_id=499601666]
+layout_mode = 2
+mouse_behavior_recursive = 2
+item_count = 3
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "6 Shell"
+popup/item_1/id = 1
+popup/item_2/text = "8 Shell"
+popup/item_2/id = 2
+
+[node name="Ammunition" type="Control" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras" unique_id=1820548719]
+visible = false
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/Ammunition" unique_id=1948329210]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="Label" type="Label" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/Ammunition/HBoxContainer" unique_id=2095605174]
+layout_mode = 2
+mouse_behavior_recursive = 2
+text = "Ammunition"
+label_settings = SubResource("LabelSettings_02q03")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AmmunitionOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras/Ammunition/HBoxContainer" unique_id=1109239913]
+layout_mode = 2
+mouse_behavior_recursive = 2
+item_count = 16
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "9mm"
+popup/item_1/id = 1
+popup/item_1/separator = true
+popup/item_2/text = "9mm Regular"
+popup/item_2/id = 2
+popup/item_3/text = "9mm Thunder"
+popup/item_3/id = 3
+popup/item_4/text = "9mm Incendiary"
+popup/item_4/id = 4
+popup/item_5/text = "9mm Line"
+popup/item_5/id = 5
+popup/item_6/text = "5.56mm"
+popup/item_6/id = 6
+popup/item_6/separator = true
+popup/item_7/text = "5.56mm Regular"
+popup/item_7/id = 7
+popup/item_8/text = "5.56mm Thunder"
+popup/item_8/id = 8
+popup/item_9/text = "5.56mm Incendiary"
+popup/item_9/id = 9
+popup/item_10/text = "5.56mm Line"
+popup/item_10/id = 10
+popup/item_11/text = "12GA"
+popup/item_11/id = 11
+popup/item_11/separator = true
+popup/item_12/text = "12GA Regular"
+popup/item_12/id = 12
+popup/item_13/text = "12GA Ripple"
+popup/item_13/id = 13
+popup/item_14/text = "12GA Cum"
+popup/item_14/id = 14
+popup/item_15/text = "12GA Burst"
+popup/item_15/id = 15
+
+[connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/PlatformContainer/HBoxContainer/PlatformOptions" to="." method="_on_platform_options_item_selected"]
+[connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/PlatformContainer/HBoxContainer/PlatformOptions" to="WeaponsMenu/Body" method="_on_platform_options_item_selected"]
+[connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_P/HBoxContainer/MagazinePOptions" to="." method="_on_magazine_p_options_item_selected"]
+[connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_P/HBoxContainer/MagazinePOptions" to="WeaponsMenu/Body" method="_on_magazine_p_options_item_selected"]
+[connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_A/HBoxContainer/MagazineAOptions" to="." method="_on_magazine_a_options_item_selected"]
+[connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_A/HBoxContainer/MagazineAOptions" to="WeaponsMenu/Body" method="_on_magazine_a_options_item_selected"]
+[connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_S/HBoxContainer/MagazineSOptions" to="." method="_on_magazine_s_options_item_selected"]
+[connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_S/HBoxContainer/MagazineSOptions" to="WeaponsMenu/Body" method="_on_magazine_s_options_item_selected"]
+[connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Ammunition/HBoxContainer/AmmunitionOptions" to="." method="_on_ammunition_options_item_selected"]
+[connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/PumpHandle/HBoxContainer/PumpHandleOptions" to="." method="_on_pump_handle_options_item_selected"]
+[connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Barrel/HBoxContainer/BarrelOptions" to="." method="_on_barrel_options_item_selected"]

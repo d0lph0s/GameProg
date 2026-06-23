@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c1k6grvuynkf8"]
 
 [ext_resource type="Script" uid="uid://4baq66rbvasm" path="res://Scripts/player.gd" id="1_6t5aa"]
-[ext_resource type="PackedScene" uid="uid://cllyag1lkur41" path="res://Scenes/PlayerModel.tscn" id="2_gntrk"]
+[ext_resource type="PackedScene" uid="uid://cy2vkiafivj85" path="res://Scenes/PlayerHands.tscn" id="2_gntrk"]
 [ext_resource type="Shader" uid="uid://bmj4cmt61mt07" path="res://Art/2D/Shader/chromatic_abberation.gdshader" id="4_dewec"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_writ7"]
@@ -23,7 +23,7 @@ shape = SubResource("CapsuleShape3D_writ7")
 [node name="Mesh" type="Node3D" parent="." unique_id=902892264]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="PlayerModel" parent="Mesh" unique_id=457790362 instance=ExtResource("2_gntrk")]
+[node name="PlayerHands" parent="Mesh" unique_id=1646747500 instance=ExtResource("2_gntrk")]
 
 [node name="CameraHead" type="Node3D" parent="." unique_id=268881830]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7229743, -0.113566905)
