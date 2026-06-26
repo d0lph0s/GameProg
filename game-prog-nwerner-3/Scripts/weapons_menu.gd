@@ -22,12 +22,12 @@ func body_part_selected(index : int) -> void:
 	if (index == 0):
 		index = 1
 	if(index == 3):
-		unlock_certain_part(5)
+		show_certain_part(5)
 	else:
 		hide_certain_part(5)
-	unlock_certain_part(index)
+	show_certain_part(index)
 
-func unlock_certain_part(index : int) -> void:
+func show_certain_part(index : int) -> void:
 	weapon_body_parts.get_child(index).visible = true
 
 func hide_certain_part(index : int) -> void:
@@ -38,22 +38,26 @@ func _on_platform_options_item_selected(index: int) -> void:
 		for i : int in range(1, weapon_body_parts.get_child_count()):
 			weapon_body_parts.get_child(i).visible = false
 		return
+	if(index != 0):
+		show_certain_part(5)
+	else:
+		hide_certain_part(5)
 	body_part_selected(index-1)
 
 func _on_magazine_p_options_item_selected(index: int) -> void:
 	if(index == 0): 
 		hide_certain_part(4)
 		return
-	unlock_certain_part(4)
+	show_certain_part(4)
 
 func _on_magazine_a_options_item_selected(index: int) -> void:
 	if(index == 0): 
 		hide_certain_part(4)
 		return
-	unlock_certain_part(4)
+	show_certain_part(4)
 
 func _on_magazine_s_options_item_selected(index: int) -> void:
 	if(index == 0): 
 		hide_certain_part(4)
 		return
-	unlock_certain_part(4)
+	show_certain_part(4)

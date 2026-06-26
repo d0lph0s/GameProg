@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://drrrdqkr8skn1"]
 
-[ext_resource type="Script" uid="uid://b1e156ae7svyt" path="res://Art/3D/Weapons/weapon_modulator.gd" id="1_yltro"]
-[ext_resource type="PackedScene" uid="uid://cb3fdcg3h7ldb" path="res://Art/3D/Weapons/MW1_Platform_12ga_01.fbx" id="2_ovc61"]
+[ext_resource type="Script" uid="uid://b1e156ae7svyt" path="res://Scripts/weapon_modulator.gd" id="1_yltro"]
+[ext_resource type="Script" uid="uid://c4lrxn10nvaka" path="res://Scripts/weapon_functionality.gd" id="2_ovc61"]
 [ext_resource type="Theme" uid="uid://cs4l0psoivy8d" path="res://Art/2D/UI/MainFontTheme.tres" id="3_8qb6n"]
 [ext_resource type="Script" uid="uid://cwguagkqcww10" path="res://Scripts/weapons_menu.gd" id="4_ovc61"]
 
@@ -35,9 +35,10 @@ environment = SubResource("Environment_ovc61")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Platform" type="Node3D" parent="." unique_id=1725974123]
+[node name="WeaponFunctionality" type="Node3D" parent="." unique_id=1741974668]
+script = ExtResource("2_ovc61")
 
-[node name="MW1_Platform_12ga_01" parent="Platform" unique_id=1254712316 instance=ExtResource("2_ovc61")]
+[node name="Platform" type="Node3D" parent="." unique_id=1725974123]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1948369329]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.5, 0, 0)

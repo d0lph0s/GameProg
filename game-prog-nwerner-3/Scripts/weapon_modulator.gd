@@ -1,6 +1,7 @@
 extends Node3D
 
-@onready var platform_NODE: Node3D = $Platform
+@onready var platform_NODE : Node3D = $Platform
+
 var platform_mesh : PackedScene = preload("uid://b4wcc0ej50o7u")
 var barrel_mesh : PackedScene = preload("uid://dggehpa1xc4l4")
 var slide_mesh : PackedScene = preload("uid://cf6uagrdjie38")
@@ -93,8 +94,6 @@ func weapon_modified(type : int) -> void:
 				barrel_NODE.get_child(0).queue_free()
 				return
 				
-				
-			pr
 			if(barrel_NODE.get_child_count() != 0 && barrel_NODE.get_child(0) != null):
 				barrel_NODE.get_child(0).queue_free()
 			barrel = barrel_mesh.instantiate()

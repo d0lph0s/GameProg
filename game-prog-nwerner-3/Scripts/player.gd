@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
-@onready var head: Node3D = $CameraHead
+@onready var head : Node3D = $CameraHead
+@onready var hands : Node3D = $Mesh/PlayerHands
 
 var direction : Vector3
 var speed : float
@@ -23,6 +24,12 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
+	#shooting
+	#animation has its ows things in player_hands_animation
+		'''if Input.is_action_just_pressed("Shoot"): #eventual addition for automatic fire
+			SignalManager.animation_state.emit("idle", false)
+			SignalManager.animation_state.emit("pistol", true)'''
+		
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -33,7 +40,6 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		SignalManager.movement.emit(1)
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 	else:

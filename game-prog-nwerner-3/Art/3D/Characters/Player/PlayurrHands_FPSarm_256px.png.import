@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b34khluxbnouy"
-path.s3tc="res://.godot/imported/texture of the arms 2.png-c3c49f3ae48c6d3ef622592f9c76afdc.s3tc.ctex"
+uid="uid://dwr4lolbe2nvy"
+path.s3tc="res://.godot/imported/PlayurrHands_FPSarm_256px.png-14fb308a6ce2510d63f56913d8ffffbf.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "a164cb6006e0adaf397c221a162ae97c"
+}
 
 [deps]
 
-source_file="res://Art/3D/Characters/Player/texture of the arms 2.png"
-dest_files=["res://.godot/imported/texture of the arms 2.png-c3c49f3ae48c6d3ef622592f9c76afdc.s3tc.ctex"]
+source_file="res://Art/3D/Characters/Player/PlayurrHands_FPSarm_256px.png"
+dest_files=["res://.godot/imported/PlayurrHands_FPSarm_256px.png-14fb308a6ce2510d63f56913d8ffffbf.s3tc.ctex"]
 
 [params]
 
