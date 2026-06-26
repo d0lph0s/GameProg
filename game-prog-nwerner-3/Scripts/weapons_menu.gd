@@ -61,3 +61,9 @@ func _on_magazine_s_options_item_selected(index: int) -> void:
 		hide_certain_part(4)
 		return
 	show_certain_part(4)
+
+
+func _on_confirm_pressed() -> void:
+	get_parent().visible = false
+	get_parent().mouse_filter = Control.MOUSE_FILTER_IGNORE
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

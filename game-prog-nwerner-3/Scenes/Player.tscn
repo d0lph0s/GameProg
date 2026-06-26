@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://4baq66rbvasm" path="res://Scripts/player.gd" id="1_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://cy2vkiafivj85" path="res://Scenes/PlayerHands.tscn" id="2_gntrk"]
+[ext_resource type="PackedScene" uid="uid://drrrdqkr8skn1" path="res://Scenes/Weapons.tscn" id="3_dewec"]
 [ext_resource type="Shader" uid="uid://bmj4cmt61mt07" path="res://Art/2D/Shader/chromatic_abberation.gdshader" id="4_dewec"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_writ7"]
@@ -24,12 +25,20 @@ shape = SubResource("CapsuleShape3D_writ7")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="PlayerHands" parent="Mesh" unique_id=1983307631 instance=ExtResource("2_gntrk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0.1)
 
 [node name="CameraHead" type="Node3D" parent="." unique_id=268881830]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7229743, -0.113566905)
 
+[node name="HandOriginFix" type="Node3D" parent="CameraHead" unique_id=2004518328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.423, 0.114)
+
+[node name="WeaponOriginPistol" type="Node3D" parent="CameraHead" unique_id=224906099]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.6939164e-08, -0.07908785, -0.5521312)
+
+[node name="Weapons" parent="CameraHead/WeaponOriginPistol" unique_id=136330797 instance=ExtResource("3_dewec")]
+
 [node name="Camera3D" type="Camera3D" parent="CameraHead" unique_id=2140618423]
+current = true
 
 [node name="Control" type="Control" parent="." unique_id=429013575]
 visible = false

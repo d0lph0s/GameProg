@@ -1,21 +1,10 @@
 [gd_scene format=3 uid="uid://drrrdqkr8skn1"]
 
 [ext_resource type="Script" uid="uid://b1e156ae7svyt" path="res://Scripts/weapon_modulator.gd" id="1_yltro"]
+[ext_resource type="PackedScene" uid="uid://h0fsxu18d5om" path="res://Scenes/Environment.tscn" id="2_33wch"]
 [ext_resource type="Script" uid="uid://c4lrxn10nvaka" path="res://Scripts/weapon_functionality.gd" id="2_ovc61"]
 [ext_resource type="Theme" uid="uid://cs4l0psoivy8d" path="res://Art/2D/UI/MainFontTheme.tres" id="3_8qb6n"]
 [ext_resource type="Script" uid="uid://cwguagkqcww10" path="res://Scripts/weapons_menu.gd" id="4_ovc61"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_02q03"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_8qb6n"]
-sky_material = SubResource("ProceduralSkyMaterial_02q03")
-
-[sub_resource type="Environment" id="Environment_ovc61"]
-background_mode = 2
-sky = SubResource("Sky_8qb6n")
-glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_tdnec"]
 
@@ -28,12 +17,8 @@ font_size = 18
 [node name="Weapons" type="Node3D" unique_id=136330797]
 script = ExtResource("1_yltro")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=411253234]
-environment = SubResource("Environment_ovc61")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1551345917]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = true
+[node name="Environment" parent="." unique_id=981963169 instance=ExtResource("2_33wch")]
+visible = false
 
 [node name="WeaponFunctionality" type="Node3D" parent="." unique_id=1741974668]
 script = ExtResource("2_ovc61")
@@ -42,10 +27,12 @@ script = ExtResource("2_ovc61")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1948369329]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.5, 0, 0)
+visible = false
 fov = 66.35489
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=28978261]
 transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.34020007, 0, 0)
+visible = false
 mesh = SubResource("PlaneMesh_tdnec")
 surface_material_override/0 = SubResource("StandardMaterial3D_02q03")
 
@@ -383,10 +370,42 @@ popup/item_5/id = 5
 popup/item_6/text = "12GA 01"
 popup/item_6/id = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="WeaponsMenu/Body/HBoxContainer" unique_id=1184162485]
+[node name="MiddleMarginContainer" type="MarginContainer" parent="WeaponsMenu/Body/HBoxContainer" unique_id=1184162485]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.14
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/MiddleMarginContainer" unique_id=203703397]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="WeaponsMenu/Body/HBoxContainer/MiddleMarginContainer/VBoxContainer" unique_id=1930705378]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 16.82
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WeaponsMenu/Body/HBoxContainer/MiddleMarginContainer/VBoxContainer" unique_id=473168725]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="WeaponsMenu/Body/HBoxContainer/MiddleMarginContainer/VBoxContainer/HBoxContainer" unique_id=1571908539]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Confirm" type="Button" parent="WeaponsMenu/Body/HBoxContainer/MiddleMarginContainer/VBoxContainer/HBoxContainer" unique_id=951565162]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+offset_transform_enabled = true
+text = "Confirm"
+
+[node name="MarginContainer2" type="MarginContainer" parent="WeaponsMenu/Body/HBoxContainer/MiddleMarginContainer/VBoxContainer/HBoxContainer" unique_id=1640829670]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="WeaponsMenu/Body/HBoxContainer/MiddleMarginContainer/VBoxContainer" unique_id=509966078]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.37
 
 [node name="CenterContainerRight" type="MarginContainer" parent="WeaponsMenu/Body/HBoxContainer" unique_id=637380744]
 layout_mode = 2
@@ -624,3 +643,4 @@ popup/item_15/id = 15
 [connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Ammunition/HBoxContainer/AmmunitionOptions" to="." method="_on_ammunition_options_item_selected"]
 [connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/PumpHandle/HBoxContainer/PumpHandleOptions" to="." method="_on_pump_handle_options_item_selected"]
 [connection signal="item_selected" from="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Barrel/HBoxContainer/BarrelOptions" to="." method="_on_barrel_options_item_selected"]
+[connection signal="pressed" from="WeaponsMenu/Body/HBoxContainer/MiddleMarginContainer/VBoxContainer/HBoxContainer/Confirm" to="WeaponsMenu/Body" method="_on_confirm_pressed"]
