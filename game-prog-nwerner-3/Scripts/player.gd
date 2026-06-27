@@ -2,14 +2,16 @@ extends CharacterBody3D
 
 @onready var head : Node3D = $CameraHead
 @onready var hands : Node3D = $Mesh/PlayerHands
-@onready var hands_fix : Node3D = $CameraHead/HandOriginFix
+#@onready var hands_fix : Node3D = $CameraHead/HandOriginFix
 
 @onready var mesh : Node3D = $Mesh
-
 
 var direction : Vector3
 var speed : float
 const JUMP_VELOCITY : float = 2.75
+
+func _ready() -> void:
+	pass
 
 func _unhandled_input(event: InputEvent) -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -30,10 +32,18 @@ func _physics_process(delta: float) -> void:
 	
 	#aiming
 	#animation has its ows things in player_hands_animation
+	
 	if Input.is_action_just_pressed("Aim"): #eventual addition for automatic fire
-		hands.reparent(hands_fix)
+		hands.reparent(head)
+		hands.position = Vector3(0.0, -0.9, 0.0)#Vector3(0.0, -0.933, 0.022)
+		hands.rotation_degrees = Vector3(0.0, -180.0, 0.0)
+		#basis
+		
+		
 	if Input.is_action_just_released("Aim"):
 		hands.reparent(mesh)
+		hands.position = Vector3(0.0, 0.0, 0.0)
+		hands.rotation = Vector3(0.0, 0.0, 0.0)
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY

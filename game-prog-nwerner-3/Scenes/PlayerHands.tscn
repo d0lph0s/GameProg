@@ -280,10 +280,10 @@ graph_offset = Vector2(26, -55)
 [node name="PlayerHands" unique_id=1983307631 instance=ExtResource("1_70t3d")]
 script = ExtResource("2_2104g")
 
-[node name="ArmRig" parent="." index="0" unique_id=1743353197]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79, 0.092)
+[node name="ArmRig" parent="." index="0" unique_id=303580885]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="ArmRig" index="0" unique_id=195713301]
+[node name="Skeleton3D" parent="ArmRig" index="0" unique_id=1200960406]
 bones/0/rotation = Quaternion(0.10131678, 0.026844105, 0.96994764, -0.21958172)
 bones/1/rotation = Quaternion(0.013156422, 0.17873009, -0.06794228, 0.98146135)
 bones/2/rotation = Quaternion(0.026130993, -0.04647132, 0.048885766, 0.9973805)
@@ -294,7 +294,7 @@ bones/19/rotation = Quaternion(0.026131103, 0.04647221, -0.048884943, 0.9973805)
 bones/23/rotation = Quaternion(0.04443414, -0.0032147188, 0.039270163, 0.99823505)
 bones/30/rotation = Quaternion(-0.009475648, -0.07583281, -0.0033984813, 0.9970698)
 
-[node name="Arm" parent="ArmRig/Skeleton3D" index="0" unique_id=571673408]
+[node name="Arm" parent="ArmRig/Skeleton3D" index="0" unique_id=1482482896]
 cast_shadow = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1" unique_id=1328293197]
@@ -302,6 +302,7 @@ libraries/ = SubResource("AnimationLibrary_8mcc7")
 libraries/FPS_Hands = ExtResource("2_3577h")
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2" unique_id=695230626]
+active = false
 tree_root = SubResource("AnimationNodeStateMachine_g51p0")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/idle = false

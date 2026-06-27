@@ -19,7 +19,6 @@ var barrel : Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	platform = platform_mesh.instantiate()
-	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -47,6 +46,7 @@ func weapon_modified(type : int) -> void:
 			#region magazine"
 			var magazine_NODE = platform.get_child(0).find_child("Socket_Magazine" + "*")
 			if(magazine_mesh == null):
+				
 				if(magazine.get_child_count() == 0):
 					return
 				magazine_NODE.get_child(0).queue_free()
@@ -65,6 +65,7 @@ func weapon_modified(type : int) -> void:
 				return
 			if(ammunition_NODE.get_child_count() != 0 && ammunition_NODE.get_child(0) != null):
 				ammunition_NODE.get_child(0).queue_free()
+			PlayerManager.current_ammuniton = ammunition_mesh
 			ammunition = ammunition_mesh.instantiate()
 			ammunition.rotation.x = deg_to_rad(90.0)
 			ammunition.get_child(0).set_surface_override_material(0, load("res://Art/3D/Weapons/Master_Material.material"))
@@ -87,7 +88,7 @@ func weapon_modified(type : int) -> void:
 			#endregion
 		4:
 			#region barrel
-			var barrel_NODE = platform.get_child(0).get_child(8)
+			var barrel_NODE = platform.get_child(0).find_child("Socket_Barrel" + "*", true)
 			if(barrel_mesh == null):
 				if(barrel.get_child_count() == 0):
 					return

@@ -26,6 +26,7 @@ func body_part_selected(index : int) -> void:
 	else:
 		hide_certain_part(5)
 	show_certain_part(index)
+	show_certain_part(6)
 
 func show_certain_part(index : int) -> void:
 	weapon_body_parts.get_child(index).visible = true
@@ -36,6 +37,7 @@ func hide_certain_part(index : int) -> void:
 func _on_platform_options_item_selected(index: int) -> void:
 	if(index == 0):
 		for i : int in range(1, weapon_body_parts.get_child_count()):
+			weapon_body_parts.get_child(i).find_child("*" + "Options").selected = 0
 			weapon_body_parts.get_child(i).visible = false
 		return
 	if(index != 0):
