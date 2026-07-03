@@ -86,8 +86,8 @@ Escape={
 [layer_names]
 
 3d_physics/layer_1="Main"
-3d_physics/layer_2="Obstacles"
-3d_physics/layer_3="Enemy"
+3d_physics/layer_3="Obstacles"
+3d_physics/layer_5="Enemy"
 
 [physics]
 

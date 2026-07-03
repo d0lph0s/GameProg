@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b052y3oatt3id"]
+
+[ext_resource type="Script" uid="uid://snmh4dpk5qv2" path="res://Scripts/enemy.gd" id="1_m1htj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tdnec"]
+
+[node name="Enemy" type="CharacterBody3D" unique_id=386391300]
+collision_layer = 21
+script = ExtResource("1_m1htj")
+health = 100
+max_health = 100
+walk_speed = 5.0
+sprint_speed = 7.0
+metadata/Enemy = &"Regular"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1812874417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_tdnec")

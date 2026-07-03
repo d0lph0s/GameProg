@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://mvmfnciw6yf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5n62p"]
+radius = 0.0041569225
+height = 0.056999844
+
+[node name="Bullet" type="RigidBody3D" unique_id=2122403693]
+physics_interpolation_mode = 1
+collision_layer = 2
+collision_mask = 20
+contact_monitor = true
+max_contacts_reported = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=253905640]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.656613e-10, 0.026939962, 0)
+shape = SubResource("CapsuleShape3D_5n62p")

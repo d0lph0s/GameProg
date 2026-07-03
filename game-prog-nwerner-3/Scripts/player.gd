@@ -2,16 +2,29 @@ extends CharacterBody3D
 
 @onready var head : Node3D = $CameraHead
 @onready var hands : Node3D = $Mesh/PlayerHands
-#@onready var hands_fix : Node3D = $CameraHead/HandOriginFix
-
 @onready var mesh : Node3D = $Mesh
 
-var direction : Vector3
+@export_category("Player Stats")
+@export var health : int
+@export var max_health : int
+@export var walk_speed : float
+@export var sprint_speed : float
+
 var speed : float
+var direction : Vector3
 const JUMP_VELOCITY : float = 2.75
 
 func _ready() -> void:
 	pass
+
+func take_damage(damage : int) -> void:
+	health -= damage
+	if(health > 0):
+		return
+	if(health >= 0):
+		pass
+
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -23,9 +36,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 func _physics_process(delta: float) -> void:
 	#sprint
-	speed = 6.5
+	speed = walk_speed
 	if Input.is_action_pressed("Run") and is_on_floor():
-		speed = 8.75
+		speed = sprint_speed
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
