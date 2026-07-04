@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
-uid="uid://clmbfpwskd5ac"
-path="res://.godot/imported/Character_31.fbx-7883aea0bab48c7dd8a64b883e45457e.scn"
+type="AnimationLibrary"
+uid="uid://du8oknosvlv3y"
+path="res://.godot/imported/Hit Reaction.fbx-02715aa54239229665f3b3fa03f9b144.res"
 
 [deps]
 
-source_file="res://Art/3D/Characters/Enemies/Character_31.fbx"
-dest_files=["res://.godot/imported/Character_31.fbx-7883aea0bab48c7dd8a64b883e45457e.scn"]
+source_file="res://Art/3D/Characters/Enemies/Animations/Hit Reaction.fbx"
+dest_files=["res://.godot/imported/Hit Reaction.fbx-02715aa54239229665f3b3fa03f9b144.res"]
 
 [params]
 

@@ -475,14 +475,17 @@ animation = &"FPS_Hands/IdleAnim"
 animation = &"FPS_Hands/Pistol_Draw"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8mcc7"]
+xfade_time = 0.2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d8tlu"]
+xfade_time = 0.2
 switch_mode = 1
 advance_mode = 2
 advance_condition = &"pistol"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hbvof"]
+xfade_time = 0.2
 switch_mode = 1
 advance_mode = 2
 advance_condition = &"idle"
@@ -505,6 +508,7 @@ width = 20
 height = 20
 
 [node name="Player" type="CharacterBody3D" unique_id=38466257]
+collision_layer = 65
 collision_mask = 5
 script = ExtResource("1_6t5aa")
 health = 100

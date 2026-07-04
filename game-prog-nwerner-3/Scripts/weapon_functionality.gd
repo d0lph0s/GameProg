@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 			bullet.mass = 0.02
 			bullet.gravity_scale = 0.0
 			bullet.rotation.x += deg_to_rad(90.0)
-			bullet.linear_velocity = weapon_origin.global_transform.basis.z * 3.0
+			bullet.linear_velocity = weapon_origin.global_transform.basis.z * 50.0
 			bullet.set_script(load("res://Scripts/bullet_script.gd"))
 			get_tree().root.add_child(bullet)
 			

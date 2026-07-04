@@ -1,0 +1,177 @@
+[gd_resource type="AnimationNodeStateMachine" format=3 uid="uid://cm8ca3sqppbo6"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ugrun"]
+animation = &"Death/mixamo_com"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fet2m"]
+animation = &"Hit Reaction/mixamo_com"
+advance_on_start = true
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 0.29999999999999716
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gs252"]
+animation = &"Pistol Idle Undetected/mixamo_com"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_geccx"]
+animation = &"Pistol Idle/mixamo_com"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p5xw6"]
+animation = &"Pistol Kneeling Idle/mixamo_com_2"
+use_custom_timeline = true
+timeline_length = 0.5
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jdwv0"]
+animation = &"Hit Reaction/mixamo_com"
+use_custom_timeline = true
+timeline_length = 0.4
+stretch_time_scale = true
+start_offset = 0.29999999999999716
+loop_mode = 0
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_pjo4r"]
+sync_mode = 2
+blend_point_0/node = SubResource("AnimationNodeAnimation_p5xw6")
+blend_point_0/pos = -1.0
+blend_point_0/name = &"Pistol Kneeling Idle_mixamo_com"
+blend_point_1/node = SubResource("AnimationNodeAnimation_jdwv0")
+blend_point_1/pos = 1.0
+blend_point_1/name = &"Hit Reaction_mixamo_com"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c3hgt"]
+animation = &"Pistol Kneel To Stand/mixamo_com"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ef4mg"]
+animation = &"Pistol Kneeling Idle/mixamo_com"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pjo4r"]
+animation = &"Pistol Run/mixamo_com"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b3vv3"]
+animation = &"Pistol Stand To Kneel/mixamo_com"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nvgn0"]
+animation = &"Pistol Walk/mixamo_com"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fet2m"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c3hgt"]
+advance_mode = 2
+advance_condition = &"init"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jdwv0"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3dbtj"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0w7v7"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n5ysp"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fhtyo"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_llh6q"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d3lna"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g1drt"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"stand"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6w2kx"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_188ir"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ryypn"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"kneeling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aam14"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"kneeling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nire4"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"kneeling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s8qwq"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ef4mg"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b3vv3"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gs252"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[resource]
+states/Death_mixamo_com/node = SubResource("AnimationNodeAnimation_ugrun")
+states/Death_mixamo_com/position = Vector2(1220, -120)
+states/End/position = Vector2(1294, 100)
+"states/Hit Reaction_mixamo_com/node" = SubResource("AnimationNodeAnimation_fet2m")
+"states/Hit Reaction_mixamo_com/position" = Vector2(350, 318)
+states/Idle/node = SubResource("AnimationNodeAnimation_geccx")
+states/Idle/position = Vector2(660, 100)
+"states/Idle Undetected/node" = SubResource("AnimationNodeAnimation_gs252")
+"states/Idle Undetected/position" = Vector2(350, 100)
+states/Kneel/node = SubResource("AnimationNodeAnimation_ef4mg")
+states/Kneel/position = Vector2(350, -56)
+"states/Kneel Hit/node" = SubResource("AnimationNodeBlendSpace1D_pjo4r")
+"states/Kneel Hit/position" = Vector2(350, -193)
+"states/Kneel Transition Stand /node" = SubResource("AnimationNodeAnimation_c3hgt")
+"states/Kneel Transition Stand /position" = Vector2(660, -56)
+"states/Pistol Run_mixamo_com/node" = SubResource("AnimationNodeAnimation_pjo4r")
+"states/Pistol Run_mixamo_com/position" = Vector2(899, 100)
+"states/Stand Transition Kneel/node" = SubResource("AnimationNodeAnimation_b3vv3")
+"states/Stand Transition Kneel/position" = Vector2(350, 24)
+states/Start/position = Vector2(108, 100)
+states/Walk/node = SubResource("AnimationNodeAnimation_nvgn0")
+states/Walk/position = Vector2(660, 318)
+transitions = ["Start", "Idle Undetected", SubResource("AnimationNodeStateMachineTransition_fet2m"), "Idle Undetected", "Idle", SubResource("AnimationNodeStateMachineTransition_c3hgt"), "Idle Undetected", "Death_mixamo_com", SubResource("AnimationNodeStateMachineTransition_jdwv0"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_3dbtj"), "Idle", "Death_mixamo_com", SubResource("AnimationNodeStateMachineTransition_0w7v7"), "Idle Undetected", "Hit Reaction_mixamo_com", SubResource("AnimationNodeStateMachineTransition_n5ysp"), "Hit Reaction_mixamo_com", "Idle", SubResource("AnimationNodeStateMachineTransition_fhtyo"), "Idle", "Hit Reaction_mixamo_com", SubResource("AnimationNodeStateMachineTransition_llh6q"), "Walk", "Hit Reaction_mixamo_com", SubResource("AnimationNodeStateMachineTransition_d3lna"), "Kneel", "Kneel Transition Stand ", SubResource("AnimationNodeStateMachineTransition_g1drt"), "Kneel Transition Stand ", "Idle", SubResource("AnimationNodeStateMachineTransition_6w2kx"), "Kneel", "Kneel Hit", SubResource("AnimationNodeStateMachineTransition_188ir"), "Kneel Hit", "Kneel", SubResource("AnimationNodeStateMachineTransition_ryypn"), "Idle", "Stand Transition Kneel", SubResource("AnimationNodeStateMachineTransition_aam14"), "Idle Undetected", "Stand Transition Kneel", SubResource("AnimationNodeStateMachineTransition_nire4"), "Stand Transition Kneel", "Kneel", SubResource("AnimationNodeStateMachineTransition_s8qwq"), "Walk", "Pistol Run_mixamo_com", SubResource("AnimationNodeStateMachineTransition_ef4mg"), "Pistol Run_mixamo_com", "Walk", SubResource("AnimationNodeStateMachineTransition_b3vv3"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_gs252")]
+graph_offset = Vector2(141, 88)

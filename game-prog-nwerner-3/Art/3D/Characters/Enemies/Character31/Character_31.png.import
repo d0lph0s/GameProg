@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://t6pf5bekqmkm"
-path.s3tc="res://.godot/imported/Character_31.png-e544c848345c52743f8018a488185061.s3tc.ctex"
+path.s3tc="res://.godot/imported/Character_31.png-b299a791f7b3b8d59fe9a41a4004c2e1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Art/3D/Characters/Enemies/Character_31.png"
-dest_files=["res://.godot/imported/Character_31.png-e544c848345c52743f8018a488185061.s3tc.ctex"]
+source_file="res://Art/3D/Characters/Enemies/Character31/Character_31.png"
+dest_files=["res://.godot/imported/Character_31.png-b299a791f7b3b8d59fe9a41a4004c2e1.s3tc.ctex"]
 
 [params]
 

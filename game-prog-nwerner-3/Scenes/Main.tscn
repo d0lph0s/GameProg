@@ -6,6 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://c0kabgfpgrlcm" path="res://Art/3D/Weapons/Master_Texture.png" id="3_rgh2o"]
 [ext_resource type="Material" uid="uid://cllbcv5v205x1" path="res://Art/3D/Weapons/Master_Material.material" id="4_pbw6q"]
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_writ7"]
+vertices = PackedVector3Array(-0.75, 0.20000005, -7.5, 0.25, 0.20000005, -7.5, 0.25, 0.20000005, -49, -1.5, 0.20000005, -6.75, -49, 0.20000005, -49, -49, 0.20000005, -5.75, -1.5, 0.20000005, -5.75, 1, 0.20000005, -7.5, 1.75, 0.20000005, -6.75, 49, 0.20000005, -5.75, 49, 0.20000005, -49, 1.75, 0.20000005, -5.75, -1.5, 0.20000005, -5, -0.75, 0.20000005, -4.25, -49, 0.20000005, 49, 0.25, 0.20000005, 49, 0.25, 0.20000005, -4.25, 1.75, 0.20000005, -5, 1, 0.20000005, -4.25, 49, 0.20000005, 49)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 3, 2), PackedInt32Array(2, 3, 4), PackedInt32Array(4, 3, 5), PackedInt32Array(3, 6, 5), PackedInt32Array(7, 1, 2), PackedInt32Array(7, 2, 8), PackedInt32Array(8, 2, 10), PackedInt32Array(8, 10, 9), PackedInt32Array(9, 11, 8), PackedInt32Array(5, 6, 12), PackedInt32Array(12, 13, 5), PackedInt32Array(5, 13, 14), PackedInt32Array(14, 13, 15), PackedInt32Array(13, 16, 15), PackedInt32Array(17, 11, 9), PackedInt32Array(17, 9, 18), PackedInt32Array(18, 9, 19), PackedInt32Array(18, 19, 15), PackedInt32Array(15, 16, 18)]
+cell_height = 0.1
+agent_height = 2.0
+agent_radius = 1.0
+vertices_per_polygon = 8.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_tdnec"]
 size = Vector3(100, 1, 100)
 
@@ -22,35 +30,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="Environment" parent="." unique_id=981963169 instance=ExtResource("1_kln2b")]
 
-[node name="Player" parent="." unique_id=38466257 instance=ExtResource("1_idj7w")]
-collision_mask = 4
+[node name="Level" type="NavigationRegion3D" parent="." unique_id=1866028559]
+navigation_mesh = SubResource("NavigationMesh_writ7")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1111054948]
+[node name="StaticBody3D" type="StaticBody3D" parent="Level" unique_id=1111054948]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 7
 collision_mask = 23
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1245801023]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D" unique_id=1245801023]
 shape = SubResource("BoxShape3D_tdnec")
 
-[node name="Floor" type="CSGBox3D" parent="StaticBody3D" unique_id=1198237399]
+[node name="Floor" type="CSGBox3D" parent="Level/StaticBody3D" unique_id=1198237399]
 size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_vgqql")
 
-[node name="StaticBody3D2" type="RigidBody3D" parent="." unique_id=665230939]
+[node name="StaticBody3D2" type="RigidBody3D" parent="Level" unique_id=665230939]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5.9633713)
 disable_mode = 1
 collision_layer = 7
 collision_mask = 3
 gravity_scale = 0.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1036287822]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/StaticBody3D2" unique_id=1036287822]
 shape = SubResource("BoxShape3D_writ7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=1932932278]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/StaticBody3D2" unique_id=1932932278]
 visible = false
 mesh = SubResource("BoxMesh_tdnec")
 surface_material_override/0 = ExtResource("4_pbw6q")
+
+[node name="Player" parent="." unique_id=38466257 instance=ExtResource("1_idj7w")]
+collision_mask = 4
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=1259357157]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0511813, 0, -5.8594756)
@@ -59,7 +70,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0511813, 0, -5.8594756)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7695317, 2.0564792, -6.781023)
 
 [node name="Enemy" parent="." unique_id=386391300 instance=ExtResource("3_kln2b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44773015, 2.3469329e-05, -0.77961797)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.339204, 2.3841858e-05, -6.0133867)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1099227855]
 transform = Transform3D(1, 0, 0, 0, 0.88420045, 0.46710765, 0, -0.46710765, 0.88420045, 0, 2.2259502, 1.665796)
