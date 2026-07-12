@@ -30,6 +30,10 @@ gdscript/warnings/unused_signal=0
 window/size/viewport_width=960
 window/size/viewport_height=540
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg")
+
 [input]
 
 Forward={

@@ -1,0 +1,115 @@
+{
+	"categories": [
+		{
+			"uuid": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"title": "Task",
+			"color": "3daee9"
+		}
+	],
+	"stages": [
+		{
+			"uuid": "afd8f5e5-70f2-44ad-b152-a5273e87635e",
+			"title": "Todo",
+			"tasks": [
+				"63686dca-11cf-4621-9832-530359f0dfe4",
+				"fde6f192-bb08-4db0-a9ee-186f49a3bd1f",
+				"dcd376d1-824f-4327-9f1a-e82b95b14e9a",
+				"51bf50cc-b985-4c4b-bf93-e45f87689268",
+				"50b004da-a1a6-4a8f-9749-cb6317ac317c",
+				"65031d1c-d3ab-4848-9843-9da1abe275a0",
+				"4d3ca739-9c04-4a7d-a0ce-d548af0fd536",
+				"36b7453d-4927-4dd9-9930-28e664f1c5b9"
+			]
+		},
+		{
+			"uuid": "754925d9-e87c-4151-8431-d105cac2f5e0",
+			"title": "Doing",
+			"tasks": [
+				"b3868c3a-8a05-4304-9bfc-e2548cbc6b52"
+			]
+		},
+		{
+			"uuid": "601ff683-b062-4228-b3ca-83040c12fd8d",
+			"title": "Done",
+			"tasks": []
+		}
+	],
+	"tasks": [
+		{
+			"uuid": "fde6f192-bb08-4db0-a9ee-186f49a3bd1f",
+			"title": "Smooth Camera turn for Enemy",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "63686dca-11cf-4621-9832-530359f0dfe4",
+			"title": "Weapons for Enemies",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "b3868c3a-8a05-4304-9bfc-e2548cbc6b52",
+			"title": "Levelbuilding",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "dcd376d1-824f-4327-9f1a-e82b95b14e9a",
+			"title": "Finish Modular Weapon System visually",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "51bf50cc-b985-4c4b-bf93-e45f87689268",
+			"title": "Modular Weapon System functionally",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "50b004da-a1a6-4a8f-9749-cb6317ac317c",
+			"title": "Bloom",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "65031d1c-d3ab-4848-9843-9da1abe275a0",
+			"title": "Recoil",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "4d3ca739-9c04-4a7d-a0ce-d548af0fd536",
+			"title": "\"Weapon Class\" functionality",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "36b7453d-4927-4dd9-9930-28e664f1c5b9",
+			"title": "Prevent enemy softlocking because pooint not on grid",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		}
+	],
+	"layout": {
+		"columns": [
+			[
+				"afd8f5e5-70f2-44ad-b152-a5273e87635e"
+			],
+			[
+				"754925d9-e87c-4151-8431-d105cac2f5e0"
+			],
+			[
+				"601ff683-b062-4228-b3ca-83040c12fd8d"
+			]
+		]
+	}
+}

@@ -72,9 +72,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7695317, 2.0564792, -6.7810
 
 [node name="Enemy" parent="." unique_id=386391300 instance=ExtResource("3_kln2b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.339204, 2.3841858e-05, -6.0133867)
+parole_speed = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1099227855]
 transform = Transform3D(1, 0, 0, 0, 0.88420045, 0.46710765, 0, -0.46710765, 0.88420045, 1.5106506, 18.306904, 14.409273)
+visible = false
 current = true
 
 [editable path="Player"]

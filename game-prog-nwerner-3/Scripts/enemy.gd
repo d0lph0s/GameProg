@@ -8,12 +8,14 @@ extends CharacterBody3D
 @export var max_health : int
 @export var walk_speed : float
 @export var sprint_speed : float
-@export var parole_speed : float
+@export var patrole_speed : float
 
-#parole
-var parole_points : PackedVector3Array = [null, null, null, null, null]
-var current_parole_point : int = 0
+#patrole
+var patrole_points : PackedVector3Array = [null, null, null, null, null]
+var current_patrole_point : int = 0
 var patroling : bool = true
+var stopping : bool = false
+@onready var scout_point: Node3D = $"../ScoutPoint"
 
 #misc
 var pre_hit_position : Vector3
@@ -25,13 +27,15 @@ var enemy_mesh : PackedScene = preload("res://Art/3D/Characters/Enemies/Characte
 var speed = 5.0
 
 func _ready() -> void:
-	for i in range(0, parole_points.size()):
+	for i in range(0, patrole_points.size()):
 		match i:
 			0:
-				parole_points[i] = global_position
+				patrole_points[i] = global_position
+			1:
+				patrole_points[i] = scout_point.global_position
 			_: 
-				parole_points[i] = Vector3(global_position.x + randf_range(-10.0, 10.0), global_position.y, global_position.z + randf_range(-10.0, 10.0))
-		print(parole_points[i])
+				patrole_points[i] = Vector3(global_position.x + randf_range(-10.0, 10.0), global_position.y, global_position.z + randf_range(-10.0, 10.0))
+		print(patrole_points[i])
 	
 	
 	nav_agent = get_node("./NavigationAgent")
@@ -76,7 +80,7 @@ func _physics_process(delta: float) -> void:
 				speed = walk_speed
 			else:
 				animation_tree.set("parameters/conditions/init", true)
-				animation_tree.set("parameters/conditions/paroling", true)
+				animation_tree.set("parameters/conditions/patroling", true)
 				patroling = true
 				patrole()
 		"Idle":
@@ -84,12 +88,14 @@ func _physics_process(delta: float) -> void:
 				speed = walk_speed
 				animation_tree.set("parameters/conditions/idle", false)
 				animation_tree.set("parameters/conditions/walk", true)
+			elif stopping:
+				return
 			elif !patroling:
 				velocity.x = move_toward(velocity.x, 0, speed)
 				velocity.z = move_toward(velocity.z, 0, speed)
 			else:
 				animation_tree.set("parameters/conditions/idle", false)
-				animation_tree.set("parameters/conditions/paroling", true)
+				animation_tree.set("parameters/conditions/patroling", true)
 				patrole()
 		"Walk":
 			if sight.is_colliding():
@@ -104,21 +110,22 @@ func _physics_process(delta: float) -> void:
 			pass
 		"Kneel Hit":
 			pass
-		"Parole":
-			'if sight.is_colliding():
-				animation_tree.set("parameters/conditions/paroling", false)
+		"Patrole":
+			if sight.is_colliding():
+				animation_tree.set("parameters/conditions/patroling", false)
 				animation_tree.set("parameters/conditions/idle", true)
 				animation_tree.set("parameters/conditions/walk", true)
-			else:'
-			patrole()
+			else:
+				patrole()
 			
-			WHY DOES IT NOT WALK ANYMORE
+			#WHY DOES IT NOT WALK ANYMORE
 			
 	if(animation_tree.get("parameters/conditions/walk")):
 		if(animation_tree.get("parameters/conditions/hit")):
 			velocity.x = move_toward(velocity.x, 0, speed)
 			velocity.z = move_toward(velocity.z, 0, speed)
 			return
+
 		
 		if(sight.is_colliding()):
 			patroling = false
@@ -127,6 +134,7 @@ func _physics_process(delta: float) -> void:
 			next_nav_point = nav_agent.get_next_path_position()
 			velocity = (next_nav_point - global_position).normalized() * speed
 		elif !patroling:
+			print("follow_last_point")
 			follow_last_point(next_nav_point)
 	
 	rotation_degrees.x = 0.0
@@ -152,20 +160,55 @@ func follow_last_point(next_nav_point : Vector3) -> void:
 		
 func patrole() -> void:
 	var next_nav_point
-	var speed = parole_speed
-	if (global_position.x > parole_points[current_parole_point].x - 0.1 && global_position.x < parole_points[current_parole_point].x + 0.1 && global_position.z > parole_points[current_parole_point].z - 0.1 && global_position.z < parole_points[current_parole_point].z + 0.1):
-		'if(current_parole_point == 0):
-			await get_tree().create_timer(2.5).timeout
-			pass'
-		current_parole_point += 1
-		if(current_parole_point >= parole_points.size()):
-			current_parole_point = 0
+	speed = patrole_speed
+	if stopping:
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
+		walk_toggle_undetected(false)
+		return
+	if (global_position.x > patrole_points[current_patrole_point].x - 0.1 && global_position.x < patrole_points[current_patrole_point].x + 0.1 && global_position.z > patrole_points[current_patrole_point].z - 0.1 && global_position.z < patrole_points[current_patrole_point].z + 0.1):
+		if(current_patrole_point == 0 && stopping == false):
+			stopping = true
+			await get_tree().create_timer(4.5).timeout
+			stopping = false
+			walk_toggle_undetected(true)
+			pass
+		if(patrole_points[current_patrole_point] == scout_point.global_position && stopping == false):
+			stopping = true
+			await get_tree().create_timer(7.5).timeout
+			stopping = false
+			walk_toggle_undetected(true)
+			pass
+		current_patrole_point += 1
+		if(current_patrole_point >= patrole_points.size()):
+			current_patrole_point = 0
 		return
 	
-	look_at(parole_points[current_parole_point], Vector3.UP)
-	nav_agent.target_position = parole_points[current_parole_point]
+	look_at(patrole_points[current_patrole_point], Vector3.UP)
+	nav_agent.target_position = patrole_points[current_patrole_point]
 	print(global_position)
 	print(nav_agent.target_position)
 	next_nav_point = nav_agent.get_next_path_position()
 	velocity = (next_nav_point - global_position).normalized() * speed
-	
+
+func walk_toggle(ver : bool):
+	if(ver):
+		animation_tree.set("parameters/conditions/patroling", false)
+		animation_tree.set("parameters/conditions/idle", false)
+		animation_tree.set("parameters/conditions/walk", true)
+	else:
+		animation_tree.set("parameters/conditions/patroling", false)
+		animation_tree.set("parameters/conditions/walk", false)
+		animation_tree.set("parameters/conditions/idle", true)
+
+func walk_toggle_undetected(ver : bool):
+	if(ver):
+		animation_tree.set("parameters/conditions/walk", false)
+		animation_tree.set("parameters/conditions/init", true)
+		animation_tree.set("parameters/conditions/patroling", true)
+		animation_tree.set("parameters/conditions/idle", false)
+	else:
+		animation_tree.set("parameters/conditions/walk", false)
+		animation_tree.set("parameters/conditions/patroling", false)
+		animation_tree.set("parameters/conditions/init", false)
+		animation_tree.set("parameters/conditions/idle", true)

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dei34o418lutn"]
+
+[ext_resource type="Texture2D" uid="uid://du8fqcije4ey1" path="res://Art/3D/Environment/Textures/Blockout/greybox_light_grid.png" id="1_f1c3r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bdu3n"]
+albedo_texture = ExtResource("1_f1c3r")
+uv1_scale = Vector3(75, 25, 50)
+uv1_triplanar_sharpness = 4.756827
+
+[sub_resource type="BoxMesh" id="BoxMesh_tdnec"]
+material = SubResource("StandardMaterial3D_bdu3n")
+size = Vector3(0.5, 25, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f1c3r"]
+size = Vector3(0.5, 25, 50)
+
+[node name="Wall" type="StaticBody3D" unique_id=1096365692]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1659865449]
+mesh = SubResource("BoxMesh_tdnec")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1505895557]
+shape = SubResource("BoxShape3D_f1c3r")
