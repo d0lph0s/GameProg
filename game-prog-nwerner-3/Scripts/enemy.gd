@@ -184,11 +184,12 @@ func patrole() -> void:
 			current_patrole_point = 0
 		return
 	
-	look_at(patrole_points[current_patrole_point], Vector3.UP)
+	next_nav_point = nav_agent.get_next_path_position()
+	look_at(Vector3(next_nav_point.x, global_position.y, next_nav_point.z), Vector3.UP)
 	nav_agent.target_position = patrole_points[current_patrole_point]
 	print(global_position)
 	print(nav_agent.target_position)
-	next_nav_point = nav_agent.get_next_path_position()
+	
 	velocity = (next_nav_point - global_position).normalized() * speed
 
 func walk_toggle(ver : bool):

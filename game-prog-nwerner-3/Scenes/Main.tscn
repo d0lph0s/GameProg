@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://c1k6grvuynkf8" path="res://Scenes/Player.tscn" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://h0fsxu18d5om" path="res://Scenes/Environment.tscn" id="1_kln2b"]
-[ext_resource type="PackedScene" uid="uid://b052y3oatt3id" path="res://Scenes/Enemy.tscn" id="3_kln2b"]
 [ext_resource type="Texture2D" uid="uid://c0kabgfpgrlcm" path="res://Art/3D/Weapons/Master_Texture.png" id="3_rgh2o"]
 [ext_resource type="Material" uid="uid://cllbcv5v205x1" path="res://Art/3D/Weapons/Master_Material.material" id="4_pbw6q"]
 
@@ -61,7 +60,7 @@ mesh = SubResource("BoxMesh_tdnec")
 surface_material_override/0 = ExtResource("4_pbw6q")
 
 [node name="Player" parent="." unique_id=38466257 instance=ExtResource("1_idj7w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.19258, 0, 39.23368)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.56143, 0, 9.865261)
 collision_mask = 4
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=1259357157]
@@ -69,10 +68,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0511813, 0, -5.8594756)
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1971519656]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7695317, 2.0564792, -6.781023)
-
-[node name="Enemy" parent="." unique_id=386391300 instance=ExtResource("3_kln2b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.339204, 2.3841858e-05, -6.0133867)
-parole_speed = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1099227855]
 transform = Transform3D(1, 0, 0, 0, 0.88420045, 0.46710765, 0, -0.46710765, 0.88420045, 1.5106506, 18.306904, 14.409273)

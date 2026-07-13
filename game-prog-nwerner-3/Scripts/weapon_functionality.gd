@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 			var bullet_helper : MeshInstance3D = get_tree().root.get_child(-1)
 			bullet_helper.reparent(bullet)
 			bullet_mesh.queue_free()
-			bullet.get_child(1).set_surface_override_material(0, load("res://Art/3D/Weapons/Master_Material.material"))
+			bullet.get_child(get_child_count()-1).set_surface_override_material(0, load("res://Art/3D/Weapons/Master_Material.material"))
 			var weapon_origin = find_parent("Player").find_child("WeaponOriginPistol")
 			bullet.look_at_from_position(position, weapon_origin.global_transform.basis.z)
 			bullet.global_transform = weapon_origin.global_transform
