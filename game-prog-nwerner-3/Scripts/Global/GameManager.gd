@@ -2,7 +2,7 @@ extends Node
 
 #Game Variables
 var current_level : int
-
+var enemy_count : int
 #Settings
 var Mouse_Sensitivity : float = 0.5
 

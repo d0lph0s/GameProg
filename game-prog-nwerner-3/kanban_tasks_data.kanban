@@ -17,8 +17,7 @@
 				"51bf50cc-b985-4c4b-bf93-e45f87689268",
 				"50b004da-a1a6-4a8f-9749-cb6317ac317c",
 				"65031d1c-d3ab-4848-9843-9da1abe275a0",
-				"4d3ca739-9c04-4a7d-a0ce-d548af0fd536",
-				"36b7453d-4927-4dd9-9930-28e664f1c5b9"
+				"4d3ca739-9c04-4a7d-a0ce-d548af0fd536"
 			]
 		},
 		{
@@ -31,7 +30,11 @@
 		{
 			"uuid": "601ff683-b062-4228-b3ca-83040c12fd8d",
 			"title": "Done",
-			"tasks": []
+			"tasks": [
+				"a882d13b-8669-4a98-80d7-196d14426885",
+				"36b7453d-4927-4dd9-9930-28e664f1c5b9",
+				"38812962-09c6-4d3b-ba68-8d699d69432f"
+			]
 		}
 	],
 	"tasks": [
@@ -94,6 +97,20 @@
 		{
 			"uuid": "36b7453d-4927-4dd9-9930-28e664f1c5b9",
 			"title": "Prevent enemy softlocking because pooint not on grid",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "a882d13b-8669-4a98-80d7-196d14426885",
+			"title": "fix rentner x-ray",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "38812962-09c6-4d3b-ba68-8d699d69432f",
+			"title": "fix rentner spasms",
 			"description": "",
 			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
 			"steps": []

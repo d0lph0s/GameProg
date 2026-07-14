@@ -159,7 +159,7 @@ advance_condition = &"patroling"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mpg14"]
 advance_mode = 2
-advance_expression = "idle && init"
+advance_condition = &"init"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ugrun"]
 advance_mode = 2
@@ -167,7 +167,7 @@ advance_condition = &"patroling"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_geccx"]
 advance_mode = 2
-advance_expression = "idle && !init"
+advance_condition = &"idle"
 
 [resource]
 states/Death_mixamo_com/node = SubResource("AnimationNodeAnimation_ugrun")
@@ -195,4 +195,4 @@ states/Start/position = Vector2(108, 100)
 states/Walk/node = SubResource("AnimationNodeAnimation_nvgn0")
 states/Walk/position = Vector2(660, 318)
 transitions = ["Start", "Idle Undetected", SubResource("AnimationNodeStateMachineTransition_fet2m"), "Idle Undetected", "Idle", SubResource("AnimationNodeStateMachineTransition_c3hgt"), "Idle Undetected", "Death_mixamo_com", SubResource("AnimationNodeStateMachineTransition_jdwv0"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_3dbtj"), "Idle", "Death_mixamo_com", SubResource("AnimationNodeStateMachineTransition_0w7v7"), "Idle Undetected", "Hit", SubResource("AnimationNodeStateMachineTransition_n5ysp"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_fhtyo"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_llh6q"), "Walk", "Hit", SubResource("AnimationNodeStateMachineTransition_d3lna"), "Kneel", "Kneel Transition Stand ", SubResource("AnimationNodeStateMachineTransition_g1drt"), "Kneel Transition Stand ", "Idle", SubResource("AnimationNodeStateMachineTransition_6w2kx"), "Kneel", "Kneel Hit", SubResource("AnimationNodeStateMachineTransition_188ir"), "Kneel Hit", "Kneel", SubResource("AnimationNodeStateMachineTransition_ryypn"), "Idle", "Stand Transition Kneel", SubResource("AnimationNodeStateMachineTransition_aam14"), "Idle Undetected", "Stand Transition Kneel", SubResource("AnimationNodeStateMachineTransition_nire4"), "Stand Transition Kneel", "Kneel", SubResource("AnimationNodeStateMachineTransition_s8qwq"), "Walk", "Pistol Run_mixamo_com", SubResource("AnimationNodeStateMachineTransition_ef4mg"), "Pistol Run_mixamo_com", "Walk", SubResource("AnimationNodeStateMachineTransition_b3vv3"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_gs252"), "Idle Undetected", "Patrole", SubResource("AnimationNodeStateMachineTransition_7wmn1"), "Patrole", "Idle", SubResource("AnimationNodeStateMachineTransition_mpg14"), "Idle", "Patrole", SubResource("AnimationNodeStateMachineTransition_ugrun"), "Patrole", "Idle Undetected", SubResource("AnimationNodeStateMachineTransition_geccx")]
-graph_offset = Vector2(135, 37)
+graph_offset = Vector2(40, 47)
