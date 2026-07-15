@@ -70,6 +70,7 @@ func weapon_modified(type : int) -> void:
 			ammunition.rotation.x = deg_to_rad(90.0)
 			ammunition.get_child(0).set_surface_override_material(0, load("res://Art/3D/Weapons/Master_Material.material"))
 			ammunition_NODE.add_child(ammunition)
+			SignalManager.ammo_selected.emit(ammunition.name)
 			#endregion
 			#tween for style
 		3:

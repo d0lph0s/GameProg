@@ -12,19 +12,18 @@
 			"title": "Todo",
 			"tasks": [
 				"63686dca-11cf-4621-9832-530359f0dfe4",
-				"fde6f192-bb08-4db0-a9ee-186f49a3bd1f",
 				"dcd376d1-824f-4327-9f1a-e82b95b14e9a",
 				"51bf50cc-b985-4c4b-bf93-e45f87689268",
-				"50b004da-a1a6-4a8f-9749-cb6317ac317c",
-				"65031d1c-d3ab-4848-9843-9da1abe275a0",
-				"4d3ca739-9c04-4a7d-a0ce-d548af0fd536"
+				"4d3ca739-9c04-4a7d-a0ce-d548af0fd536",
+				"39c74f25-06c9-49cb-b825-076057356235"
 			]
 		},
 		{
 			"uuid": "754925d9-e87c-4151-8431-d105cac2f5e0",
 			"title": "Doing",
 			"tasks": [
-				"b3868c3a-8a05-4304-9bfc-e2548cbc6b52"
+				"7ad84411-3def-4e76-89c8-c4f4540babda",
+				"48241c19-03c6-42e7-87c1-afbbfdb27ccd"
 			]
 		},
 		{
@@ -33,7 +32,11 @@
 			"tasks": [
 				"a882d13b-8669-4a98-80d7-196d14426885",
 				"36b7453d-4927-4dd9-9930-28e664f1c5b9",
-				"38812962-09c6-4d3b-ba68-8d699d69432f"
+				"38812962-09c6-4d3b-ba68-8d699d69432f",
+				"b3868c3a-8a05-4304-9bfc-e2548cbc6b52",
+				"50b004da-a1a6-4a8f-9749-cb6317ac317c",
+				"65031d1c-d3ab-4848-9843-9da1abe275a0",
+				"fde6f192-bb08-4db0-a9ee-186f49a3bd1f"
 			]
 		}
 	],
@@ -111,6 +114,27 @@
 		{
 			"uuid": "38812962-09c6-4d3b-ba68-8d699d69432f",
 			"title": "fix rentner spasms",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "39c74f25-06c9-49cb-b825-076057356235",
+			"title": "Renter reaction to hit",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "7ad84411-3def-4e76-89c8-c4f4540babda",
+			"title": "UI",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "48241c19-03c6-42e7-87c1-afbbfdb27ccd",
+			"title": "Weaponmanager for Stat-transfer",
 			"description": "",
 			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
 			"steps": []

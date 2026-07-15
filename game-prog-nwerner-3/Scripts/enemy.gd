@@ -1,3 +1,4 @@
+class_name Enemy
 extends CharacterBody3D
 
 @onready var animation_tree : AnimationTree = $AnimationTree
@@ -14,6 +15,7 @@ extends CharacterBody3D
 
 #patrole
 var patrole_points : PackedVector3Array = [null, null, null, null, null]
+var scout_points : PackedVector3Array = []
 var current_patrole_point : int = 0
 var patroling : bool = true
 var stopping : bool = false
@@ -36,19 +38,27 @@ func _ready() -> void:
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	
+	#region assigning+nav
 	nav_agent = get_node("./NavigationAgent")
 	nav_map = nav_agent.get_navigation_map()
-	print(NavigationServer3D.map_get_regions(nav_map).size())
+	#print(NavigationServer3D.map_get_regions(nav_map).size())
 	player = get_node("../Player")
 	state = animation_tree.get("parameters/playback")
 	
 	if nav_mesh_node == null:
 		nav_mesh_node = get_tree().root.find_child("Level")
 	
-	patrole_points = [global_position, $PatrolPoints/Point1.global_position, $PatrolPoints/Point2.global_position, $PatrolPoints/Point3.global_position, $PatrolPoints/Point4.global_position]
-	#var nav_mesh = nav_mesh_node.navigation_mesh.get_vertices()
-	#print(nav_mesh)
+	var scout_points_raw = get_parent().find_children("ScoutPoint" + "*")
+	for i : int in range(0, scout_points_raw.size()):
+		scout_points.append(scout_points_raw[i].global_position)
+	scout_points.sort()
 	
+	#print(scout_points)
+	patrole_points = [global_position, $PatrolPoints/Point1.global_position, $PatrolPoints/Point2.global_position, $PatrolPoints/Point3.global_position, $PatrolPoints/Point4.global_position]
+	#endregion
+	
+	#OPTIONAL MODULAR MESH LOADING
+	#region meshloading
 	'''var enemy : Node = enemy_mesh.instantiate()
 	enemy.remove_child(enemy.get_child(-1))
 	var new_animation_player_scene : PackedScene = load("res://Scenes/EnemyAnimationPlayer.tscn")
@@ -61,6 +71,8 @@ func _ready() -> void:
 	add_child(enemy)
 	
 	animation_tree.anim_player = enemy.get_child(-1).get_path()'''
+	#endregion
+	
 	animation_tree.active = true
 
 func take_damage(damage : int) -> void:
@@ -70,6 +82,7 @@ func take_damage(damage : int) -> void:
 	if(health > 0):
 		return
 	if(health >= 0):
+		SignalManager.enemy_killed.emit()
 		queue_free()
 
 func _physics_process(delta: float) -> void:
@@ -82,7 +95,7 @@ func _physics_process(delta: float) -> void:
 	true_sight.look_at(Vector3(player.global_position.x, player.global_position.y + 1.5, player.global_position.z), Vector3.UP)
 	
 	sighted = sight.is_colliding() && is_true_sight()
-	print(sighted)
+	#print(sighted)
 	
 	match state.get_current_node():
 		"Idle Undetected":
@@ -116,6 +129,7 @@ func _physics_process(delta: float) -> void:
 		"Hit":
 			await animation_tree.animation_finished
 			animation_tree.set("parameters/conditions/hit", false)
+			#ADD GO TO PLAYER AFTER BEING HIT
 			global_position = pre_hit_position
 		"Kneel":
 			pass
@@ -152,28 +166,20 @@ func _physics_process(delta: float) -> void:
 		elif !patroling:
 			print("follow_last_point")
 			follow_last_point(next_nav_point)
-	
-	'if(animation_tree.get("parameters/conditions/patroling")):
+			
+	if(animation_tree.get("parameters/conditions/patroling")):
 		if(animation_tree.get("parameters/conditions/hit")):
 			velocity.x = move_toward(velocity.x, 0, speed)
 			velocity.z = move_toward(velocity.z, 0, speed)
 			return
-			
-		if(!is_true_sight()):
-			follow_last_point(next_nav_point)
-			return
-		
-		if(sight.is_colliding() && is_true_sight()):
-			patroling = false
-			walk_toggle_undetected(false)
-			walk_toggle(true)'
 	
 	rotation_degrees.x = 0.0
 	rotation_degrees.z = 0.0
 	
 	if not is_on_floor():
 		velocity.y = get_gravity().y
-	move_and_slide()
+	if not stopping:
+		move_and_slide()
 
 func follow_last_point(next_nav_point : Vector3) -> void:
 	print("sight just broken")
@@ -208,12 +214,16 @@ func patrole() -> void:
 			stopping = false
 			walk_toggle_undetected(true)
 			pass
-		if(patrole_points[current_patrole_point] == scout_point.global_position && stopping == false):
+		elif(scout_points.has(patrole_points[current_patrole_point]) && stopping == false):
 			stopping = true
 			await get_tree().create_timer(7.5).timeout
 			stopping = false
 			walk_toggle_undetected(true)
-			pass
+		else:
+			stopping = true
+			await get_tree().create_timer(1.25).timeout
+			stopping = false
+			walk_toggle_undetected(true)
 		current_patrole_point += 1
 		if(current_patrole_point >= patrole_points.size()):
 			current_patrole_point = 0
@@ -229,7 +239,6 @@ func patrole() -> void:
 	global_transform.basis = Basis(slerped_quat)
 	
 	nav_agent.target_position = patrole_points[current_patrole_point]
-	print(nav_agent.target_position)
 	
 	velocity = (next_nav_point - global_position).normalized() * speed
 

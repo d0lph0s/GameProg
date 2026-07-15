@@ -4,21 +4,31 @@ extends CharacterBody3D
 @onready var hands : Node3D = $Mesh/PlayerHands
 @onready var mesh : Node3D = $Mesh
 
+
 @export_category("Player Stats")
 @export var health : int
 @export var max_health : int
 @export var walk_speed : float
 @export var sprint_speed : float
+@export var crouch_speed : float
 
 var speed : float
 var direction : Vector3
 const JUMP_VELOCITY : float = 2.75
 
 func _ready() -> void:
-	pass
+
+	health = max_health
+
+	SignalManager.ammo_used.emit()
+	PlayerManager.current_health = health
+	SignalManager.damage_taken.emit()
+
 
 func take_damage(damage : int) -> void:
 	health -= damage
+	PlayerManager.current_health = health
+	SignalManager.damage_taken.emit()
 	if(health > 0):
 		return
 	if(health >= 0):
@@ -34,11 +44,33 @@ func _unhandled_input(event: InputEvent) -> void:
 		head.rotate_x(deg_to_rad(-event.relative.y * mouse_sens))
 		head.rotation.x = clamp(head.rotation.x, -1.1, 1.4)
 	
+
+	
 func _physics_process(delta: float) -> void:
-	#sprint
-	speed = walk_speed
-	if Input.is_action_pressed("Run") and is_on_floor():
+	
+	if Input.is_action_pressed("Crouch") and is_on_floor():
+		speed = crouch_speed
+		head.position = lerp(head.position, Vector3(0.0, 1.023, -0.114), 0.1)
+		$CollisionShape3D.shape.height = 1.0
+		$CollisionShape3D.position = Vector3(0.0, 0.584, 0.0)
+		$HeadScan.position = Vector3(0.0, 1.023, 0.0)
+	elif Input.is_action_pressed("Run") and is_on_floor() and speed != crouch_speed:
+		if $HeadScan.is_colliding():
+			return
 		speed = sprint_speed
+		#hands.position = lerp(hands.position, Vector3.ZERO, 0.1)
+		head.position = lerp(head.position, Vector3(0.0, 1.723, -0.114), 0.1)
+		$HeadScan.position = Vector3(0.0, 1.723, 0.0)
+	else:
+		if $HeadScan.is_colliding():
+			return
+		$CollisionShape3D.shape.height = 1.735
+		$CollisionShape3D.position = Vector3(0.0, 0.968, 0.0)
+		speed = walk_speed
+		head.position = lerp(head.position, Vector3(0.0, 1.723, -0.114), 0.1)
+		$HeadScan.position = Vector3(0.0, 1.723, 0.0)
+		
+		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -48,7 +80,10 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Aim"): #eventual addition for automatic fire
 		hands.reparent(head)
-		hands.position = Vector3(0.0, -0.9, 0.0)#Vector3(0.0, -0.933, 0.022)
+		if Input.is_action_pressed("Crouch"):
+			hands.position = lerp(hands.position, Vector3(0.0, -0.5, 0.0), 0.1)
+		else:
+			hands.position = Vector3(0.0, -0.9, 0.0)#Vector3(0.0, -0.933, 0.022)
 		hands.rotation_degrees = Vector3(0.0, -180.0, 0.0)
 		#basis
 		

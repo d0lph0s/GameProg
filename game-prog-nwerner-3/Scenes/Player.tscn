@@ -4,13 +4,15 @@
 [ext_resource type="Script" uid="uid://sid0evpul03n" path="res://Scripts/player_hands_animation.gd" id="2_52ee3"]
 [ext_resource type="Texture2D" uid="uid://dwr4lolbe2nvy" path="res://Art/3D/Characters/Player/PlayurrHands_FPSarm_256px.png" id="3_bhhdu"]
 [ext_resource type="PackedScene" uid="uid://drrrdqkr8skn1" path="res://Scenes/Weapons.tscn" id="3_dewec"]
-[ext_resource type="Script" uid="uid://db682q078vk61" path="res://Scripts/player_ui.gd" id="4_5ixxa"]
+[ext_resource type="Script" uid="uid://db682q078vk61" path="res://Scripts/ui_script.gd" id="4_5ixxa"]
 [ext_resource type="Shader" uid="uid://bmj4cmt61mt07" path="res://Art/2D/Shader/chromatic_abberation.gdshader" id="4_dewec"]
 [ext_resource type="AnimationLibrary" uid="uid://iwa0upeh5chu" path="res://Art/3D/Characters/Player/Animations/FPS_Hands.res" id="4_megsn"]
+[ext_resource type="PackedScene" uid="uid://c5qcpfn0lhjkj" path="res://Scenes/WinMenu.tscn" id="8_bhhdu"]
+[ext_resource type="PackedScene" uid="uid://tf621qvffkst" path="res://Scenes/PlayerUI.tscn" id="9_megsn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_writ7"]
 radius = 0.4
-height = 1.7354004
+height = 1.735
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nck34"]
 resource_name = "FPS_Arm"
@@ -513,8 +515,10 @@ collision_mask = 5
 script = ExtResource("1_6t5aa")
 health = 100
 max_health = 100
-walk_speed = 6.5
-sprint_speed = 8.75
+walk_speed = 4.5
+sprint_speed = 7.25
+crouch_speed = 2.25
+metadata/Player = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1434518248]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96770024, 0)
@@ -787,6 +791,7 @@ parameters/conditions/pistol = false
 
 [node name="CameraHead" type="Node3D" parent="." unique_id=268881830]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7229743, -0.113566905)
+metadata/Player = true
 
 [node name="WeaponOriginPistol" type="Node3D" parent="CameraHead" unique_id=224906099]
 transform = Transform3D(-1.5, 0, -2.2649371e-07, 0, 1.5, 0, 2.2649371e-07, 0, -1.5, 0, -0.055, -0.632)
@@ -796,7 +801,15 @@ transform = Transform3D(-1.5, 0, -2.2649371e-07, 0, 1.5, 0, 2.2649371e-07, 0, -1
 [node name="Camera3D" type="Camera3D" parent="CameraHead" unique_id=2140618423]
 current = true
 
+[node name="HeadScan" type="RayCast3D" parent="." unique_id=38617344]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.723, 0)
+target_position = Vector3(0, 0.1, 0)
+collision_mask = 7
+hit_from_inside = true
+debug_shape_custom_color = Color(0, 3.4822285, 2.3525748, 1)
+
 [node name="Control" type="Control" parent="." unique_id=429013575]
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -808,6 +821,7 @@ mouse_filter = 2
 script = ExtResource("4_5ixxa")
 
 [node name="ColorRect" type="ColorRect" parent="Control" unique_id=1576975646]
+visible = false
 material = SubResource("ShaderMaterial_i6fqs")
 layout_mode = 1
 anchors_preset = 15
@@ -842,6 +856,13 @@ offset_transform_enabled = true
 offset_transform_position = Vector2(-10, -10)
 texture = SubResource("NoiseTexture2D_tdnec")
 stretch_mode = 2
+
+[node name="WinMenu" parent="Control" unique_id=711515340 instance=ExtResource("8_bhhdu")]
+visible = false
+layout_mode = 1
+
+[node name="PlayerUI" parent="Control" unique_id=1850710553 instance=ExtResource("9_megsn")]
+layout_mode = 1
 
 [connection signal="pressed" from="CameraHead/WeaponOriginPistol/Weapons/WeaponsMenu/Body/HBoxContainer/MiddleMarginContainer/VBoxContainer/HBoxContainer/Confirm" to="Control" method="_on_confirm_pressed"]
 

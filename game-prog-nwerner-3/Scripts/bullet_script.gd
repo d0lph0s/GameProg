@@ -5,7 +5,7 @@ var timer : Timer = Timer.new()
 func _ready() -> void:
 	self.add_child(timer)
 	self.body_entered.connect(_collision)
-	timer.wait_time = 6.5
+	timer.wait_time = 1.25
 	sleeping = false
 	death_timer()
 	
@@ -21,6 +21,6 @@ func death_timer() -> void:
 	queue_free()
 
 func _collision(body : Node) -> void:
-	if(body.has_meta("Enemy")):
+	if(body.has_meta("Enemy") || body.has_meta("Player")):
 		body.take_damage(20)
 	queue_free()

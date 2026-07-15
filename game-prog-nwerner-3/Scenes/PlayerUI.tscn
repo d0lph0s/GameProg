@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://tf621qvffkst"]
+
+[ext_resource type="Theme" uid="uid://cs4l0psoivy8d" path="res://Art/2D/UI/MainFontTheme.tres" id="1_hfrq2"]
+[ext_resource type="Script" uid="uid://b06t4ukixri1y" path="res://Scripts/player_ui.gd" id="2_jrycd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tdnec"]
+bg_color = Color(0.5058824, 0.15294118, 1, 0.07058824)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_writ7"]
+bg_color = Color(0.5411765, 0.44705883, 0.9254902, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 20
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hfrq2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hfrq2"]
+font_size = 36
+
+[node name="PlayerUI" type="Control" unique_id=1850710553]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_hfrq2")
+script = ExtResource("2_jrycd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1765595883]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=1853199226]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.02
+
+[node name="VBoxContainerMain" type="VBoxContainer" parent="HBoxContainer" unique_id=784134670]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainerMain" unique_id=807661459]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="RemainingE" type="Label" parent="HBoxContainer/VBoxContainerMain" unique_id=1174698436]
+layout_mode = 2
+text = "Rentner übrig: "
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainerMain" unique_id=1379676344]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainerMain/VBoxContainer" unique_id=1247680500]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HealthBar" type="ProgressBar" parent="HBoxContainer/VBoxContainerMain/VBoxContainer" unique_id=2123430160]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_tdnec")
+theme_override_styles/fill = SubResource("StyleBoxFlat_writ7")
+step = 1.0
+value = 30.0
+rounded = true
+show_percentage = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainerMain/VBoxContainer" unique_id=250949483]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.03
+
+[node name="BoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainerMain/VBoxContainer" unique_id=332158629]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.12
+
+[node name="AmmoText" type="TextureRect" parent="HBoxContainer/VBoxContainerMain/VBoxContainer/BoxContainer" unique_id=1966093235]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("PlaceholderTexture2D_hfrq2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ammo" type="Label" parent="HBoxContainer/VBoxContainerMain/VBoxContainer/BoxContainer" unique_id=899187236]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "x"
+label_settings = SubResource("LabelSettings_hfrq2")
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/VBoxContainerMain/VBoxContainer" unique_id=1877925028]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=152201377]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.5

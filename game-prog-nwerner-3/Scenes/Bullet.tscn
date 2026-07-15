@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://xe6rpteqqu1l" path="res://Art/Sound/SFX/bullet_trail.ogg" id="1_vlxeq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5n62p"]
-radius = 0.0041569225
+radius = 0.009
 height = 0.056999844
 
 [node name="Bullet" type="RigidBody3D" unique_id=2122403693]
