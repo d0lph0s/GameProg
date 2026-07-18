@@ -518,6 +518,7 @@ max_health = 100
 walk_speed = 4.5
 sprint_speed = 7.25
 crouch_speed = 2.25
+aim_speed = 3.75
 metadata/Player = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1434518248]

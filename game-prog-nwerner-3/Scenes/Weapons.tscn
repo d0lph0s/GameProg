@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c4lrxn10nvaka" path="res://Scripts/weapon_functionality.gd" id="2_ovc61"]
 [ext_resource type="Theme" uid="uid://cs4l0psoivy8d" path="res://Art/2D/UI/MainFontTheme.tres" id="3_8qb6n"]
 [ext_resource type="Script" uid="uid://cwguagkqcww10" path="res://Scripts/weapons_menu.gd" id="4_ovc61"]
+[ext_resource type="AudioStream" uid="uid://bifo4vn24ccg7" path="res://Art/Sound/SFX/pistol_shot.ogg" id="4_yukwd"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_tdnec"]
 
@@ -36,6 +37,11 @@ transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.3
 visible = false
 mesh = SubResource("PlaneMesh_tdnec")
 surface_material_override/0 = SubResource("StandardMaterial3D_02q03")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1052678414]
+stream = ExtResource("4_yukwd")
+max_polyphony = 10
+bus = &"Weapon"
 
 [node name="WeaponsMenu" type="Control" parent="." unique_id=910210828]
 layout_mode = 3

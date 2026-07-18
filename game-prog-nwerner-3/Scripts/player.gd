@@ -11,6 +11,7 @@ extends CharacterBody3D
 @export var walk_speed : float
 @export var sprint_speed : float
 @export var crouch_speed : float
+@export var aim_speed : float
 
 var speed : float
 var direction : Vector3
@@ -58,6 +59,8 @@ func _physics_process(delta: float) -> void:
 		if $HeadScan.is_colliding():
 			return
 		speed = sprint_speed
+		if Input.is_action_pressed("Aim"):
+			speed = aim_speed
 		#hands.position = lerp(hands.position, Vector3.ZERO, 0.1)
 		head.position = lerp(head.position, Vector3(0.0, 1.723, -0.114), 0.1)
 		$HeadScan.position = Vector3(0.0, 1.723, 0.0)
@@ -67,6 +70,8 @@ func _physics_process(delta: float) -> void:
 		$CollisionShape3D.shape.height = 1.735
 		$CollisionShape3D.position = Vector3(0.0, 0.968, 0.0)
 		speed = walk_speed
+		if Input.is_action_pressed("Aim"):
+			speed = aim_speed
 		head.position = lerp(head.position, Vector3(0.0, 1.723, -0.114), 0.1)
 		$HeadScan.position = Vector3(0.0, 1.723, 0.0)
 		

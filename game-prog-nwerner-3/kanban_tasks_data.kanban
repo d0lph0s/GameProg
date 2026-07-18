@@ -15,7 +15,13 @@
 				"dcd376d1-824f-4327-9f1a-e82b95b14e9a",
 				"51bf50cc-b985-4c4b-bf93-e45f87689268",
 				"4d3ca739-9c04-4a7d-a0ce-d548af0fd536",
-				"39c74f25-06c9-49cb-b825-076057356235"
+				"39c74f25-06c9-49cb-b825-076057356235",
+				"c3a32c26-7e9a-4d0c-861d-58a719c2d073",
+				"3f7f2f5c-03f2-4f9d-8d18-bf96fb3258e4",
+				"578e8b8c-1690-450b-86d0-807d93f378cf",
+				"bc99727d-e1ee-42fa-88da-f416c6c05537",
+				"9672de2c-f21b-4c59-93d9-e99778b42fb6",
+				"706ee967-65af-4e82-8c81-a06077e4bf48"
 			]
 		},
 		{
@@ -135,6 +141,48 @@
 		{
 			"uuid": "48241c19-03c6-42e7-87c1-afbbfdb27ccd",
 			"title": "Weaponmanager for Stat-transfer",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "c3a32c26-7e9a-4d0c-861d-58a719c2d073",
+			"title": "Tutorial",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "3f7f2f5c-03f2-4f9d-8d18-bf96fb3258e4",
+			"title": "Time between shots",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "578e8b8c-1690-450b-86d0-807d93f378cf",
+			"title": "make enemies more complex",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "bc99727d-e1ee-42fa-88da-f416c6c05537",
+			"title": "Enemy Types",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "9672de2c-f21b-4c59-93d9-e99778b42fb6",
+			"title": "ammunition type effects and interactions",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "706ee967-65af-4e82-8c81-a06077e4bf48",
+			"title": "VFX",
 			"description": "",
 			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
 			"steps": []

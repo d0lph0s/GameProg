@@ -6,12 +6,14 @@ extends CharacterBody3D
 @onready var true_sight: RayCast3D = $TrueSight
 
 
-@export_category("Enemy Stats")
+@export_category("Enemy Movement Stats")
 @export var health : int
 @export var max_health : int
 @export var walk_speed : float
 @export var sprint_speed : float
 @export var patrole_speed : float
+@export_category("Enemy Combat Stats")
+@export var armor : int 
 
 #patrole
 var patrole_points : PackedVector3Array = [null, null, null, null, null]
@@ -23,6 +25,8 @@ var sighted : bool = false
 @onready var scout_point: Node3D = $"../ScoutPoint"
 
 #misc
+var hit : bool = false
+var next_nav_point : Vector3
 var pre_hit_position : Vector3
 var sight_just_broken : bool = false
 var state
@@ -34,6 +38,11 @@ var enemy_mesh : PackedScene = preload("res://Art/3D/Characters/Enemies/Characte
 var speed : float = 5.0
 
 func _ready() -> void:
+	var label3d : Label3D = Label3D.new()
+	label3d.text = "Arschhaare"
+	label3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label3d.position = Vector3(0.0, 1.0, 0.0)
+	$DamageFeedback.add_child(label3d)
 	GameManager.enemy_count += 1
 	await get_tree().physics_frame
 	await get_tree().physics_frame
@@ -85,8 +94,29 @@ func take_damage(damage : int) -> void:
 		SignalManager.enemy_killed.emit()
 		queue_free()
 
+func display_damage(damage : int, hit_position : Vector3, color : Color) -> void:
+	var damage_label : Label3D = Label3D.new()
+	damage_label.text = str(damage)
+	damage_label.modulate = color
+	damage_label.font = load("res://Art/2D/UI/SyneMono-Regular.ttf")
+	damage_label.font_size = 64
+	damage_label.position = (global_position - hit_position) * 0.25 + Vector3(randf_range(-0.15, 0.15), randf_range(-0.15, 0.15) + 0.5, randf_range(-0.15, 0.15))
+	damage_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	#damage_label.look_at(Vector3(player.global_position.x, damage_label.global_position.y, player.global_position.z), Vector3.UP)
+	$DamageFeedback.add_child(damage_label)
+	var tween = create_tween()
+	var evil_tween = create_tween()
+	evil_tween.set_ease(Tween.EaseType.EASE_OUT)
+	evil_tween.set_trans(Tween.TRANS_ELASTIC)
+	fix mal den tween color, ainfach nur alpha fade out
+	tween.tween_property(damage_label, "position", global_position - hit_position + Vector3(randf_range(-0.4, 0.4), 1.5, 0.0), 1.25)
+	evil_tween.tween_property(damage_label, "modulate", Color(0.0, 0.0, 0.0, 0.0), 3.0)
+	evil_tween.tween_property(damage_label, "outline_modulate", Color(0.0, 0.0, 0.0, 0.0), 3.0)
+	await tween.finished
+	damage_label.queue_free()
+
 func _physics_process(delta: float) -> void:
-	var next_nav_point : Vector3
+	
 	if(player == null):
 		return
 	
@@ -122,15 +152,22 @@ func _physics_process(delta: float) -> void:
 				animation_tree.set("parameters/conditions/patroling", true)
 				patrole()
 		"Walk":
-			if sighted:
+			if hit:
+				follow_player()
+			elif sighted:
 				pass
 			else:
 				patrole()
 		"Hit":
+			hit = true
 			await animation_tree.animation_finished
+			animation_tree.set("parameters/conditions/patroling", false)
 			animation_tree.set("parameters/conditions/hit", false)
+			animation_tree.set("parameters/conditions/walk", true)
 			#ADD GO TO PLAYER AFTER BEING HIT
 			global_position = pre_hit_position
+			just_hit()
+			follow_player()
 		"Kneel":
 			pass
 		"Kneel Hit":
@@ -159,10 +196,7 @@ func _physics_process(delta: float) -> void:
 		
 		if(sighted):
 			patroling = false
-			look_at(player.global_position, Vector3.UP)
-			nav_agent.target_position = player.global_position
-			next_nav_point = nav_agent.get_next_path_position()
-			velocity = (next_nav_point - global_position).normalized() * speed
+			follow_player()
 		elif !patroling:
 			print("follow_last_point")
 			follow_last_point(next_nav_point)
@@ -180,6 +214,19 @@ func _physics_process(delta: float) -> void:
 		velocity.y = get_gravity().y
 	if not stopping:
 		move_and_slide()
+
+func just_hit() -> void:
+	if hit:
+		speed = sprint_speed + patrole_speed
+		await get_tree().create_timer(2.0).timeout
+		hit = false
+		speed = walk_speed
+	
+func follow_player() -> void:
+	look_at(player.global_position, Vector3.UP)
+	nav_agent.target_position = player.global_position
+	next_nav_point = nav_agent.get_next_path_position()
+	velocity = (next_nav_point - global_position).normalized() * speed
 
 func follow_last_point(next_nav_point : Vector3) -> void:
 	print("sight just broken")
@@ -200,9 +247,10 @@ func follow_last_point(next_nav_point : Vector3) -> void:
 	return
 		
 func patrole() -> void:
-	var next_nav_point
 	speed = patrole_speed
 	if stopping:
+		if(scout_points.has(patrole_points[current_patrole_point])):
+			$Sight.scale = lerp($Sight.scale, Vector3(1.0, 1.0, 3.0), 0.1)
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 		walk_toggle_undetected(false)
@@ -212,23 +260,27 @@ func patrole() -> void:
 			stopping = true
 			await get_tree().create_timer(4.5).timeout
 			stopping = false
-			walk_toggle_undetected(true)
+			if !sighted:
+				walk_toggle_undetected(true)
 			pass
 		elif(scout_points.has(patrole_points[current_patrole_point]) && stopping == false):
 			stopping = true
 			await get_tree().create_timer(7.5).timeout
 			stopping = false
-			walk_toggle_undetected(true)
+			if !sighted:
+				walk_toggle_undetected(true)
 		else:
 			stopping = true
 			await get_tree().create_timer(1.25).timeout
 			stopping = false
-			walk_toggle_undetected(true)
+			if !sighted:
+				walk_toggle_undetected(true)
 		current_patrole_point += 1
 		if(current_patrole_point >= patrole_points.size()):
 			current_patrole_point = 0
 		return
-	
+		
+	$Sight.scale = Vector3.ONE
 	next_nav_point = nav_agent.get_next_path_position()
 	var target_transform = global_transform.looking_at(next_nav_point, Vector3.UP)
 	

@@ -41,6 +41,8 @@ func _process(delta: float) -> void:
 					useful_parent_node.rotation_degrees.x = lerpf(useful_parent_node.rotation_degrees.x, useful_parent_node.rotation_degrees.x + randf_range(0.45, 3.1), 0.21)
 					player_node.rotation_degrees.y = lerpf(player_node.rotation_degrees.y, player_node.rotation_degrees.y + randf_range(-3.1, 3.1), 0.21)
 					printerr("succes")
+			$"../AudioStreamPlayer3D".play()
+			
 			var bullet : RigidBody3D = bullet_scene.instantiate()
 			var bullet_mesh : Node3D = PlayerManager.current_ammuniton.instantiate()
 			bullet_mesh.get_child(0).owner = null
@@ -50,7 +52,7 @@ func _process(delta: float) -> void:
 			bullet_mesh.queue_free()
 			bullet.get_child(get_child_count()-1).set_surface_override_material(0, load("res://Art/3D/Weapons/Master_Material.material"))
 			var weapon_origin = find_parent("Player").find_child("WeaponOriginPistol")
-			bullet.look_at_from_position(position, weapon_origin.global_transform.basis.z + Vector3(randf_range(-0.005, 0.005), randf_range(-0.005, 0.005), randf_range(-0.005, 0.005)))
+			bullet.look_at_from_position(position, weapon_origin.global_transform.basis.z + Vector3(randf_range(-0.01, 0.01) * WeaponManager.accuracy(), randf_range(-0.01, 0.01) * WeaponManager.accuracy(), randf_range(-0.01, 0.01) * WeaponManager.accuracy()))
 			bullet.global_transform = weapon_origin.global_transform
 			bullet.mass = 0.02
 			bullet.gravity_scale = 0.0
