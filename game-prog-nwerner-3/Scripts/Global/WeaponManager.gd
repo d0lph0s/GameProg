@@ -24,6 +24,11 @@ func accuracy() -> float:
 		accuracy_mod = 100
 	return (100.0 - accuracy_mod)
 
+func calc_accuracy(value : float) -> float:
+	if value > 100.0:
+		value = 100
+	return (100.0 - value)/10
+
 func reload_time() -> float:
 	return (1/reload_speed_mod * normal_reload_time)
 

@@ -13,6 +13,7 @@ func _ready() -> void:
 	ammo = max_ammo
 	PlayerManager.current_ammo = ammo
 	SignalManager.ammo_used.emit()
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,7 +24,11 @@ func _process(delta: float) -> void:
 		can_shoot = true
 	else:
 		can_shoot = false
-		
+	
+	if Input.is_action_just_pressed("Reload"):
+		ammo = 0
+		reload()
+	
 	if(can_shoot):
 		if (Input.is_action_just_pressed("Shoot")):
 			if(ammo <= 0):
@@ -31,9 +36,6 @@ func _process(delta: float) -> void:
 			ammo -= 1
 			PlayerManager.current_ammo -= 1
 			SignalManager.ammo_used.emit()
-			if(ammo <= 0):
-				reload()
-				return
 			if has_node("../../.."):
 				var useful_parent_node : Node3D = get_parent().get_parent().get_parent()
 				var player_node : Node3D = get_node("../../../..")
@@ -42,7 +44,6 @@ func _process(delta: float) -> void:
 					player_node.rotation_degrees.y = lerpf(player_node.rotation_degrees.y, player_node.rotation_degrees.y + randf_range(-3.1, 3.1), 0.21)
 					printerr("succes")
 			$"../AudioStreamPlayer3D".play()
-			
 			var bullet : RigidBody3D = bullet_scene.instantiate()
 			var bullet_mesh : Node3D = PlayerManager.current_ammuniton.instantiate()
 			bullet_mesh.get_child(0).owner = null
@@ -60,6 +61,9 @@ func _process(delta: float) -> void:
 			bullet.linear_velocity = weapon_origin.global_transform.basis.z * 50.0
 			bullet.set_script(load("res://Scripts/bullet_script.gd"))
 			get_tree().root.add_child(bullet)
+			if(ammo <= 0):
+				reload()
+				return
 			
 			#bullet.get_child(0).scale = bullet.get_child(0).scale * 1.5
 			
