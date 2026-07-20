@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://b7m2ayjt63u2t"]
+
+[ext_resource type="Texture2D" uid="uid://d0lvey62ac75k" path="res://Art/2D/UI/rentner_spritesheet.png" id="1_f1gli"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hgjo"]
+atlas = ExtResource("1_f1gli")
+region = Rect2(0, 0, 324, 498)
+
+[sub_resource type="GDScript" id="GDScript_64vox"]
+script/source = "extends TextureRect
+
+var i : int = 0
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if get_tree().get_frame() % 60 == 0:
+		i += 1
+		texture.region += Vector2(324.0, 0.0)
+"
+
+[node name="DeathMenu" type="Control" unique_id=1066113762]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2142329255]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=1252635749]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=449287770]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/VBoxContainer" unique_id=1742228929]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer" unique_id=636954442]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = SubResource("AtlasTexture_1hgjo")
+stretch_mode = 4
+script = SubResource("GDScript_64vox")
+
+[node name="MarginContainer4" type="MarginContainer" parent="HBoxContainer/VBoxContainer" unique_id=2085162995]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=134990662]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25

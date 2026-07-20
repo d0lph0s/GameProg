@@ -3964,7 +3964,7 @@ _data = {
 &"mixamo_com": SubResource("Animation_q4ksb")
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" unique_id=1199763422]
+[node name="AnimationPlayer" type="AnimationPlayer" unique_id=1430173487]
 libraries/ = SubResource("AnimationLibrary_52qwr")
 "libraries/Crouch Death" = SubResource("AnimationLibrary_x8wuo")
 libraries/Death = SubResource("AnimationLibrary_4qcij")

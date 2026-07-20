@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://chhyvnyucovad"]
+
+[ext_resource type="PackedScene" uid="uid://cf5qmxqitevh8" path="res://Art/2D/VFX/BinbunVFX/muzzle_flash/effects/short_flash/short_flash_04.tscn" id="1_cclob"]
+
+[node name="MuzzleFlash" type="Node3D" unique_id=1611372311]
+
+[node name="ShortFlash_04" parent="." unique_id=757852547 instance=ExtResource("1_cclob")]

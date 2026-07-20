@@ -69,3 +69,4 @@ func _on_confirm_pressed() -> void:
 	get_parent().visible = false
 	get_parent().mouse_filter = Control.MOUSE_FILTER_IGNORE
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	

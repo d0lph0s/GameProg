@@ -5,7 +5,8 @@ extends CharacterBody3D
 @onready var sight : ShapeCast3D = $Sight
 @onready var true_sight: RayCast3D = $TrueSight
 @onready var weapon_scene : PackedScene = preload("res://Scenes/EnemyPlaceholderWeapon.tscn")
-
+var muzzle_flash_node : Node3D
+var weapon_sound_node : AudioStreamPlayer3D
 
 @export_category("Enemy Movement Stats")
 @export var health : int
@@ -144,7 +145,8 @@ func display_damage(damage : int, hit_position : Vector3, color : Color) -> void
 	damage_label.queue_free()
 
 func _physics_process(delta: float) -> void:
-	
+	if process_mode == PROCESS_MODE_DISABLED:
+		return
 	if(player == null):
 		return
 	
@@ -293,6 +295,9 @@ func shoot_player() -> void:
 
 func shoot() -> void:
 	await get_tree().physics_frame
+	muzzle_flash_node.play()
+	weapon_sound_node.pitch_scale = randf_range(3.0, 3.69)
+	weapon_sound_node.play()
 	var bullet_scene : PackedScene = load("res://Scenes/Bullet.tscn")
 	var bullet : RigidBody3D = bullet_scene.instantiate()
 	var bullet_mesh : Node3D = ammunition_scene.instantiate()
@@ -306,12 +311,15 @@ func shoot() -> void:
 	var weapon_origin : Node3D = $WeaponOrigin
 	bullet.set_collision_mask_value(5, false)
 	bullet.set_collision_mask_value(7, true)
-	bullet.look_at_from_position(position, weapon_origin.global_transform.basis.z + Vector3(randf_range(-0.02, 0.02) * WeaponManager.calc_accuracy(accuracy), randf_range(-0.02, 0.02) * WeaponManager.calc_accuracy(accuracy), randf_range(-0.02, 0.02) * WeaponManager.calc_accuracy(accuracy)))
+	bullet.get_child(0).set_collision_mask_value(5, false)
+	bullet.get_child(0).set_collision_mask_value(7, true)
+	var direction : Vector3 = (weapon_origin.global_transform.basis.z + Vector3(randf_range(-0.02, 0.02) * WeaponManager.calc_accuracy(accuracy), randf_range(-0.02, 0.02) * WeaponManager.calc_accuracy(accuracy), randf_range(-0.02, 0.02) * WeaponManager.calc_accuracy(accuracy))).normalized()
+	bullet.look_at_from_position(position, direction)
 	bullet.global_transform = weapon_origin.global_transform
 	bullet.mass = 0.02
 	bullet.gravity_scale = 0.0
 	bullet.rotation.x += deg_to_rad(90.0)
-	bullet.linear_velocity = weapon_origin.global_transform.basis.z * 1.0
+	bullet.linear_velocity = -direction * 32.5
 	bullet.set_script(load("res://Scripts/bullet_script.gd"))
 	get_tree().root.add_child(bullet)
 
@@ -415,4 +423,8 @@ func is_true_sight() -> bool:
 func instantiate_weapon() -> void:
 	#randomize this shit at some point if developed further
 	var weapon = weapon_scene.instantiate()
+	weapon.rotation_degrees.y = 180.0
 	$WeaponOrigin.add_child(weapon)
+	weapon_sound_node = weapon.find_child("WeaponSound")
+	muzzle_flash_node = weapon.find_child("ShortFlash" + "*")
+	muzzle_flash_node.rotation_degrees.y = -90.0

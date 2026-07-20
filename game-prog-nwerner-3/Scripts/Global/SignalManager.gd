@@ -7,3 +7,4 @@ signal enemy_killed
 signal damage_taken
 signal ammo_used
 signal ammo_selected
+signal death

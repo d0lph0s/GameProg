@@ -33,8 +33,7 @@ func take_damage(damage : int) -> void:
 	if(health > 0):
 		return
 	if(health >= 0):
-		pass
-
+		SignalManager.death.emit()
 
 
 func _unhandled_input(event: InputEvent) -> void:

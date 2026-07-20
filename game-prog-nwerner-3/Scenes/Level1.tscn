@@ -5,11 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://dei34o418lutn" path="res://Scenes/WallPrefab.tscn" id="2_joc8x"]
 [ext_resource type="PackedScene" uid="uid://b052y3oatt3id" path="res://Scenes/Enemy.tscn" id="2_ysn8j"]
 [ext_resource type="Material" uid="uid://df6gdx8dahchb" path="res://Art/3D/Environment/blockout_cylinder.material" id="3_jghel"]
-[ext_resource type="NavigationMesh" uid="uid://d2o4gqttl22s5" path="res://Scenes/nav_mesh_level1.tres" id="3_kylad"]
+[ext_resource type="NavigationMesh" uid="uid://d2o4gqttl22s5" path="res://Art/2D/nav_mesh_level1.tres" id="3_kylad"]
 [ext_resource type="Material" uid="uid://bxbsthbn4c24g" path="res://Art/3D/Environment/blockout_small.material" id="6_ysn8j"]
 [ext_resource type="Material" uid="uid://8u5f3k4gfmpx" path="res://Art/3D/Environment/blockout_wide.material" id="7_6ll4n"]
 [ext_resource type="PackedScene" uid="uid://c1k6grvuynkf8" path="res://Scenes/Player.tscn" id="7_ysn8j"]
 [ext_resource type="Material" uid="uid://2wlcudfpwpdh" path="res://Art/3D/Environment/blockout_small_red.material" id="9_bdlbp"]
+[ext_resource type="Texture2D" uid="uid://bgp11h7ommmed" path="res://Art/3D/Environment/Textures/Blockout/greybox_grey_grid.png" id="10_2h8qs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tdnec"]
 size = Vector3(50, 1, 50)
@@ -74,8 +75,8 @@ material = ExtResource("6_ysn8j")
 left_to_right = 1.9
 size = Vector3(3, 3, 2)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6ll4n"]
-points = PackedVector3Array(4.2, 1.5, 1, 4.2, 1.5, -1, -1.5, -1.5, 1, 1.4995301, -1.5, 1, 1.4995301, -1.5, -1, -1.5, -1.5, -1)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2h8qs"]
+data = PackedVector3Array(4.2, 1.5, 1, 1.5, -1.5, 1, -1.5, -1.5, 1, 4.2, 1.5, -1, -1.5, -1.5, -1, 1.5, -1.5, -1, 4.2, 1.5, 1, 4.2, 1.5, -1, 1.5, -1.5, 1, 4.2, 1.5, -1, 1.5, -1.5, -1, 1.5, -1.5, 1, 4.2, 1.5, -1, 4.2, 1.5, 1, -1.5, -1.5, -1, 4.2, 1.5, 1, -1.5, -1.5, 1, -1.5, -1.5, -1, -1.5, -1.5, 1, 1.5, -1.5, 1, -1.5, -1.5, -1, 1.5, -1.5, 1, 1.5, -1.5, -1, -1.5, -1.5, -1)
 
 [sub_resource type="PrismMesh" id="PrismMesh_6jj8j"]
 material = ExtResource("6_ysn8j")
@@ -469,8 +470,11 @@ size = Vector3(4.5, 4, 0.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_n8veb"]
 size = Vector3(4.5, 4, 0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vlxeq"]
+albedo_texture = ExtResource("10_2h8qs")
+
 [sub_resource type="BoxMesh" id="BoxMesh_aj8od"]
-material = ExtResource("7_6ll4n")
+material = SubResource("StandardMaterial3D_vlxeq")
 size = Vector3(0.5, 4, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mc7rw"]
@@ -524,41 +528,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 transform = Transform3D(-0.8660254, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660254, -22.6, 0, 16.4)
 patrole_speed = 2.5
 armor = 5
+accuracy = 0.0
 
 [node name="Skeleton3D" parent="Enemy/Character_31" parent_id_path=PackedInt32Array(386391300, 1453268681) index="0" unique_id=196311768]
-bones/0/position = Vector3(0.1373856, 2.1552618, -0.090562746)
-bones/0/rotation = Quaternion(-0.0077055497, -0.82639927, -0.015787842, 0.56281054)
-bones/1/rotation = Quaternion(0.028369142, 0.022938713, -0.03154062, 0.9988364)
-bones/2/rotation = Quaternion(0.009580063, 0.004751792, -0.033440076, 0.99938357)
-bones/3/rotation = Quaternion(0.009657917, 0.004722005, -0.033422925, 0.99938357)
-bones/4/rotation = Quaternion(-0.0054188496, 0.03841669, 0.034292653, 0.9986586)
-bones/5/rotation = Quaternion(-0.048454963, 0.17777154, 0.072891355, 0.98017156)
-bones/7/rotation = Quaternion(-0.03533437, -0.692583, 0.72041667, -0.008952779)
-bones/8/rotation = Quaternion(-0.3876583, 0.76888597, 0.50340277, 0.0715607)
-bones/9/rotation = Quaternion(-0.044445664, 0.003249737, -0.43821615, 0.8977642)
-bones/10/rotation = Quaternion(0.38300794, -0.49507415, 0.0579275, 0.77772164)
+bones/0/position = Vector3(0.18016139, 2.3614063, 0.050644726)
+bones/0/rotation = Quaternion(-0.06539504, -0.8284638, 0.028213233, 0.5554957)
+bones/1/rotation = Quaternion(0.037998095, 0.019060876, -0.036185354, 0.99844056)
+bones/2/rotation = Quaternion(0.005687366, 0.006510722, -0.044570114, 0.99896884)
+bones/3/rotation = Quaternion(0.0051435474, 0.006192276, -0.04463593, 0.99897087)
+bones/4/rotation = Quaternion(0.015289941, 0.03161773, 0.01795833, 0.99922174)
+bones/5/rotation = Quaternion(-0.0033694236, 0.1749787, 0.029254356, 0.9841318)
+bones/7/rotation = Quaternion(-0.019320663, -0.62051916, 0.7839219, 0.0070139132)
+bones/8/rotation = Quaternion(-0.39602917, 0.8261598, 0.39877447, -0.03999689)
+bones/9/rotation = Quaternion(-0.045225207, 0.003235904, -0.44590253, 0.8939324)
+bones/10/rotation = Quaternion(0.3940095, -0.513253, 0.040618904, 0.76136595)
 bones/11/rotation = Quaternion(-0.37343025, -0.002180041, 0.08364471, 0.92387706)
 bones/12/rotation = Quaternion(-0.31771705, 0.051568024, 0.19960263, 0.9255028)
 bones/13/rotation = Quaternion(-0.221699, 0.031817466, -0.048454832, 0.97339064)
-bones/15/rotation = Quaternion(0.6960282, -0.02143373, 0.03712318, 0.71673375)
-bones/16/rotation = Quaternion(0.42522025, -0.012096837, -0.5404656, 0.7259053)
-bones/17/rotation = Quaternion(0.13238111, -0.0024805835, -0.45361722, 0.8813062)
-bones/18/rotation = Quaternion(-0.23310591, 0.4082726, 0.045462407, 0.881424)
+bones/15/rotation = Quaternion(0.7318902, -0.031976737, 0.040657636, 0.6794566)
+bones/16/rotation = Quaternion(0.36581522, -0.091864556, -0.5612288, 0.73672414)
+bones/17/rotation = Quaternion(0.123644546, -0.0025256223, -0.4236807, 0.8973296)
+bones/18/rotation = Quaternion(-0.16852675, 0.47493497, -0.03354083, 0.86308205)
 bones/19/rotation = Quaternion(0.5297624, -0.006286838, 0.21986772, 0.81912786)
 bones/20/rotation = Quaternion(0.43184727, -0.07888658, 0.2969524, 0.84800005)
 bones/21/rotation = Quaternion(0.17708574, -0.082254946, 0.11897254, 0.97350925)
-bones/23/rotation = Quaternion(0.11059351, -0.15292066, 0.9219162, -0.33831203)
-bones/24/rotation = Quaternion(0.0051180003, -0.0739405, -0.51931787, 0.85136104)
-bones/25/rotation = Quaternion(0.4716249, -0.60911375, 0.40824467, 0.48978248)
-bones/26/rotation = Quaternion(0.27216634, 0.008262841, -0.0023724958, 0.96221185)
-bones/28/rotation = Quaternion(-0.21075235, 0.018708, 0.9132565, -0.34813228)
-bones/29/rotation = Quaternion(0.0972687, 0.0069768913, -0.52798826, 0.84363425)
-bones/30/rotation = Quaternion(0.42434782, -0.45204568, 0.44685873, 0.6449038)
-bones/31/rotation = Quaternion(0.29778662, -0.008294671, 0.0035232366, 0.95458996)
-
-[node name="AnimationTree" parent="Enemy" index="2" unique_id=528603731]
-parameters/conditions/patroling = false
-parameters/conditions/walk = false
+bones/23/rotation = Quaternion(0.110546194, -0.10027828, 0.9784076, -0.14297742)
+bones/24/rotation = Quaternion(-0.025424812, -0.08265013, -0.3547945, 0.9309369)
+bones/25/rotation = Quaternion(0.42743337, -0.62801886, 0.3931866, 0.51797444)
+bones/26/rotation = Quaternion(0.28799886, 0.0066375714, -0.0027658066, 0.9576039)
+bones/28/rotation = Quaternion(-0.19473408, 0.057747368, 0.9674319, -0.1510612)
+bones/29/rotation = Quaternion(0.081140086, 0.042595305, -0.34563237, 0.93388444)
+bones/30/rotation = Quaternion(0.3361073, -0.5266542, 0.41707015, 0.6600907)
+bones/31/rotation = Quaternion(0.32311848, -0.0056299316, 0.0041069747, 0.9463329)
 
 [node name="PatrolPoints" parent="Enemy" index="6" unique_id=54079538]
 transform = Transform3D(-0.8660254, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660254, 0, 0, 0)
@@ -585,40 +586,43 @@ text = "Penislänge"
 font_size = 64
 outline_size = 8
 
+[node name="WeaponOrigin" parent="Enemy" index="8" unique_id=449798740]
+transform = Transform3D(0.9999992, 0, 0, 0, 0.99999934, 0, 0, 0, 0.99999887, 0, 1.2, -0.5)
+
 [node name="Enemy2" parent="." unique_id=1193446327 instance=ExtResource("2_ysn8j")]
 transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, 10, 0, 20.8)
 patrole_speed = 2.0
 
 [node name="Skeleton3D" parent="Enemy2/Character_31" parent_id_path=PackedInt32Array(1193446327, 1453268681) index="0" unique_id=196311768]
-bones/0/position = Vector3(0.76234686, 0.35290408, -2.5584965)
-bones/0/rotation = Quaternion(-0.43387675, -0.4858694, 0.57253873, 0.49787682)
-bones/1/rotation = Quaternion(0.05549988, 0.029992534, 0.01329297, 0.99791956)
-bones/2/rotation = Quaternion(-0.008550864, 0.0050625773, -0.022667672, 0.9996937)
-bones/3/rotation = Quaternion(-0.008221042, 0.004117921, -0.022884171, 0.99969584)
-bones/4/rotation = Quaternion(0.046830535, 0.0051840125, 0.054078907, 0.9974245)
-bones/5/rotation = Quaternion(0.05543217, 0.12939213, -0.07845344, 0.9869296)
-bones/7/rotation = Quaternion(0.027996324, -0.6643852, 0.746647, 0.018077513)
-bones/8/rotation = Quaternion(-0.17719938, 0.6666242, -0.42379764, 0.58703333)
-bones/9/rotation = Quaternion(-0.03321281, 0.0034180018, -0.3274649, 0.9442733)
-bones/10/rotation = Quaternion(0.12844543, 0.092197254, 0.019832892, 0.98722243)
-bones/11/rotation = Quaternion(-0.26721516, -0.02385549, 0.012956269, 0.9632545)
-bones/12/rotation = Quaternion(-0.34424442, 0.054760087, 0.19666184, 0.9164177)
-bones/13/rotation = Quaternion(-0.35130772, 0.054767597, -0.021744542, 0.93440384)
-bones/15/rotation = Quaternion(0.73994166, -0.046709005, 0.07685614, 0.6666317)
-bones/16/rotation = Quaternion(-0.05060458, 0.8069441, -0.04790404, 0.58650297)
-bones/17/rotation = Quaternion(0.21884102, -0.0017574728, -0.7498797, 0.6243284)
-bones/18/rotation = Quaternion(-0.06998753, 0.24800399, 0.04205766, 0.9653119)
-bones/19/rotation = Quaternion(-0.015259367, -0.009669324, -0.03000162, 0.99938667)
-bones/20/rotation = Quaternion(0.25460428, -0.052123714, 0.22377512, 0.9393532)
-bones/21/rotation = Quaternion(0.2391502, -0.09922932, 0.12598594, 0.95764726)
-bones/23/rotation = Quaternion(0.16956341, -0.13431448, 0.9762846, -0.008736115)
-bones/24/rotation = Quaternion(-0.057762116, -0.009497653, -0.073366806, 0.9955856)
-bones/25/rotation = Quaternion(0.2274135, -0.77324253, 0.31298319, 0.5024147)
-bones/26/rotation = Quaternion(0.28202355, 0.0072521954, -0.0026171298, 0.9593765)
-bones/28/rotation = Quaternion(-0.2685575, 0.41194823, 0.8456788, -0.20737147)
-bones/29/rotation = Quaternion(0.07461608, -0.024358666, -0.058402162, 0.9952027)
-bones/30/rotation = Quaternion(0.27046913, -0.547892, 0.3752103, 0.6970496)
-bones/31/rotation = Quaternion(0.2865736, -0.009465229, 0.0032655813, 0.95800596)
+bones/0/position = Vector3(0.18016139, 2.3614063, 0.050644726)
+bones/0/rotation = Quaternion(-0.06539504, -0.8284638, 0.028213233, 0.5554957)
+bones/1/rotation = Quaternion(0.037998095, 0.019060876, -0.036185354, 0.99844056)
+bones/2/rotation = Quaternion(0.005687366, 0.006510722, -0.044570114, 0.99896884)
+bones/3/rotation = Quaternion(0.0051435474, 0.006192276, -0.04463593, 0.99897087)
+bones/4/rotation = Quaternion(0.015289941, 0.03161773, 0.01795833, 0.99922174)
+bones/5/rotation = Quaternion(-0.0033694236, 0.1749787, 0.029254356, 0.9841318)
+bones/7/rotation = Quaternion(-0.019320663, -0.62051916, 0.7839219, 0.0070139132)
+bones/8/rotation = Quaternion(-0.39602917, 0.8261598, 0.39877447, -0.03999689)
+bones/9/rotation = Quaternion(-0.045225207, 0.003235904, -0.44590253, 0.8939324)
+bones/10/rotation = Quaternion(0.3940095, -0.513253, 0.040618904, 0.76136595)
+bones/11/rotation = Quaternion(-0.37343025, -0.002180041, 0.08364471, 0.92387706)
+bones/12/rotation = Quaternion(-0.31771705, 0.051568024, 0.19960263, 0.9255028)
+bones/13/rotation = Quaternion(-0.221699, 0.031817466, -0.048454832, 0.97339064)
+bones/15/rotation = Quaternion(0.7318902, -0.031976737, 0.040657636, 0.6794566)
+bones/16/rotation = Quaternion(0.36581522, -0.091864556, -0.5612288, 0.73672414)
+bones/17/rotation = Quaternion(0.123644546, -0.0025256223, -0.4236807, 0.8973296)
+bones/18/rotation = Quaternion(-0.16852675, 0.47493497, -0.03354083, 0.86308205)
+bones/19/rotation = Quaternion(0.5297624, -0.006286838, 0.21986772, 0.81912786)
+bones/20/rotation = Quaternion(0.43184727, -0.07888658, 0.2969524, 0.84800005)
+bones/21/rotation = Quaternion(0.17708574, -0.082254946, 0.11897254, 0.97350925)
+bones/23/rotation = Quaternion(0.110546194, -0.10027828, 0.9784076, -0.14297742)
+bones/24/rotation = Quaternion(-0.025424812, -0.08265013, -0.3547945, 0.9309369)
+bones/25/rotation = Quaternion(0.42743337, -0.62801886, 0.3931866, 0.51797444)
+bones/26/rotation = Quaternion(0.28799886, 0.0066375714, -0.0027658066, 0.9576039)
+bones/28/rotation = Quaternion(-0.19473408, 0.057747368, 0.9674319, -0.1510612)
+bones/29/rotation = Quaternion(0.081140086, 0.042595305, -0.34563237, 0.93388444)
+bones/30/rotation = Quaternion(0.3361073, -0.5266542, 0.41707015, 0.6600907)
+bones/31/rotation = Quaternion(0.32311848, -0.0056299316, 0.0041069747, 0.9463329)
 
 [node name="Point1" parent="Enemy2/PatrolPoints" parent_id_path=PackedInt32Array(1193446327, 54079538) index="0" unique_id=461562754]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7000008, 10, 12.6)
@@ -632,40 +636,43 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9, 10, 13.8)
 [node name="Point4" parent="Enemy2/PatrolPoints" parent_id_path=PackedInt32Array(1193446327, 54079538) index="3" unique_id=933397070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.6, 10, 15.6)
 
+[node name="WeaponOrigin" parent="Enemy2" index="8" unique_id=449798740]
+transform = Transform3D(0.9999992, 0, 0, 0, 0.99999934, 0, 0, 0, 0.99999887, 0, 1.2, -0.5)
+
 [node name="Enemy3" parent="." unique_id=1233796815 instance=ExtResource("2_ysn8j")]
 transform = Transform3D(-0.42261833, 0, 0.90630776, 0, 1, 0, -0.90630776, 0, -0.42261833, 18, 0, -4)
 patrole_speed = 2.0
 
 [node name="Skeleton3D" parent="Enemy3/Character_31" parent_id_path=PackedInt32Array(1233796815, 1453268681) index="0" unique_id=196311768]
-bones/0/position = Vector3(0.76234686, 0.35290408, -2.5584965)
-bones/0/rotation = Quaternion(-0.43387675, -0.4858694, 0.57253873, 0.49787682)
-bones/1/rotation = Quaternion(0.05549988, 0.029992534, 0.01329297, 0.99791956)
-bones/2/rotation = Quaternion(-0.008550864, 0.0050625773, -0.022667672, 0.9996937)
-bones/3/rotation = Quaternion(-0.008221042, 0.004117921, -0.022884171, 0.99969584)
-bones/4/rotation = Quaternion(0.046830535, 0.0051840125, 0.054078907, 0.9974245)
-bones/5/rotation = Quaternion(0.05543217, 0.12939213, -0.07845344, 0.9869296)
-bones/7/rotation = Quaternion(0.027996324, -0.6643852, 0.746647, 0.018077513)
-bones/8/rotation = Quaternion(-0.17719938, 0.6666242, -0.42379764, 0.58703333)
-bones/9/rotation = Quaternion(-0.03321281, 0.0034180018, -0.3274649, 0.9442733)
-bones/10/rotation = Quaternion(0.12844543, 0.092197254, 0.019832892, 0.98722243)
-bones/11/rotation = Quaternion(-0.26721516, -0.02385549, 0.012956269, 0.9632545)
-bones/12/rotation = Quaternion(-0.34424442, 0.054760087, 0.19666184, 0.9164177)
-bones/13/rotation = Quaternion(-0.35130772, 0.054767597, -0.021744542, 0.93440384)
-bones/15/rotation = Quaternion(0.73994166, -0.046709005, 0.07685614, 0.6666317)
-bones/16/rotation = Quaternion(-0.05060458, 0.8069441, -0.04790404, 0.58650297)
-bones/17/rotation = Quaternion(0.21884102, -0.0017574728, -0.7498797, 0.6243284)
-bones/18/rotation = Quaternion(-0.06998753, 0.24800399, 0.04205766, 0.9653119)
-bones/19/rotation = Quaternion(-0.015259367, -0.009669324, -0.03000162, 0.99938667)
-bones/20/rotation = Quaternion(0.25460428, -0.052123714, 0.22377512, 0.9393532)
-bones/21/rotation = Quaternion(0.2391502, -0.09922932, 0.12598594, 0.95764726)
-bones/23/rotation = Quaternion(0.16956341, -0.13431448, 0.9762846, -0.008736115)
-bones/24/rotation = Quaternion(-0.057762116, -0.009497653, -0.073366806, 0.9955856)
-bones/25/rotation = Quaternion(0.2274135, -0.77324253, 0.31298319, 0.5024147)
-bones/26/rotation = Quaternion(0.28202355, 0.0072521954, -0.0026171298, 0.9593765)
-bones/28/rotation = Quaternion(-0.2685575, 0.41194823, 0.8456788, -0.20737147)
-bones/29/rotation = Quaternion(0.07461608, -0.024358666, -0.058402162, 0.9952027)
-bones/30/rotation = Quaternion(0.27046913, -0.547892, 0.3752103, 0.6970496)
-bones/31/rotation = Quaternion(0.2865736, -0.009465229, 0.0032655813, 0.95800596)
+bones/0/position = Vector3(0.18016139, 2.3614063, 0.050644726)
+bones/0/rotation = Quaternion(-0.06539504, -0.8284638, 0.028213233, 0.5554957)
+bones/1/rotation = Quaternion(0.037998095, 0.019060876, -0.036185354, 0.99844056)
+bones/2/rotation = Quaternion(0.005687366, 0.006510722, -0.044570114, 0.99896884)
+bones/3/rotation = Quaternion(0.0051435474, 0.006192276, -0.04463593, 0.99897087)
+bones/4/rotation = Quaternion(0.015289941, 0.03161773, 0.01795833, 0.99922174)
+bones/5/rotation = Quaternion(-0.0033694236, 0.1749787, 0.029254356, 0.9841318)
+bones/7/rotation = Quaternion(-0.019320663, -0.62051916, 0.7839219, 0.0070139132)
+bones/8/rotation = Quaternion(-0.39602917, 0.8261598, 0.39877447, -0.03999689)
+bones/9/rotation = Quaternion(-0.045225207, 0.003235904, -0.44590253, 0.8939324)
+bones/10/rotation = Quaternion(0.3940095, -0.513253, 0.040618904, 0.76136595)
+bones/11/rotation = Quaternion(-0.37343025, -0.002180041, 0.08364471, 0.92387706)
+bones/12/rotation = Quaternion(-0.31771705, 0.051568024, 0.19960263, 0.9255028)
+bones/13/rotation = Quaternion(-0.221699, 0.031817466, -0.048454832, 0.97339064)
+bones/15/rotation = Quaternion(0.7318902, -0.031976737, 0.040657636, 0.6794566)
+bones/16/rotation = Quaternion(0.36581522, -0.091864556, -0.5612288, 0.73672414)
+bones/17/rotation = Quaternion(0.123644546, -0.0025256223, -0.4236807, 0.8973296)
+bones/18/rotation = Quaternion(-0.16852675, 0.47493497, -0.03354083, 0.86308205)
+bones/19/rotation = Quaternion(0.5297624, -0.006286838, 0.21986772, 0.81912786)
+bones/20/rotation = Quaternion(0.43184727, -0.07888658, 0.2969524, 0.84800005)
+bones/21/rotation = Quaternion(0.17708574, -0.082254946, 0.11897254, 0.97350925)
+bones/23/rotation = Quaternion(0.110546194, -0.10027828, 0.9784076, -0.14297742)
+bones/24/rotation = Quaternion(-0.025424812, -0.08265013, -0.3547945, 0.9309369)
+bones/25/rotation = Quaternion(0.42743337, -0.62801886, 0.3931866, 0.51797444)
+bones/26/rotation = Quaternion(0.28799886, 0.0066375714, -0.0027658066, 0.9576039)
+bones/28/rotation = Quaternion(-0.19473408, 0.057747368, 0.9674319, -0.1510612)
+bones/29/rotation = Quaternion(0.081140086, 0.042595305, -0.34563237, 0.93388444)
+bones/30/rotation = Quaternion(0.3361073, -0.5266542, 0.41707015, 0.6600907)
+bones/31/rotation = Quaternion(0.32311848, -0.0056299316, 0.0041069747, 0.9463329)
 
 [node name="Point1" parent="Enemy3/PatrolPoints" parent_id_path=PackedInt32Array(1233796815, 54079538) index="0" unique_id=461562754]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 10, -22)
@@ -679,40 +686,43 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, 10, -21.6)
 [node name="Point4" parent="Enemy3/PatrolPoints" parent_id_path=PackedInt32Array(1233796815, 54079538) index="3" unique_id=933397070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6, 10, -14.4)
 
+[node name="WeaponOrigin" parent="Enemy3" index="8" unique_id=449798740]
+transform = Transform3D(0.9999992, 0, 0, 0, 0.99999934, 0, 0, 0, 0.99999887, 0, 1.2, -0.5)
+
 [node name="Enemy4" parent="." unique_id=1016686147 instance=ExtResource("2_ysn8j")]
 transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, 6, 0, -20)
 patrole_speed = 2.25
 
 [node name="Skeleton3D" parent="Enemy4/Character_31" parent_id_path=PackedInt32Array(1016686147, 1453268681) index="0" unique_id=196311768]
-bones/0/position = Vector3(0.76234686, 0.35290408, -2.5584965)
-bones/0/rotation = Quaternion(-0.43387675, -0.4858694, 0.57253873, 0.49787682)
-bones/1/rotation = Quaternion(0.05549988, 0.029992534, 0.01329297, 0.99791956)
-bones/2/rotation = Quaternion(-0.008550864, 0.0050625773, -0.022667672, 0.9996937)
-bones/3/rotation = Quaternion(-0.008221042, 0.004117921, -0.022884171, 0.99969584)
-bones/4/rotation = Quaternion(0.046830535, 0.0051840125, 0.054078907, 0.9974245)
-bones/5/rotation = Quaternion(0.05543217, 0.12939213, -0.07845344, 0.9869296)
-bones/7/rotation = Quaternion(0.027996324, -0.6643852, 0.746647, 0.018077513)
-bones/8/rotation = Quaternion(-0.17719938, 0.6666242, -0.42379764, 0.58703333)
-bones/9/rotation = Quaternion(-0.03321281, 0.0034180018, -0.3274649, 0.9442733)
-bones/10/rotation = Quaternion(0.12844543, 0.092197254, 0.019832892, 0.98722243)
-bones/11/rotation = Quaternion(-0.26721516, -0.02385549, 0.012956269, 0.9632545)
-bones/12/rotation = Quaternion(-0.34424442, 0.054760087, 0.19666184, 0.9164177)
-bones/13/rotation = Quaternion(-0.35130772, 0.054767597, -0.021744542, 0.93440384)
-bones/15/rotation = Quaternion(0.73994166, -0.046709005, 0.07685614, 0.6666317)
-bones/16/rotation = Quaternion(-0.05060458, 0.8069441, -0.04790404, 0.58650297)
-bones/17/rotation = Quaternion(0.21884102, -0.0017574728, -0.7498797, 0.6243284)
-bones/18/rotation = Quaternion(-0.06998753, 0.24800399, 0.04205766, 0.9653119)
-bones/19/rotation = Quaternion(-0.015259367, -0.009669324, -0.03000162, 0.99938667)
-bones/20/rotation = Quaternion(0.25460428, -0.052123714, 0.22377512, 0.9393532)
-bones/21/rotation = Quaternion(0.2391502, -0.09922932, 0.12598594, 0.95764726)
-bones/23/rotation = Quaternion(0.16956341, -0.13431448, 0.9762846, -0.008736115)
-bones/24/rotation = Quaternion(-0.057762116, -0.009497653, -0.073366806, 0.9955856)
-bones/25/rotation = Quaternion(0.2274135, -0.77324253, 0.31298319, 0.5024147)
-bones/26/rotation = Quaternion(0.28202355, 0.0072521954, -0.0026171298, 0.9593765)
-bones/28/rotation = Quaternion(-0.2685575, 0.41194823, 0.8456788, -0.20737147)
-bones/29/rotation = Quaternion(0.07461608, -0.024358666, -0.058402162, 0.9952027)
-bones/30/rotation = Quaternion(0.27046913, -0.547892, 0.3752103, 0.6970496)
-bones/31/rotation = Quaternion(0.2865736, -0.009465229, 0.0032655813, 0.95800596)
+bones/0/position = Vector3(0.18016139, 2.3614063, 0.050644726)
+bones/0/rotation = Quaternion(-0.06539504, -0.8284638, 0.028213233, 0.5554957)
+bones/1/rotation = Quaternion(0.037998095, 0.019060876, -0.036185354, 0.99844056)
+bones/2/rotation = Quaternion(0.005687366, 0.006510722, -0.044570114, 0.99896884)
+bones/3/rotation = Quaternion(0.0051435474, 0.006192276, -0.04463593, 0.99897087)
+bones/4/rotation = Quaternion(0.015289941, 0.03161773, 0.01795833, 0.99922174)
+bones/5/rotation = Quaternion(-0.0033694236, 0.1749787, 0.029254356, 0.9841318)
+bones/7/rotation = Quaternion(-0.019320663, -0.62051916, 0.7839219, 0.0070139132)
+bones/8/rotation = Quaternion(-0.39602917, 0.8261598, 0.39877447, -0.03999689)
+bones/9/rotation = Quaternion(-0.045225207, 0.003235904, -0.44590253, 0.8939324)
+bones/10/rotation = Quaternion(0.3940095, -0.513253, 0.040618904, 0.76136595)
+bones/11/rotation = Quaternion(-0.37343025, -0.002180041, 0.08364471, 0.92387706)
+bones/12/rotation = Quaternion(-0.31771705, 0.051568024, 0.19960263, 0.9255028)
+bones/13/rotation = Quaternion(-0.221699, 0.031817466, -0.048454832, 0.97339064)
+bones/15/rotation = Quaternion(0.7318902, -0.031976737, 0.040657636, 0.6794566)
+bones/16/rotation = Quaternion(0.36581522, -0.091864556, -0.5612288, 0.73672414)
+bones/17/rotation = Quaternion(0.123644546, -0.0025256223, -0.4236807, 0.8973296)
+bones/18/rotation = Quaternion(-0.16852675, 0.47493497, -0.03354083, 0.86308205)
+bones/19/rotation = Quaternion(0.5297624, -0.006286838, 0.21986772, 0.81912786)
+bones/20/rotation = Quaternion(0.43184727, -0.07888658, 0.2969524, 0.84800005)
+bones/21/rotation = Quaternion(0.17708574, -0.082254946, 0.11897254, 0.97350925)
+bones/23/rotation = Quaternion(0.110546194, -0.10027828, 0.9784076, -0.14297742)
+bones/24/rotation = Quaternion(-0.025424812, -0.08265013, -0.3547945, 0.9309369)
+bones/25/rotation = Quaternion(0.42743337, -0.62801886, 0.3931866, 0.51797444)
+bones/26/rotation = Quaternion(0.28799886, 0.0066375714, -0.0027658066, 0.9576039)
+bones/28/rotation = Quaternion(-0.19473408, 0.057747368, 0.9674319, -0.1510612)
+bones/29/rotation = Quaternion(0.081140086, 0.042595305, -0.34563237, 0.93388444)
+bones/30/rotation = Quaternion(0.3361073, -0.5266542, 0.41707015, 0.6600907)
+bones/31/rotation = Quaternion(0.32311848, -0.0056299316, 0.0041069747, 0.9463329)
 
 [node name="Point1" parent="Enemy4/PatrolPoints" parent_id_path=PackedInt32Array(1016686147, 54079538) index="0" unique_id=461562754]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4, 10, -10)
@@ -726,39 +736,42 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 10, 4.8)
 [node name="Point4" parent="Enemy4/PatrolPoints" parent_id_path=PackedInt32Array(1016686147, 54079538) index="3" unique_id=933397070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.099999, 10, -4.4)
 
+[node name="WeaponOrigin" parent="Enemy4" index="8" unique_id=449798740]
+transform = Transform3D(0.9999992, 0, 0, 0, 0.99999934, 0, 0, 0, 0.99999887, 0, 1.2, -0.5)
+
 [node name="Enemy5" parent="." unique_id=2133409245 instance=ExtResource("2_ysn8j")]
 transform = Transform3D(0.49999997, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.49999997, -22.800001, 0, 2.3)
 
 [node name="Skeleton3D" parent="Enemy5/Character_31" parent_id_path=PackedInt32Array(2133409245, 1453268681) index="0" unique_id=196311768]
-bones/0/position = Vector3(0.76234686, 0.35290408, -2.5584965)
-bones/0/rotation = Quaternion(-0.43387675, -0.4858694, 0.57253873, 0.49787682)
-bones/1/rotation = Quaternion(0.05549988, 0.029992534, 0.01329297, 0.99791956)
-bones/2/rotation = Quaternion(-0.008550864, 0.0050625773, -0.022667672, 0.9996937)
-bones/3/rotation = Quaternion(-0.008221042, 0.004117921, -0.022884171, 0.99969584)
-bones/4/rotation = Quaternion(0.046830535, 0.0051840125, 0.054078907, 0.9974245)
-bones/5/rotation = Quaternion(0.05543217, 0.12939213, -0.07845344, 0.9869296)
-bones/7/rotation = Quaternion(0.027996324, -0.6643852, 0.746647, 0.018077513)
-bones/8/rotation = Quaternion(-0.17719938, 0.6666242, -0.42379764, 0.58703333)
-bones/9/rotation = Quaternion(-0.03321281, 0.0034180018, -0.3274649, 0.9442733)
-bones/10/rotation = Quaternion(0.12844543, 0.092197254, 0.019832892, 0.98722243)
-bones/11/rotation = Quaternion(-0.26721516, -0.02385549, 0.012956269, 0.9632545)
-bones/12/rotation = Quaternion(-0.34424442, 0.054760087, 0.19666184, 0.9164177)
-bones/13/rotation = Quaternion(-0.35130772, 0.054767597, -0.021744542, 0.93440384)
-bones/15/rotation = Quaternion(0.73994166, -0.046709005, 0.07685614, 0.6666317)
-bones/16/rotation = Quaternion(-0.05060458, 0.8069441, -0.04790404, 0.58650297)
-bones/17/rotation = Quaternion(0.21884102, -0.0017574728, -0.7498797, 0.6243284)
-bones/18/rotation = Quaternion(-0.06998753, 0.24800399, 0.04205766, 0.9653119)
-bones/19/rotation = Quaternion(-0.015259367, -0.009669324, -0.03000162, 0.99938667)
-bones/20/rotation = Quaternion(0.25460428, -0.052123714, 0.22377512, 0.9393532)
-bones/21/rotation = Quaternion(0.2391502, -0.09922932, 0.12598594, 0.95764726)
-bones/23/rotation = Quaternion(0.16956341, -0.13431448, 0.9762846, -0.008736115)
-bones/24/rotation = Quaternion(-0.057762116, -0.009497653, -0.073366806, 0.9955856)
-bones/25/rotation = Quaternion(0.2274135, -0.77324253, 0.31298319, 0.5024147)
-bones/26/rotation = Quaternion(0.28202355, 0.0072521954, -0.0026171298, 0.9593765)
-bones/28/rotation = Quaternion(-0.2685575, 0.41194823, 0.8456788, -0.20737147)
-bones/29/rotation = Quaternion(0.07461608, -0.024358666, -0.058402162, 0.9952027)
-bones/30/rotation = Quaternion(0.27046913, -0.547892, 0.3752103, 0.6970496)
-bones/31/rotation = Quaternion(0.2865736, -0.009465229, 0.0032655813, 0.95800596)
+bones/0/position = Vector3(0.18016139, 2.3614063, 0.050644726)
+bones/0/rotation = Quaternion(-0.06539504, -0.8284638, 0.028213233, 0.5554957)
+bones/1/rotation = Quaternion(0.037998095, 0.019060876, -0.036185354, 0.99844056)
+bones/2/rotation = Quaternion(0.005687366, 0.006510722, -0.044570114, 0.99896884)
+bones/3/rotation = Quaternion(0.0051435474, 0.006192276, -0.04463593, 0.99897087)
+bones/4/rotation = Quaternion(0.015289941, 0.03161773, 0.01795833, 0.99922174)
+bones/5/rotation = Quaternion(-0.0033694236, 0.1749787, 0.029254356, 0.9841318)
+bones/7/rotation = Quaternion(-0.019320663, -0.62051916, 0.7839219, 0.0070139132)
+bones/8/rotation = Quaternion(-0.39602917, 0.8261598, 0.39877447, -0.03999689)
+bones/9/rotation = Quaternion(-0.045225207, 0.003235904, -0.44590253, 0.8939324)
+bones/10/rotation = Quaternion(0.3940095, -0.513253, 0.040618904, 0.76136595)
+bones/11/rotation = Quaternion(-0.37343025, -0.002180041, 0.08364471, 0.92387706)
+bones/12/rotation = Quaternion(-0.31771705, 0.051568024, 0.19960263, 0.9255028)
+bones/13/rotation = Quaternion(-0.221699, 0.031817466, -0.048454832, 0.97339064)
+bones/15/rotation = Quaternion(0.7318902, -0.031976737, 0.040657636, 0.6794566)
+bones/16/rotation = Quaternion(0.36581522, -0.091864556, -0.5612288, 0.73672414)
+bones/17/rotation = Quaternion(0.123644546, -0.0025256223, -0.4236807, 0.8973296)
+bones/18/rotation = Quaternion(-0.16852675, 0.47493497, -0.03354083, 0.86308205)
+bones/19/rotation = Quaternion(0.5297624, -0.006286838, 0.21986772, 0.81912786)
+bones/20/rotation = Quaternion(0.43184727, -0.07888658, 0.2969524, 0.84800005)
+bones/21/rotation = Quaternion(0.17708574, -0.082254946, 0.11897254, 0.97350925)
+bones/23/rotation = Quaternion(0.110546194, -0.10027828, 0.9784076, -0.14297742)
+bones/24/rotation = Quaternion(-0.025424812, -0.08265013, -0.3547945, 0.9309369)
+bones/25/rotation = Quaternion(0.42743337, -0.62801886, 0.3931866, 0.51797444)
+bones/26/rotation = Quaternion(0.28799886, 0.0066375714, -0.0027658066, 0.9576039)
+bones/28/rotation = Quaternion(-0.19473408, 0.057747368, 0.9674319, -0.1510612)
+bones/29/rotation = Quaternion(0.081140086, 0.042595305, -0.34563237, 0.93388444)
+bones/30/rotation = Quaternion(0.3361073, -0.5266542, 0.41707015, 0.6600907)
+bones/31/rotation = Quaternion(0.32311848, -0.0056299316, 0.0041069747, 0.9463329)
 
 [node name="Point1" parent="Enemy5/PatrolPoints" parent_id_path=PackedInt32Array(2133409245, 54079538) index="0" unique_id=461562754]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6, 10, -0.90000004)
@@ -772,40 +785,43 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1, 10, 2)
 [node name="Point4" parent="Enemy5/PatrolPoints" parent_id_path=PackedInt32Array(2133409245, 54079538) index="3" unique_id=933397070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.800001, 10, 3.2)
 
+[node name="WeaponOrigin" parent="Enemy5" index="8" unique_id=449798740]
+transform = Transform3D(0.9999992, 0, 0, 0, 0.99999934, 0, 0, 0, 0.99999887, 0, 1.2, -0.5)
+
 [node name="Enemy6" parent="." unique_id=1549109761 instance=ExtResource("2_ysn8j")]
 transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, -23.3, 0, -18)
 armor = 10
 
 [node name="Skeleton3D" parent="Enemy6/Character_31" parent_id_path=PackedInt32Array(1549109761, 1453268681) index="0" unique_id=196311768]
-bones/0/position = Vector3(0.76234686, 0.35290408, -2.5584965)
-bones/0/rotation = Quaternion(-0.43387675, -0.4858694, 0.57253873, 0.49787682)
-bones/1/rotation = Quaternion(0.05549988, 0.029992534, 0.01329297, 0.99791956)
-bones/2/rotation = Quaternion(-0.008550864, 0.0050625773, -0.022667672, 0.9996937)
-bones/3/rotation = Quaternion(-0.008221042, 0.004117921, -0.022884171, 0.99969584)
-bones/4/rotation = Quaternion(0.046830535, 0.0051840125, 0.054078907, 0.9974245)
-bones/5/rotation = Quaternion(0.05543217, 0.12939213, -0.07845344, 0.9869296)
-bones/7/rotation = Quaternion(0.027996324, -0.6643852, 0.746647, 0.018077513)
-bones/8/rotation = Quaternion(-0.17719938, 0.6666242, -0.42379764, 0.58703333)
-bones/9/rotation = Quaternion(-0.03321281, 0.0034180018, -0.3274649, 0.9442733)
-bones/10/rotation = Quaternion(0.12844543, 0.092197254, 0.019832892, 0.98722243)
-bones/11/rotation = Quaternion(-0.26721516, -0.02385549, 0.012956269, 0.9632545)
-bones/12/rotation = Quaternion(-0.34424442, 0.054760087, 0.19666184, 0.9164177)
-bones/13/rotation = Quaternion(-0.35130772, 0.054767597, -0.021744542, 0.93440384)
-bones/15/rotation = Quaternion(0.73994166, -0.046709005, 0.07685614, 0.6666317)
-bones/16/rotation = Quaternion(-0.05060458, 0.8069441, -0.04790404, 0.58650297)
-bones/17/rotation = Quaternion(0.21884102, -0.0017574728, -0.7498797, 0.6243284)
-bones/18/rotation = Quaternion(-0.06998753, 0.24800399, 0.04205766, 0.9653119)
-bones/19/rotation = Quaternion(-0.015259367, -0.009669324, -0.03000162, 0.99938667)
-bones/20/rotation = Quaternion(0.25460428, -0.052123714, 0.22377512, 0.9393532)
-bones/21/rotation = Quaternion(0.2391502, -0.09922932, 0.12598594, 0.95764726)
-bones/23/rotation = Quaternion(0.16956341, -0.13431448, 0.9762846, -0.008736115)
-bones/24/rotation = Quaternion(-0.057762116, -0.009497653, -0.073366806, 0.9955856)
-bones/25/rotation = Quaternion(0.2274135, -0.77324253, 0.31298319, 0.5024147)
-bones/26/rotation = Quaternion(0.28202355, 0.0072521954, -0.0026171298, 0.9593765)
-bones/28/rotation = Quaternion(-0.2685575, 0.41194823, 0.8456788, -0.20737147)
-bones/29/rotation = Quaternion(0.07461608, -0.024358666, -0.058402162, 0.9952027)
-bones/30/rotation = Quaternion(0.27046913, -0.547892, 0.3752103, 0.6970496)
-bones/31/rotation = Quaternion(0.2865736, -0.009465229, 0.0032655813, 0.95800596)
+bones/0/position = Vector3(0.18016139, 2.3614063, 0.050644726)
+bones/0/rotation = Quaternion(-0.06539504, -0.8284638, 0.028213233, 0.5554957)
+bones/1/rotation = Quaternion(0.037998095, 0.019060876, -0.036185354, 0.99844056)
+bones/2/rotation = Quaternion(0.005687366, 0.006510722, -0.044570114, 0.99896884)
+bones/3/rotation = Quaternion(0.0051435474, 0.006192276, -0.04463593, 0.99897087)
+bones/4/rotation = Quaternion(0.015289941, 0.03161773, 0.01795833, 0.99922174)
+bones/5/rotation = Quaternion(-0.0033694236, 0.1749787, 0.029254356, 0.9841318)
+bones/7/rotation = Quaternion(-0.019320663, -0.62051916, 0.7839219, 0.0070139132)
+bones/8/rotation = Quaternion(-0.39602917, 0.8261598, 0.39877447, -0.03999689)
+bones/9/rotation = Quaternion(-0.045225207, 0.003235904, -0.44590253, 0.8939324)
+bones/10/rotation = Quaternion(0.3940095, -0.513253, 0.040618904, 0.76136595)
+bones/11/rotation = Quaternion(-0.37343025, -0.002180041, 0.08364471, 0.92387706)
+bones/12/rotation = Quaternion(-0.31771705, 0.051568024, 0.19960263, 0.9255028)
+bones/13/rotation = Quaternion(-0.221699, 0.031817466, -0.048454832, 0.97339064)
+bones/15/rotation = Quaternion(0.7318902, -0.031976737, 0.040657636, 0.6794566)
+bones/16/rotation = Quaternion(0.36581522, -0.091864556, -0.5612288, 0.73672414)
+bones/17/rotation = Quaternion(0.123644546, -0.0025256223, -0.4236807, 0.8973296)
+bones/18/rotation = Quaternion(-0.16852675, 0.47493497, -0.03354083, 0.86308205)
+bones/19/rotation = Quaternion(0.5297624, -0.006286838, 0.21986772, 0.81912786)
+bones/20/rotation = Quaternion(0.43184727, -0.07888658, 0.2969524, 0.84800005)
+bones/21/rotation = Quaternion(0.17708574, -0.082254946, 0.11897254, 0.97350925)
+bones/23/rotation = Quaternion(0.110546194, -0.10027828, 0.9784076, -0.14297742)
+bones/24/rotation = Quaternion(-0.025424812, -0.08265013, -0.3547945, 0.9309369)
+bones/25/rotation = Quaternion(0.42743337, -0.62801886, 0.3931866, 0.51797444)
+bones/26/rotation = Quaternion(0.28799886, 0.0066375714, -0.0027658066, 0.9576039)
+bones/28/rotation = Quaternion(-0.19473408, 0.057747368, 0.9674319, -0.1510612)
+bones/29/rotation = Quaternion(0.081140086, 0.042595305, -0.34563237, 0.93388444)
+bones/30/rotation = Quaternion(0.3361073, -0.5266542, 0.41707015, 0.6600907)
+bones/31/rotation = Quaternion(0.32311848, -0.0056299316, 0.0041069747, 0.9463329)
 
 [node name="Point1" parent="Enemy6/PatrolPoints" parent_id_path=PackedInt32Array(1549109761, 54079538) index="0" unique_id=461562754]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 13, -22)
@@ -819,6 +835,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 10, -12)
 [node name="Point4" parent="Enemy6/PatrolPoints" parent_id_path=PackedInt32Array(1549109761, 54079538) index="3" unique_id=933397070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 10, -18)
 
+[node name="WeaponOrigin" parent="Enemy6" index="8" unique_id=449798740]
+transform = Transform3D(0.9999992, 0, 0, 0, 0.99999934, 0, 0, 0, 0.99999887, 0, 1.2, -0.5)
+
 [node name="Level" type="NavigationRegion3D" parent="." unique_id=1975063401]
 navigation_mesh = ExtResource("3_kylad")
 use_edge_connections = false
@@ -826,6 +845,7 @@ use_edge_connections = false
 [node name="Floor" type="StaticBody3D" parent="Level" unique_id=604697265]
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Floor" unique_id=1613587007]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -840,21 +860,25 @@ mesh = SubResource("PlaneMesh_tdnec")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 7.5, 0)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="Wall2" parent="Level/Walls" unique_id=555757975 instance=ExtResource("2_joc8x")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 7.5, -25)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="Wall3" parent="Level/Walls" unique_id=2113797248 instance=ExtResource("2_joc8x")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 7.5, 25)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="Wall4" parent="Level/Walls" unique_id=2018680683 instance=ExtResource("2_joc8x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 7.5, 0)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="PillarPlace" type="Node3D" parent="Level" unique_id=1088231597]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 12)
@@ -863,6 +887,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 12)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -1.7000008)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/ScoutPillar" unique_id=1964432904]
 mesh = SubResource("CylinderMesh_tdnec")
@@ -876,6 +901,7 @@ shape = SubResource("CylinderShape3D_ysn8j")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 3.5000002, 1.3000002)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/PillarRamp/TopRamp" unique_id=1712231494]
 mesh = SubResource("PrismMesh_ulvkb")
@@ -895,6 +921,7 @@ shape = SubResource("BoxShape3D_ysn8j")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.4, 4.1000004)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/PillarRamp/Platform" unique_id=1466227887]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, -0.8000002)
@@ -924,14 +951,19 @@ shape = SubResource("ConvexPolygonShape3D_2h8qs")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.5)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/PillarRamp/BottomRamp" unique_id=210289655]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19999981, 1.5, -0.19999981)
 mesh = SubResource("PrismMesh_i6fqs")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/PillarPlace/PillarRamp/BottomRamp" unique_id=1108459376]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/PillarPlace/PillarRamp/BottomRamp" unique_id=723099626]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19999981, 1.5, -0.19999981)
-shape = SubResource("ConvexPolygonShape3D_6ll4n")
+shape = SubResource("ConcavePolygonShape3D_2h8qs")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Level/PillarPlace/PillarRamp/BottomRamp" unique_id=1855993316]
+transform = Transform3D(0.999, 0, 0, 0, 0.999, 0, 0, 0, 0.999, -0.19999981, 1.5, -0.19999981)
+shape = SubResource("ConcavePolygonShape3D_2h8qs")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Level/PillarPlace/PillarRamp/BottomRamp" unique_id=117037474]
 transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.4980946, 2.6236486, -0.19999981)
@@ -947,6 +979,7 @@ shape = SubResource("ConvexPolygonShape3D_06um6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.25, -8)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/Walls/Wall" unique_id=2044040847]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
@@ -976,6 +1009,7 @@ shape = SubResource("BoxShape3D_7oakr")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.5, 2.25, -8.4)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/Walls/Wall2" unique_id=1152131465]
 mesh = SubResource("BoxMesh_2h8qs")
@@ -987,6 +1021,7 @@ shape = SubResource("BoxShape3D_rpty4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.299999, 2.25, -7.3999996)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/Walls/Wall3" unique_id=1914622439]
 mesh = SubResource("BoxMesh_2h8qs")
@@ -998,6 +1033,7 @@ shape = SubResource("BoxShape3D_6jj8j")
 transform = Transform3D(0.86602545, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, 0.86602545, -9.8, 0.145, 1.8)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/Walls/Wall4" unique_id=380989121]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
@@ -1011,6 +1047,7 @@ shape = SubResource("BoxShape3D_ubfni")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.299999, 1.25, 6.1000004)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/Walls/Wall5" unique_id=320997115]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1, 0, 0)
@@ -1024,6 +1061,7 @@ shape = SubResource("BoxShape3D_0wsr5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.299999, 1.25, 6.1000004)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/Walls/Wall6" unique_id=575930075]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1, 0, 0)
@@ -1037,6 +1075,7 @@ shape = SubResource("BoxShape3D_0wsr5")
 transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, 13, 2.25, 8)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/Walls/Wall7" unique_id=1915331369]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
@@ -1050,6 +1089,7 @@ shape = SubResource("BoxShape3D_bdlbp")
 transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 5.3999996, 1.25, 9.1)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/Walls/Wall8" unique_id=310084071]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
@@ -1063,6 +1103,7 @@ shape = SubResource("BoxShape3D_2h8qs")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 2)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/LittlePillar" unique_id=2064826203]
 mesh = SubResource("CylinderMesh_i6fqs")
@@ -1074,6 +1115,7 @@ shape = SubResource("CylinderShape3D_t3or0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.2, -2)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/SmallPillar" unique_id=414673325]
 mesh = SubResource("CylinderMesh_qmme2")
@@ -1085,6 +1127,7 @@ shape = SubResource("CylinderShape3D_q1ws5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.2, -2)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/SmallPillar2" unique_id=718908365]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
@@ -1101,6 +1144,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 4.6000004)
 visible = false
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/PillarPlace/PathfindingHelp/PlaceboPillar" unique_id=493738656]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.29999924)
@@ -1113,6 +1157,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 12)
 transform = Transform3D(-0.93969274, 0, 0.3420202, 0, 1, 0, -0.3420202, 0, -0.93969274, 7.800001, 1.750001, -3)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/BarrelPlace/Wall" unique_id=1702680548]
 mesh = SubResource("BoxMesh_kylad")
@@ -1124,6 +1169,7 @@ shape = SubResource("BoxShape3D_jgorv")
 transform = Transform3D(-0.93969274, 0, 0.3420202, 0, 1, 0, -0.3420202, 0, -0.93969274, 3.435, 1.755, -3.25)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/BarrelPlace/WallSupport" unique_id=1010982983]
 mesh = SubResource("BoxMesh_bdlbp")
@@ -1136,6 +1182,7 @@ shape = SubResource("BoxShape3D_q1ws5")
 transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, 0.10000038, 1.25, 1.500001)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/BarrelPlace/Wall2" unique_id=641988710]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
@@ -1149,6 +1196,7 @@ shape = SubResource("BoxShape3D_0wsr5")
 transform = Transform3D(-0.5735764, 0, -0.81915224, 0, 1, 0, 0.81915224, 0, -0.5735764, -6.0999994, 1.25, 5.300001)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/BarrelPlace/Wall3" unique_id=571761072]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
@@ -1164,6 +1212,7 @@ shape = SubResource("BoxShape3D_0wsr5")
 transform = Transform3D(0.9659258, -0.25881904, 1.131334e-08, 0, -4.371139e-08, -1, 0.25881904, 0.9659258, -4.222196e-08, -5, 2, -3)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/BarrelPlace/BigBarrel/BigBarrelBarrel" unique_id=1001435074]
 mesh = SubResource("CylinderMesh_ttlly")
@@ -1175,6 +1224,7 @@ shape = SubResource("CylinderShape3D_ubfni")
 transform = Transform3D(0.96592575, -0.258819, 1.131334e-08, 0, -4.3711385e-08, -1, 0.258819, 0.96592575, -4.222196e-08, -5, 0.5, -3)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/BarrelPlace/BigBarrel/BigBarrelSupport" unique_id=975245456]
 transform = Transform3D(1.0000012, 2.9802322e-08, 7.993606e-15, -2.9802322e-08, 1.0000012, -1.4210855e-14, 8.260059e-14, -3.6948222e-13, 1, 0, -9.536743e-07, 0)
@@ -1190,6 +1240,7 @@ shape = SubResource("BoxShape3D_ug0sv")
 transform = Transform3D(0.5, -0.86602545, 3.7855173e-08, 0, -4.371139e-08, -1, 0.86602545, 0.5, -2.1855692e-08, 5, 2.8000002, 7.5)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/BarrelPlace/BigBarrel2/BigBarrelBarrel" unique_id=1320614620]
 mesh = SubResource("CylinderMesh_kylad")
@@ -1201,6 +1252,7 @@ shape = SubResource("CylinderShape3D_bdlbp")
 transform = Transform3D(0.5, -0.86602545, 3.7855173e-08, 0, -4.3711385e-08, -1, 0.86602545, 0.5, -2.1855692e-08, 5, 0.5, 7.5)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/BarrelPlace/BigBarrel2/BigBarrelSupport" unique_id=1366985122]
 transform = Transform3D(1.0000012, 2.9802322e-08, 7.993606e-15, -2.9802322e-08, 1.0000012, -1.4210855e-14, 8.260059e-14, -3.6948222e-13, 1, 0, -9.536743e-07, 0)
@@ -1216,6 +1268,7 @@ shape = SubResource("BoxShape3D_06um6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.9, 0.75, 11.1)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/BarrelPlace/SmallBarrelBunch/SmallBarrel" unique_id=1087464092]
 mesh = SubResource("CylinderMesh_vhdh6")
@@ -1227,6 +1280,7 @@ shape = SubResource("CylinderShape3D_2h8qs")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.75, 11.9)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/BarrelPlace/SmallBarrelBunch/SmallBarrel2" unique_id=644085376]
 mesh = SubResource("CylinderMesh_vhdh6")
@@ -1238,6 +1292,7 @@ shape = SubResource("CylinderShape3D_2h8qs")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75, 0.75, 10.725)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/BarrelPlace/SmallBarrelBunch/SmallBarrel3" unique_id=1767487325]
 mesh = SubResource("CylinderMesh_vhdh6")
@@ -1249,6 +1304,7 @@ shape = SubResource("CylinderShape3D_2h8qs")
 transform = Transform3D(-0.8660254, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660254, 7.02, 1.7, -1.95)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/BarrelPlace/WallRamp" unique_id=945552651]
 transform = Transform3D(0.98480797, 0, 0.17364827, 0, 1, 0, -0.17364827, 0, 0.98480797, 0, 0, 0)
@@ -1264,6 +1320,7 @@ shape = SubResource("ConvexPolygonShape3D_bdlbp")
 transform = Transform3D(0.34202018, 0.9396926, -4.1075275e-08, 0, -4.3711392e-08, -1.0000001, -0.93969274, 0.34202015, -1.4950178e-08, 9.4, 0.3000002, 0)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/BarrelPlace/PathfindingHelp/PlaceboCylinder" unique_id=684658307]
 transform = Transform3D(0.9999999, -2.9802322e-08, 0, 5.9604645e-08, 0.9999999, 3.996803e-15, -8.881784e-16, 7.1054274e-15, 0.9999999, -0.008636951, -0.3161049, 0)
@@ -1277,6 +1334,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -12)
 transform = Transform3D(0.9659258, 0, 0.25881904, 0, 1, 0, -0.25881904, 0, 0.9659258, 3, 1.25, 13.1)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/Wall" unique_id=161846449]
 mesh = SubResource("BoxMesh_ttlly")
@@ -1288,6 +1346,7 @@ shape = SubResource("BoxShape3D_yji5v")
 transform = Transform3D(0.8660255, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, 0.8660255, 7.299999, 1.25, 12.900001)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/Wall2" unique_id=785861132]
 mesh = SubResource("BoxMesh_ulvkb")
@@ -1299,6 +1358,7 @@ shape = SubResource("BoxShape3D_ulvkb")
 transform = Transform3D(0.7071068, 0, -0.7071069, 0, 1, 0, 0.7071069, 0, 0.7071068, -5, 1.25, 13.1)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/Wall3" unique_id=1531430651]
 mesh = SubResource("BoxMesh_fh0sh")
@@ -1310,6 +1370,7 @@ shape = SubResource("BoxShape3D_fh0sh")
 transform = Transform3D(0.5, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.5, 4.1, 0.145, 9)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/Wall4" unique_id=109435186]
 mesh = SubResource("BoxMesh_0wsr5")
@@ -1321,6 +1382,7 @@ shape = SubResource("BoxShape3D_03od6")
 transform = Transform3D(0.5, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.5, 1.8000002, 2.245, 5)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/Wall5" unique_id=1514530953]
 mesh = SubResource("BoxMesh_q1ws5")
@@ -1332,6 +1394,7 @@ shape = SubResource("BoxShape3D_384de")
 transform = Transform3D(-0.7071069, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071069, -2.8999996, 1.25, 10.7)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/Wall6" unique_id=1488266465]
 mesh = SubResource("BoxMesh_yji5v")
@@ -1343,6 +1406,7 @@ shape = SubResource("BoxShape3D_fh0sh")
 transform = Transform3D(-0.86602545, 0, -0.49999997, 0, 1, 0, 0.49999997, 0, -0.86602545, 5.300001, 0.14500046, 3)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/Wall7" unique_id=1778962901]
 mesh = SubResource("BoxMesh_0wsr5")
@@ -1354,6 +1418,7 @@ shape = SubResource("BoxShape3D_03od6")
 transform = Transform3D(-0.34202018, 0, -0.9396927, 0, 1, 0, 0.9396927, 0, -0.34202018, 10.299997, 2.245, 6.6)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/Wall8" unique_id=2110750998]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
@@ -1367,6 +1432,7 @@ shape = SubResource("BoxShape3D_bhaf5")
 transform = Transform3D(-0.9848077, 0, -0.17364815, 0, 1, 0, 0.17364815, 0, -0.9848077, 6.000002, 1.2450008, -3.0999994)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/Wall9" unique_id=48552376]
 mesh = SubResource("BoxMesh_384de")
@@ -1378,6 +1444,7 @@ shape = SubResource("BoxShape3D_oy1hs")
 transform = Transform3D(-0.17364813, 0, 0.9848077, 0, 1, 0, -0.9848077, 0, -0.17364813, 1.715, 0.145, -4.375)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/Wall10" unique_id=672979256]
 mesh = SubResource("BoxMesh_bhaf5")
@@ -1389,6 +1456,7 @@ shape = SubResource("BoxShape3D_03od6")
 transform = Transform3D(0.70710677, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.70710677, 1.6000004, 2.245, -7.5)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/Wall11" unique_id=1166473114]
 mesh = SubResource("BoxMesh_q1ws5")
@@ -1400,6 +1468,7 @@ shape = SubResource("BoxShape3D_384de")
 transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -9.5, 2.245, -5.6000004)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/Wall12" unique_id=982584726]
 mesh = SubResource("BoxMesh_q1ws5")
@@ -1411,6 +1480,7 @@ shape = SubResource("BoxShape3D_384de")
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -11.9, 2.25, 2)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/BigWall" unique_id=686640690]
 transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, 5.3125925, 0, 1.4235047)
@@ -1424,6 +1494,7 @@ shape = SubResource("BoxShape3D_iswit")
 transform = Transform3D(0.25881907, 0, 0.96592593, 0, 1, 0, -0.96592593, 0, 0.25881907, -11.9, 2.25, 2)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/BigWallPart2" unique_id=734134581]
 transform = Transform3D(0.9999994, 0, -1.4901161e-08, 0, 1, 0, 1.4901161e-08, 0, 0.9999994, -2.9999995, 0, 0)
@@ -1453,6 +1524,7 @@ shape = SubResource("BoxShape3D_4rcpl")
 transform = Transform3D(-0.96592575, 0, -0.2588191, 0, 1, 0, 0.2588191, 0, -0.96592575, -8.299999, 2.25, 2.8999996)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/BigWall2" unique_id=1368317236]
 mesh = SubResource("BoxMesh_1nrjw")
@@ -1464,6 +1536,7 @@ shape = SubResource("BoxShape3D_o0dvq")
 transform = Transform3D(-0.96592575, 0, -0.2588191, 0, 1, 0, 0.2588191, 0, -0.96592575, -8.299999, 2.25, 2.8999996)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WallPlace/BigWall3" unique_id=1864199906]
 transform = Transform3D(-2.9802322e-08, 0, -1, 0, 1, 0, 1, 0, -2.9802322e-08, -4.4999995, 0, -0.44999123)
@@ -1480,6 +1553,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -12)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 9)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall" unique_id=998160860]
 mesh = SubResource("BoxMesh_vhdh6")
@@ -1491,6 +1565,7 @@ shape = SubResource("BoxShape3D_iu5qg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 2, 9)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall2" unique_id=1954690627]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
@@ -1504,6 +1579,7 @@ shape = SubResource("BoxShape3D_nlo60")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 2, 6)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall3" unique_id=1980509506]
 mesh = SubResource("BoxMesh_iswit")
@@ -1515,6 +1591,7 @@ shape = SubResource("BoxShape3D_ek3m4")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11, 2, -8.049999)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall4" unique_id=1113422089]
 mesh = SubResource("BoxMesh_ud1sj")
@@ -1526,6 +1603,7 @@ shape = SubResource("BoxShape3D_1nrjw")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11, 2.625, -12.3)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall4Overhang" unique_id=775313091]
 mesh = SubResource("BoxMesh_qvja8")
@@ -1537,6 +1615,7 @@ shape = SubResource("BoxShape3D_bqkvc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, -4.049999)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall5" unique_id=1414497549]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
@@ -1558,6 +1637,7 @@ shape = SubResource("BoxShape3D_inpvx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 1.9500008)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall6" unique_id=2026244006]
 mesh = SubResource("BoxMesh_ek3m4")
@@ -1569,6 +1649,7 @@ shape = SubResource("BoxShape3D_5cr48")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.25, 2, 1.9499998)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall7" unique_id=191702360]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
@@ -1606,6 +1687,7 @@ shape = SubResource("BoxShape3D_ar4qq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.500002, 2, 3.9500008)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall8" unique_id=1326452377]
 mesh = SubResource("BoxMesh_oy1hs")
@@ -1617,6 +1699,7 @@ shape = SubResource("BoxShape3D_xdvfc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2, 0.95)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall9" unique_id=840315481]
 mesh = SubResource("BoxMesh_euove")
@@ -1628,6 +1711,7 @@ shape = SubResource("BoxShape3D_5jaii")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -2.8)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall10" unique_id=247482943]
 mesh = SubResource("BoxMesh_3ocbn")
@@ -1639,6 +1723,7 @@ shape = SubResource("BoxShape3D_xiixc")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.75, 2, -3.5)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall11" unique_id=1045643343]
 mesh = SubResource("BoxMesh_ghekl")
@@ -1650,6 +1735,7 @@ shape = SubResource("BoxShape3D_n8veb")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6.75, 2, -0.5)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Stick" unique_id=1189487682]
 mesh = SubResource("BoxMesh_aj8od")
@@ -1661,6 +1747,7 @@ shape = SubResource("BoxShape3D_mc7rw")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.25, 2, -2)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Stick2" unique_id=444715672]
 mesh = SubResource("BoxMesh_aj8od")
@@ -1672,6 +1759,7 @@ shape = SubResource("BoxShape3D_i6vmo")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.1499996, 2, 1)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Stick3" unique_id=1077108481]
 mesh = SubResource("BoxMesh_aj8od")
@@ -1683,6 +1771,7 @@ shape = SubResource("BoxShape3D_s8t8m")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 9.15, 2, -2.5)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Stick4" unique_id=723553325]
 mesh = SubResource("BoxMesh_aj8od")
@@ -1694,6 +1783,7 @@ shape = SubResource("BoxShape3D_i2h1n")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8.85, 2, -10)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Stick5" unique_id=724371742]
 mesh = SubResource("BoxMesh_aj8od")
@@ -1705,6 +1795,7 @@ shape = SubResource("BoxShape3D_535wf")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6.1499996, 2, -6)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Stick6" unique_id=420276725]
 mesh = SubResource("BoxMesh_aj8od")
@@ -1716,6 +1807,7 @@ shape = SubResource("BoxShape3D_fo1au")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, -8.799999)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall12" unique_id=659782472]
 mesh = SubResource("BoxMesh_qa3vx")
@@ -1727,6 +1819,7 @@ shape = SubResource("BoxShape3D_k0d2j")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 2, -11.75)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall13" unique_id=1297086500]
 mesh = SubResource("BoxMesh_sruox")
@@ -1738,6 +1831,7 @@ shape = SubResource("BoxShape3D_yq46f")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.5, 2, -10.450001)
 collision_layer = 7
 collision_mask = 31
+collision_priority = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level/DoorLabyrinth/Wall14" unique_id=644352920]
 mesh = SubResource("BoxMesh_8hygi")

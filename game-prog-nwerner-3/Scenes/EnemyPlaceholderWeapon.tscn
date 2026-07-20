@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://6dprhbsob6pa"]
 
 [ext_resource type="Material" uid="uid://cllbcv5v205x1" path="res://Art/3D/Weapons/Master_Material.material" id="1_evbjh"]
+[ext_resource type="PackedScene" uid="uid://cf5qmxqitevh8" path="res://Art/2D/VFX/BinbunVFX/muzzle_flash/effects/short_flash/short_flash_04.tscn" id="2_ylfud"]
+[ext_resource type="AudioStream" uid="uid://djvnsgf61ysys" path="res://Art/Sound/SFX/enemy_pistol_shot.ogg" id="3_1sf3y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3tye8"]
 resource_name = "ModularWeapons_Material1"
@@ -282,6 +284,8 @@ surface_material_override/0 = ExtResource("1_evbjh")
 [node name="Socket_Muzzle" type="Node3D" parent="MW1_Platform_9mm_01/Platform_9mm_01/Socket_Barrel/MW1_Barrel_9mm_4_5in_02/Barrel_9mm_4_5in_02" unique_id=19298605]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.7252903e-09, 0.11261225)
 
+[node name="ShortFlash_04" parent="MW1_Platform_9mm_01/Platform_9mm_01/Socket_Barrel/MW1_Barrel_9mm_4_5in_02/Barrel_9mm_4_5in_02/Socket_Muzzle" unique_id=757852547 instance=ExtResource("2_ylfud")]
+
 [node name="Socket_Slide" type="Node3D" parent="MW1_Platform_9mm_01/Platform_9mm_01" unique_id=231204381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.208818e-10, 0.03598469, 0.038115762)
 
@@ -316,3 +320,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.208818e-10, 0.014718883, 0.
 [node name="Trigger_01" type="MeshInstance3D" parent="MW1_Platform_9mm_01/Platform_9mm_01/Socket_Trigger/MW1_Trigger_01" unique_id=424300384]
 mesh = SubResource("ArrayMesh_xpymm")
 surface_material_override/0 = ExtResource("1_evbjh")
+
+[node name="WeaponSound" type="AudioStreamPlayer3D" parent="." unique_id=483418013]
+stream = ExtResource("3_1sf3y")
+max_distance = 75.0
+max_polyphony = 10
+bus = &"Weapon"

@@ -1,5 +1,7 @@
 extends RigidBody3D
+@onready var raycast : RayCast3D = $RayCast3D
 
+var hit : bool = false
 var regular_hit_color : Color = Color(0.773, 0.0, 0.0, 1.0)
 var bonus_hit_color : Color = Color(0.329, 0.0, 1.0, 1.0)
 var timer : Timer = Timer.new()
@@ -15,15 +17,24 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if raycast.is_colliding() && !hit:
+		_collision(raycast.get_collider())
 
 func death_timer() -> void:
 	timer.start()
 	await timer.timeout
 	queue_free()
 
+
+
 func _collision(body : Node) -> void:
+	hit = true
 	var current_position = global_position
+	if(has_node("Trail")):
+		$Trail.await_death()
+		$Trail.reparent(get_tree().root)
+	if(body.process_mode == PROCESS_MODE_DISABLED):
+		return
 	if(body.has_meta("Enemy")):
 		if (!body.has_method("take_damage")):
 			return
@@ -37,6 +48,13 @@ func _collision(body : Node) -> void:
 		return
 	if body.has_meta("Player"):
 		body.take_damage(10)
+		$HitSound.global_position =  current_position
+		$HitSound.stream = load("res://Art/Sound/SFX/shit_hit_player.ogg")
 	else:
-		pass
+		if(has_node("HitSound")):
+			$HitSound.global_position =  current_position
+			$HitSound.stream = load($HitSound.ground_sounds[randi_range(0, $HitSound.ground_sounds.size()-1)])
+	if(has_node("HitSound")):
+		$HitSound.await_death()
+		$HitSound.reparent(get_tree().root)
 	queue_free()

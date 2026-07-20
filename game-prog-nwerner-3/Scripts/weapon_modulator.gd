@@ -41,6 +41,7 @@ func weapon_modified(type : int) -> void:
 			platform = platform_mesh.instantiate()
 			platform.get_child(0).set_surface_override_material(0, load("res://Art/3D/Weapons/Master_Material.material"))
 			platform_NODE.add_child(platform)
+			WeaponManager.barrel_socket = platform.find_child("*" + "Barrel" + "*").position
 			#endregion 
 		1:
 			#region magazine"
@@ -101,6 +102,7 @@ func weapon_modified(type : int) -> void:
 			barrel = barrel_mesh.instantiate()
 			barrel.get_child(0).set_surface_override_material(0, load("res://Art/3D/Weapons/Master_Material.material"))
 			barrel_NODE.add_child(barrel)
+			WeaponManager.barrel_mesh = barrel.get_child(0).mesh
 			#endregion
 	"""
 	
