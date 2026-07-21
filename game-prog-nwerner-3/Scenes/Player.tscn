@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://4baq66rbvasm" path="res://Scripts/player.gd" id="1_6t5aa"]
 [ext_resource type="Script" uid="uid://sid0evpul03n" path="res://Scripts/player_hands_animation.gd" id="2_52ee3"]
 [ext_resource type="Texture2D" uid="uid://dwr4lolbe2nvy" path="res://Art/3D/Characters/Player/PlayurrHands_FPSarm_256px.png" id="3_bhhdu"]
-[ext_resource type="PackedScene" uid="uid://drrrdqkr8skn1" path="res://Scenes/Weapons.tscn" id="3_dewec"]
 [ext_resource type="Script" uid="uid://db682q078vk61" path="res://Scripts/ui_script.gd" id="4_5ixxa"]
 [ext_resource type="Shader" uid="uid://bmj4cmt61mt07" path="res://Art/2D/Shader/chromatic_abberation.gdshader" id="4_dewec"]
 [ext_resource type="AnimationLibrary" uid="uid://iwa0upeh5chu" path="res://Art/3D/Characters/Player/Animations/FPS_Hands.res" id="4_megsn"]
@@ -798,8 +797,6 @@ metadata/Player = true
 [node name="WeaponOriginPistol" type="Node3D" parent="CameraHead" unique_id=224906099]
 transform = Transform3D(-1.5, 0, -2.2649371e-07, 0, 1.5, 0, 2.2649371e-07, 0, -1.5, 0, -0.055, -0.632)
 
-[node name="Weapons" parent="CameraHead/WeaponOriginPistol" unique_id=136330797 instance=ExtResource("3_dewec")]
-
 [node name="Camera3D" type="Camera3D" parent="CameraHead" unique_id=2140618423]
 current = true
 
@@ -869,7 +866,3 @@ layout_mode = 1
 [node name="DeathMenu" parent="Control" unique_id=1066113762 instance=ExtResource("10_yoq75")]
 visible = false
 layout_mode = 1
-
-[connection signal="pressed" from="CameraHead/WeaponOriginPistol/Weapons/WeaponsMenu/Body/HBoxContainer/MiddleMarginContainer/VBoxContainer/HBoxContainer/Confirm" to="Control" method="_on_confirm_pressed"]
-
-[editable path="CameraHead/WeaponOriginPistol/Weapons"]
