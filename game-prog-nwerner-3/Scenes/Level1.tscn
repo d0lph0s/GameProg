@@ -1885,4 +1885,3 @@ playback_type = 1
 [editable path="Enemy5"]
 [editable path="Enemy6"]
 [editable path="Player"]
-[editable path="Player/CameraHead/WeaponOriginPistol/Weapons"]

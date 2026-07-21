@@ -66,9 +66,7 @@ func _on_magazine_s_options_item_selected(index: int) -> void:
 
 
 func _on_confirm_pressed() -> void:
-	$"../../Environment".hide()
-	$"../../Camera3D".hide()
-	$"../../MeshInstance3D".hide()
+	await get_tree().process_frame
+	GameManager.weapon_menu.pack($"../..")
 	WeaponManager.weapon_scene.pack($"../..")
-	get_parent().visible = false
 	GameManager.load_level(GameManager.main_menu)

@@ -32,6 +32,7 @@ func _process(delta: float) -> void:
 	
 	if(can_shoot):
 		if (Input.is_action_just_pressed("Shoot")):
+			printerr("shoot")
 			if(ammo <= 0):
 				return
 			ammo -= 1
@@ -43,7 +44,6 @@ func _process(delta: float) -> void:
 				if(useful_parent_node.has_meta("Player")):
 					useful_parent_node.rotation_degrees.x = lerpf(useful_parent_node.rotation_degrees.x, useful_parent_node.rotation_degrees.x + randf_range(0.45, 3.1), 0.21)
 					player_node.rotation_degrees.y = lerpf(player_node.rotation_degrees.y, player_node.rotation_degrees.y + randf_range(-3.1, 3.1), 0.21)
-					printerr("succes")
 			$"../AudioStreamPlayer3D".play()
 			muzzle_flash()
 			var bullet : RigidBody3D = bullet_scene.instantiate()
@@ -122,5 +122,6 @@ func load_muzzle_flash() -> void:
 	muzzle_flash_node = muzzle_flash
 
 func _on_confirm_pressed() -> void:
-	active = true
-	load_muzzle_flash()
+	#active = true
+	#load_muzzle_flash()
+	pass

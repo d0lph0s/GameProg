@@ -34,7 +34,9 @@
 				"64a1472c-4df3-45e4-9fce-903cc4167190",
 				"ce5b7860-46d3-4972-9e04-67d03a71618d",
 				"b30757a2-18ba-4b44-8f33-f0fff28853a8",
-				"5c403e74-abbb-4449-92bf-48090e5210d7"
+				"5c403e74-abbb-4449-92bf-48090e5210d7",
+				"d87b1e68-9209-4696-9367-ae670bb4f46b",
+				"b0b966e8-33d0-4187-8522-99d9d834afec"
 			]
 		},
 		{
@@ -283,6 +285,20 @@
 			"title": "Bullet living too long",
 			"description": "",
 			"category": "76532ce0-4b17-4a76-abe7-e283134be21a",
+			"steps": []
+		},
+		{
+			"uuid": "d87b1e68-9209-4696-9367-ae670bb4f46b",
+			"title": "Menus runnign in the background",
+			"description": "",
+			"category": "76532ce0-4b17-4a76-abe7-e283134be21a",
+			"steps": []
+		},
+		{
+			"uuid": "b0b966e8-33d0-4187-8522-99d9d834afec",
+			"title": "Load WeaponMenu from Mainmenu differently",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
 			"steps": []
 		}
 	],

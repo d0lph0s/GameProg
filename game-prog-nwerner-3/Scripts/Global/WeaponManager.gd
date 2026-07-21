@@ -2,6 +2,7 @@ extends Node
 
 #for loading after modification
 var weapon_scene : PackedScene
+var weapon_components : Dictionary = {"Platform" : null, "Magazine" : null, "Ammunition" : null, "PumpHandle" : null, "Barrel" : null, "Trigger" : null}
 
 #Stats
 var reload_speed_mod : float = 1.2

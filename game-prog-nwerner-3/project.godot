@@ -22,7 +22,7 @@ buses/default_bus_layout="uid://dwud4yydyqdym"
 
 [autoload]
 
-GameManager="*uid://eflw7ve7fxuu"
+GameManager="*uid://cbmboqmx71yup"
 SignalManager="*uid://c6hpe6pm7yivv"
 PlayerManager="*uid://co8teo70goang"
 WeaponManager="*uid://b8htiftgr2s7s"

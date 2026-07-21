@@ -28,11 +28,9 @@ func _process(delta: float) -> void:
 		await get_tree().create_timer(speed/1000).timeout
 		i += 1
 		if(i % 5 == 0 && i != 0):
-			print(\"yes\")
 			i = 0
 			texture.region.position += Vector2(-1296.0, 498.0)
 		elif(texture.region.position == Vector2(324.0, 996.0)):
-			print(\"end_reached\")
 			i = 0
 			texture.region.position = Vector2(0.0, 0.0)
 		else:

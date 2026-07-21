@@ -114,6 +114,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PlatformOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/PlatformContainer/HBoxContainer" unique_id=1035728029]
+unique_name_in_owner = true
 layout_mode = 2
 item_count = 5
 popup/item_0/text = "None"
@@ -152,6 +153,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MagazinePOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_P/HBoxContainer" unique_id=736540190]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_behavior_recursive = 2
 item_count = 3
@@ -187,6 +189,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MagazineAOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_A/HBoxContainer" unique_id=566252994]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_behavior_recursive = 2
 item_count = 4
@@ -224,6 +227,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MagazineSOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Magazine_S/HBoxContainer" unique_id=1355029995]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_behavior_recursive = 2
 item_count = 3
@@ -259,6 +263,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AmmunitionOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Ammunition/HBoxContainer" unique_id=1173979909]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_behavior_recursive = 2
 item_count = 16
@@ -323,6 +328,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PumpHandleOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/PumpHandle/HBoxContainer" unique_id=711632827]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_behavior_recursive = 2
 item_count = 4
@@ -360,6 +366,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BarrelOptions" type="OptionButton" parent="WeaponsMenu/Body/HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts/Barrel/HBoxContainer" unique_id=1212311293]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_behavior_recursive = 2
 item_count = 7

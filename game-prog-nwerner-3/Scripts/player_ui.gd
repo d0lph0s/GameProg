@@ -15,7 +15,6 @@ func _process(delta: float) -> void:
 func enemy_killed() -> void:
 	await get_tree().physics_frame
 	await get_tree().physics_frame
-	printerr("updated")
 	$HBoxContainer/VBoxContainerMain/RemainingE.text = "Rentner übrig: " + str(GameManager.enemy_count)
 
 func damage_taken() -> void:

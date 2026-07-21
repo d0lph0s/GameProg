@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var platform_NODE : Node3D = $Platform
+var platform_NODE : Node3D
 
 var platform_mesh : PackedScene = preload("uid://b4wcc0ej50o7u")
 var barrel_mesh : PackedScene = preload("uid://dggehpa1xc4l4")
@@ -18,12 +18,47 @@ var pumphandle : Node
 var barrel : Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	platform_NODE = $Platform
 	platform = platform_mesh.instantiate()
+	if(WeaponManager.weapon_components["Platform"] != null):
+		load_weapon()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func load_weapon() -> void:
+	_on_platform_options_item_selected(WeaponManager.weapon_components["Platform"])
+	await get_tree().process_frame
+	
+	if WeaponManager.weapon_components["Magazine"] == null:
+		return
+	match WeaponManager.weapon_components["Platform"]:
+		1, 2:
+			_on_magazine_p_options_item_selected(WeaponManager.weapon_components["Magazine"])
+		3:
+			_on_magazine_a_options_item_selected(WeaponManager.weapon_components["Magazine"])
+		4:
+			_on_magazine_s_options_item_selected(WeaponManager.weapon_components["Magazine"])
+	await get_tree().process_frame
+	
+	if(WeaponManager.weapon_components["Platform"] == 4):
+		if WeaponManager.weapon_components["PumpHandle"] == null:
+			return
+		_on_pump_handle_options_item_selected(WeaponManager.weapon_components["PumpHandle"])
+	if WeaponManager.weapon_components["Barrel"] == null:
+			return
+	_on_barrel_options_item_selected(WeaponManager.weapon_components["Barrel"])
+	await get_tree().process_frame
+	if WeaponManager.weapon_components["Ammunition"] == null:
+			return
+	_on_ammunition_options_item_selected(WeaponManager.weapon_components["Ammunition"])
+	SignalManager.ammo_selected.emit()
+	
+	$WeaponFunctionality.process_mode = Node.PROCESS_MODE_INHERIT
+	$WeaponFunctionality.active = true
+	$WeaponFunctionality.load_muzzle_flash()
 
 func weapon_modified(type : int) -> void:
 	match type:
@@ -130,6 +165,7 @@ func _on_platform_options_item_selected(index: int) -> void:
 		3: platform_mesh = load("uid://dt0emhsqb3bvm")
 		4: platform_mesh = load("uid://cb3fdcg3h7ldb")
 		_: return
+	WeaponManager.weapon_components["Platform"] = index
 	weapon_modified(0)
 
 func _on_magazine_p_options_item_selected(index: int) -> void:
@@ -138,6 +174,7 @@ func _on_magazine_p_options_item_selected(index: int) -> void:
 		1: magazine_mesh = load("uid://vtmo0cw83m4t")
 		2: magazine_mesh = load("uid://rfh3mntmk5q5")
 		_: return
+	WeaponManager.weapon_components["Magazine"] = index
 	weapon_modified(1)
 
 func _on_magazine_a_options_item_selected(index: int) -> void:
@@ -147,6 +184,7 @@ func _on_magazine_a_options_item_selected(index: int) -> void:
 		2: magazine_mesh = load("uid://jck0qe224oxk")
 		3: magazine_mesh = load("uid://uceyaq8w3ul4")
 		_: return
+	WeaponManager.weapon_components["Magazine"] = index
 	weapon_modified(1)
 
 func _on_magazine_s_options_item_selected(index: int) -> void:
@@ -155,6 +193,7 @@ func _on_magazine_s_options_item_selected(index: int) -> void:
 		1: magazine_mesh = load("uid://suuvkpfa4ocj")
 		2: magazine_mesh = load("uid://bifthwb0lqptm")
 		_: return
+	WeaponManager.weapon_components["Magazine"] = index
 	weapon_modified(1)
 
 func _on_ammunition_options_item_selected(index: int) -> void:
@@ -173,6 +212,7 @@ func _on_ammunition_options_item_selected(index: int) -> void:
 		14: ammunition_mesh = load("uid://bu57d6cr4wagt")
 		15: ammunition_mesh = load("uid://b7k2nj5qluavf")
 		_: return
+	WeaponManager.weapon_components["Ammunition"] = index
 	weapon_modified(2)
 
 func _on_pump_handle_options_item_selected(index: int) -> void:
@@ -182,6 +222,7 @@ func _on_pump_handle_options_item_selected(index: int) -> void:
 		2: pumphandle_mesh = load("uid://cu5yypsl2cp8f")
 		3: pumphandle_mesh = load("uid://do6amjs7h4nhl")
 		_: return
+	WeaponManager.weapon_components["PumpHandle"] = index
 	weapon_modified(3)
 
 func _on_barrel_options_item_selected(index: int) -> void:
@@ -194,4 +235,5 @@ func _on_barrel_options_item_selected(index: int) -> void:
 		5: barrel_mesh = load("uid://cnrw24clwicr2")
 		6: barrel_mesh = load("uid://fxyfxrjto6cv")
 		_: return
+	WeaponManager.weapon_components["Barrel"] = index
 	weapon_modified(4)

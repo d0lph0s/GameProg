@@ -18,13 +18,20 @@ var direction : Vector3
 const JUMP_VELOCITY : float = 2.75
 
 func _ready() -> void:
-
+	do_delayed()
 	health = max_health
 
 	SignalManager.ammo_used.emit()
 	PlayerManager.current_health = health
 	SignalManager.damage_taken.emit()
 
+func do_delayed()->void:
+	for i in 3:
+		await get_tree().process_frame
+	$CameraHead/Camera3D.make_current()
+	print(get_viewport().get_camera_3d())
+	print(get_viewport().get_camera_3d() == $CameraHead/Camera3D)
+	$Control._on_confirm_pressed()
 
 func take_damage(damage : int) -> void:
 	health -= damage
