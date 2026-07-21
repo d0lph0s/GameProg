@@ -7,10 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://cohuyhmmeavgq" path="res://Art/2D/UI/button_wide_start_hover.png" id="4_cmrfp"]
 [ext_resource type="Texture2D" uid="uid://d3asb453lu7ts" path="res://Art/2D/UI/button_wide_exit.png" id="5_loo7a"]
 [ext_resource type="Texture2D" uid="uid://bd754f6s5txa8" path="res://Art/2D/UI/button_wide_exit_pressed.png" id="6_if7li"]
+[ext_resource type="Texture2D" uid="uid://drj50goo8eb4l" path="res://Art/2D/UI/button_wide_weapon.png" id="6_rrcx7"]
+[ext_resource type="Texture2D" uid="uid://b1h77a51gefb3" path="res://Art/2D/UI/button_wide_weapon_pressed.png" id="7_fh7cp"]
 [ext_resource type="Texture2D" uid="uid://doi3rnffi4eo6" path="res://Art/2D/UI/button_wide_exit_hover.png" id="7_rrcx7"]
-[ext_resource type="AudioStream" uid="uid://bcevaddfiv3j4" path="res://Art/Sound/STD/rentner_waltz.ogg" id="9_cmrfp"]
+[ext_resource type="Texture2D" uid="uid://becyhppjmg7ow" path="res://Art/2D/UI/button_wide_weapon_hover.png" id="8_8e205"]
+[ext_resource type="AudioStream" uid="uid://bdsaihufvsa48" path="res://Art/Sound/STD/rentner_waltz.ogg" id="9_cmrfp"]
 
 [node name="MainMenu" type="Control" unique_id=1736592503]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,6 +49,7 @@ size_flags_stretch_ratio = 0.25
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=1613371290]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2" unique_id=2079063766]
 layout_mode = 2
@@ -52,13 +57,13 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1168476400]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.25
+size_flags_stretch_ratio = 0.3
 
 [node name="Start" type="TextureButton" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1764996390]
 custom_maximum_size = Vector2(1000, -1)
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
+size_flags_stretch_ratio = 0.12
 texture_normal = ExtResource("2_xim88")
 texture_pressed = ExtResource("3_koqhg")
 texture_hover = ExtResource("4_cmrfp")
@@ -66,6 +71,22 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1689568998]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.02
+
+[node name="Weapon" type="TextureButton" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1915076244]
+custom_maximum_size = Vector2(1000, -1)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+texture_normal = ExtResource("6_rrcx7")
+texture_pressed = ExtResource("7_fh7cp")
+texture_hover = ExtResource("8_8e205")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer4" type="MarginContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1754281963]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.02
@@ -83,7 +104,7 @@ stretch_mode = 5
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=37063485]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.15
+size_flags_stretch_ratio = 0.12
 
 [node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer" unique_id=197676198]
 layout_mode = 2
@@ -92,8 +113,10 @@ size_flags_horizontal = 3
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=15230525]
 process_mode = 3
 stream = ExtResource("9_cmrfp")
+volume_db = -3.0
 autoplay = true
 playback_type = 1
 
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/Weapon" to="." method="_on_weapon_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

@@ -66,8 +66,9 @@ func _on_magazine_s_options_item_selected(index: int) -> void:
 
 
 func _on_confirm_pressed() -> void:
+	$"../../Environment".hide()
+	$"../../Camera3D".hide()
+	$"../../MeshInstance3D".hide()
+	WeaponManager.weapon_scene.pack($"../..")
 	get_parent().visible = false
-	get_parent().mouse_filter = Control.MOUSE_FILTER_IGNORE
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	GameManager.start()
-	
+	GameManager.load_level(GameManager.main_menu)

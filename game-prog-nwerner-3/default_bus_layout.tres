@@ -17,14 +17,31 @@ damping = 0.1
 hipass = 0.92
 wet = 0.13
 
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_j3pel"]
+resource_name = "Compressor"
+threshold = -8.5
+ratio = 6.0
+gain = -1.8
+attack_us = 46.0
+release_ms = 276.0
+sidechain = &"Weapon"
+
 [resource]
 bus/1/name = &"Weapon"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = 0.0
+bus/1/volume_db = -5.9307528
 bus/1/send = &"Master"
 bus/1/effect/0/effect = SubResource("AudioEffectDelay_j3pel")
 bus/1/effect/0/enabled = false
 bus/1/effect/1/effect = SubResource("AudioEffectReverb_j3pel")
 bus/1/effect/1/enabled = false
+bus/2/name = &"Background"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectCompressor_j3pel")
+bus/2/effect/0/enabled = true

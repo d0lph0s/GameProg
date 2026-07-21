@@ -5,3 +5,6 @@ func _on_start_pressed() -> void:
 
 func _on_exit_pressed() -> void:
 	get_tree().quit(0)
+
+func _on_weapon_pressed() -> void:
+	GameManager.load_level(GameManager.weapon_menu)

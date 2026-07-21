@@ -2,6 +2,7 @@ extends Node
 
 @onready var level_1 : PackedScene = preload("res://Scenes/Level1.tscn")
 @onready var main_menu : PackedScene = preload("res://Scenes/MainMenu.tscn")
+@onready var weapon_menu : PackedScene = preload("res://Scenes/Weapons.tscn")
 
 #Highscore
 var timer : float
@@ -46,7 +47,10 @@ func death() -> void:
 	get_tree().paused = true
 
 func start() -> void:
+	var weapon_node : Node3D = WeaponManager.weapon_scene.instantiate()
 	get_tree().paused = false
+	await get_tree().tree_changed
+	get_tree().root.find_child("Player").find_child("WeaponOriginPistol").add_child(weapon_node)
 	timer = 0.0
 
 func load_level(scene : PackedScene) -> void:
@@ -54,4 +58,8 @@ func load_level(scene : PackedScene) -> void:
 	await get_tree().scene_changed
 	await get_tree().process_frame
 	get_tree().paused = true
+	if(scene == level_1):
+		await get_tree().process_frame
+		start()
+	
 	

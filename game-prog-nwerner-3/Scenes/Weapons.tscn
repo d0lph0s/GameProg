@@ -20,7 +20,6 @@ process_mode = 3
 script = ExtResource("1_yltro")
 
 [node name="Environment" parent="." unique_id=981963169 instance=ExtResource("2_33wch")]
-visible = false
 
 [node name="WeaponFunctionality" type="Node3D" parent="." unique_id=1741974668]
 process_mode = 1
@@ -31,12 +30,10 @@ max_ammo = 8
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1948369329]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.5, 0, 0)
-visible = false
 fov = 66.35489
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=28978261]
 transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.34020007, 0, 0)
-visible = false
 mesh = SubResource("PlaneMesh_tdnec")
 surface_material_override/0 = SubResource("StandardMaterial3D_02q03")
 

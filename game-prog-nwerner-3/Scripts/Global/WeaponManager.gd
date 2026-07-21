@@ -1,9 +1,13 @@
 extends Node
 
+#for loading after modification
+var weapon_scene : PackedScene
+
+#Stats
 var reload_speed_mod : float = 1.2
 var normal_reload_time : float = 3.0
 var accuracy_mod : float = 50.0
-var normal_damage : float = 25
+var normal_damage : float = 10
 var damage_mod : float = 1.0
 var ammunition_type : int = -1
 
@@ -13,6 +17,7 @@ var barrel_socket : Vector3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	weapon_scene = PackedScene.new()
 	SignalManager.ammo_selected.connect(set_ammunition_type)
 
 func damage() -> float:

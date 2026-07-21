@@ -40,6 +40,8 @@ func _collision(body : Node) -> void:
 			return
 		var bonus : int
 		var final_damage : int = int(WeaponManager.damage() - body.armor)
+		if final_damage < 0:
+			final_damage = 0
 		if body.get_meta("Type") == WeaponManager.ammunition_type:
 			bonus = 5
 			body.display_damage(bonus, current_position, bonus_hit_color)
