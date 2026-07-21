@@ -10,7 +10,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	%Timer.text = str(GameManager.actual_time)
 
 func enemy_killed() -> void:
 	await get_tree().physics_frame

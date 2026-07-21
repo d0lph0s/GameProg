@@ -1,6 +1,13 @@
 [gd_scene format=3 uid="uid://b7m2ayjt63u2t"]
 
 [ext_resource type="Texture2D" uid="uid://d0lvey62ac75k" path="res://Art/2D/UI/rentner_spritesheet.png" id="1_f1gli"]
+[ext_resource type="Theme" uid="uid://cs4l0psoivy8d" path="res://Art/2D/UI/MainFontTheme.tres" id="1_m0i2o"]
+[ext_resource type="Script" uid="uid://dcnd35d740kvf" path="res://Scripts/death_menu_script.gd" id="2_ad56y"]
+[ext_resource type="Texture2D" uid="uid://ddx43fkugn1gq" path="res://Art/2D/UI/death_vignette.png" id="3_71jv1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f1gli"]
+font_size = 64
+font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1hgjo"]
 atlas = ExtResource("1_f1gli")
@@ -10,21 +17,42 @@ region = Rect2(0, 0, 324, 498)
 script/source = "extends TextureRect
 
 var i : int = 0
+var speed : float = 1.0
+var ran : bool = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if get_tree().get_frame() % 60 == 0:
+	#if get_tree().get_frame() % speed == 0:
+	if(!ran):
+		ran = true
+		await get_tree().create_timer(speed/1000).timeout
 		i += 1
-		texture.region += Vector2(324.0, 0.0)
+		if(i % 5 == 0 && i != 0):
+			print(\"yes\")
+			i = 0
+			texture.region.position += Vector2(-1296.0, 498.0)
+		elif(texture.region.position == Vector2(324.0, 996.0)):
+			print(\"end_reached\")
+			i = 0
+			texture.region.position = Vector2(0.0, 0.0)
+		else:
+			texture.region.position += Vector2(324.0, 0.0)
+		speed += 1.0
+		ran = false
+		if(speed == 1100.0):
+			speed = 1.0
 "
 
 [node name="DeathMenu" type="Control" unique_id=1066113762]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_m0i2o")
+script = ExtResource("2_ad56y")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2142329255]
 layout_mode = 1
@@ -47,7 +75,16 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.25
+size_flags_stretch_ratio = 0.15
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=1086014407]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+text = "Das Alter hat dich eingeholt!"
+label_settings = SubResource("LabelSettings_f1gli")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer" unique_id=636954442]
 layout_mode = 2
@@ -57,13 +94,87 @@ texture = SubResource("AtlasTexture_1hgjo")
 stretch_mode = 4
 script = SubResource("GDScript_64vox")
 
+[node name="MarginContainer5" type="MarginContainer" parent="HBoxContainer/VBoxContainer" unique_id=1846745855]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=401480476]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="MarginContainer5" type="MarginContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1124696157]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="Restart" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1664914560]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 36
+text = "Restart"
+
+[node name="MarginContainer6" type="MarginContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1182025411]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=845571865]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="MarginContainer5" type="MarginContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1440057950]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="Home" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=598787735]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 36
+text = "Home
+"
+
+[node name="MarginContainer6" type="MarginContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=823072604]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.35
+
 [node name="MarginContainer4" type="MarginContainer" parent="HBoxContainer/VBoxContainer" unique_id=2085162995]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.25
+size_flags_stretch_ratio = 0.2
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=134990662]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1243264772]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_71jv1")
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer2/Home" to="." method="_on_home_pressed"]

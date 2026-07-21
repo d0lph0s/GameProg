@@ -33,7 +33,7 @@ func take_damage(damage : int) -> void:
 	if(health > 0):
 		return
 	if(health >= 0):
-		SignalManager.death.emit()
+		GameManager.death()
 
 
 func _unhandled_input(event: InputEvent) -> void:

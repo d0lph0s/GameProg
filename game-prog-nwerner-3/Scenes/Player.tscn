@@ -9,6 +9,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://iwa0upeh5chu" path="res://Art/3D/Characters/Player/Animations/FPS_Hands.res" id="4_megsn"]
 [ext_resource type="PackedScene" uid="uid://c5qcpfn0lhjkj" path="res://Scenes/WinMenu.tscn" id="8_bhhdu"]
 [ext_resource type="PackedScene" uid="uid://tf621qvffkst" path="res://Scenes/PlayerUI.tscn" id="9_megsn"]
+[ext_resource type="PackedScene" uid="uid://b7m2ayjt63u2t" path="res://Scenes/DeathMenu.tscn" id="10_yoq75"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_writ7"]
 radius = 0.4
@@ -863,6 +864,10 @@ visible = false
 layout_mode = 1
 
 [node name="PlayerUI" parent="Control" unique_id=1850710553 instance=ExtResource("9_megsn")]
+layout_mode = 1
+
+[node name="DeathMenu" parent="Control" unique_id=1066113762 instance=ExtResource("10_yoq75")]
+visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="CameraHead/WeaponOriginPistol/Weapons/WeaponsMenu/Body/HBoxContainer/MiddleMarginContainer/VBoxContainer/HBoxContainer/Confirm" to="Control" method="_on_confirm_pressed"]

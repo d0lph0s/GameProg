@@ -34,16 +34,16 @@
 				"a3b116bb-781c-4a83-921d-752b1ab3ac8d",
 				"d11b4399-5815-46a2-90f9-87f9b76104d2",
 				"64a1472c-4df3-45e4-9fce-903cc4167190",
-				"f02ffa3e-f7fe-4a3c-b948-e93ab1449b51",
 				"e01ccb96-d23f-4a78-9928-a4abd6937a66",
-				"ce5b7860-46d3-4972-9e04-67d03a71618d"
+				"ce5b7860-46d3-4972-9e04-67d03a71618d",
+				"b30757a2-18ba-4b44-8f33-f0fff28853a8"
 			]
 		},
 		{
 			"uuid": "754925d9-e87c-4151-8431-d105cac2f5e0",
 			"title": "Doing",
 			"tasks": [
-				"3f9f4545-ae78-4ae4-b79b-1e2408e12979"
+				"f02ffa3e-f7fe-4a3c-b948-e93ab1449b51"
 			]
 		},
 		{
@@ -61,7 +61,8 @@
 				"39c74f25-06c9-49cb-b825-076057356235",
 				"48241c19-03c6-42e7-87c1-afbbfdb27ccd",
 				"706ee967-65af-4e82-8c81-a06077e4bf48",
-				"63686dca-11cf-4621-9832-530359f0dfe4"
+				"63686dca-11cf-4621-9832-530359f0dfe4",
+				"3f9f4545-ae78-4ae4-b79b-1e2408e12979"
 			]
 		}
 	],
@@ -265,6 +266,13 @@
 		{
 			"uuid": "ce5b7860-46d3-4972-9e04-67d03a71618d",
 			"title": "Set Enemy Stats",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "b30757a2-18ba-4b44-8f33-f0fff28853a8",
+			"title": "More Hand Animations",
 			"description": "",
 			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
 			"steps": []

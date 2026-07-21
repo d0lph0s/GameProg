@@ -16,12 +16,14 @@ albedo_color = Color(0.8509804, 0.05490196, 0, 1)
 font_size = 18
 
 [node name="Weapons" type="Node3D" unique_id=136330797]
+process_mode = 3
 script = ExtResource("1_yltro")
 
 [node name="Environment" parent="." unique_id=981963169 instance=ExtResource("2_33wch")]
 visible = false
 
 [node name="WeaponFunctionality" type="Node3D" parent="." unique_id=1741974668]
+process_mode = 1
 script = ExtResource("2_ovc61")
 max_ammo = 8
 
@@ -44,6 +46,7 @@ max_polyphony = 10
 bus = &"Weapon"
 
 [node name="WeaponsMenu" type="Control" parent="." unique_id=910210828]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -18,4 +18,4 @@ func _on_confirm_pressed() -> void:
 
 func _on_stage_cleared() -> void:
 	$PlayerUI.hide()
-	$WinMenu.show()
+	GameManager.start()
