@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bn1orild0ar73"]
 
+[ext_resource type="Theme" uid="uid://cs4l0psoivy8d" path="res://Art/2D/UI/MainFontTheme.tres" id="1_fh7cp"]
 [ext_resource type="Script" uid="uid://di55nctogdj8b" path="res://Scripts/main_menu.gd" id="1_koqhg"]
 [ext_resource type="Texture2D" uid="uid://dkdhkkinpmvr6" path="res://Art/2D/UI/titlescreen.jpg" id="1_tt5f1"]
 [ext_resource type="Texture2D" uid="uid://cijfhfxshfo7s" path="res://Art/2D/UI/button_wide_start.png" id="2_xim88"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://doi3rnffi4eo6" path="res://Art/2D/UI/button_wide_exit_hover.png" id="7_rrcx7"]
 [ext_resource type="Texture2D" uid="uid://becyhppjmg7ow" path="res://Art/2D/UI/button_wide_weapon_hover.png" id="8_8e205"]
 [ext_resource type="AudioStream" uid="uid://bdsaihufvsa48" path="res://Art/Sound/STD/rentner_waltz.ogg" id="9_cmrfp"]
+[ext_resource type="PackedScene" uid="uid://dbdid3w7g4ok5" path="res://Scenes/SettingsMenu.tscn" id="14_8e205"]
 
 [sub_resource type="GDScript" id="GDScript_tdnec"]
 script/source = "extends AudioStreamPlayer
@@ -32,6 +34,12 @@ func dampen(paused : bool) -> void:
 		lp_tween.play()
 "
 
+[sub_resource type="LabelSettings" id="LabelSettings_tdnec"]
+font_size = 54
+font_color = Color(0.7882353, 0.19607843, 0.23529412, 1)
+outline_size = 8
+outline_color = Color(0.06469653, 0.064696535, 0.0646965, 1)
+
 [node name="MainMenu" type="Control" unique_id=1736592503]
 process_mode = 3
 layout_mode = 3
@@ -40,6 +48,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_fh7cp")
 script = ExtResource("1_koqhg")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=995232296]
@@ -149,6 +158,23 @@ dialog_text = "Du musst erst deine Waffe modifizieren, bevor du ins Gefecht aufb
 Du willst doch nicht unvorbereitet auf die Rentner treffen.
 Öffne das \"Weapon\"-Menü und rüste dich aus!"
 dialog_autowrap = true
+
+[node name="Label" type="Label" parent="." unique_id=1202288840]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.70500004
+anchor_top = 0.93700004
+anchor_right = 0.70500004
+anchor_bottom = 0.93700004
+offset_left = -7.6000977
+offset_top = -3.960022
+offset_right = 557.3999
+offset_bottom = 61.039978
+text = "\"Tab\" for Settings!"
+label_settings = SubResource("LabelSettings_tdnec")
+
+[node name="SettingsMenu" parent="." unique_id=1746060566 instance=ExtResource("14_8e205")]
+layout_mode = 1
 
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/Weapon" to="." method="_on_weapon_pressed"]

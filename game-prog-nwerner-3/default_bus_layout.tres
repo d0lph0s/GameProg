@@ -37,7 +37,7 @@ release_ms = 276.0
 sidechain = &"Weapon"
 
 [resource]
-bus/0/volume_db = -5.045384
+bus/0/volume_db = 6.0199986
 bus/0/effect/0/effect = SubResource("AudioEffectLowPassFilter_j3pel")
 bus/0/effect/0/enabled = true
 bus/1/name = &"Weapon"

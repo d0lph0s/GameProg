@@ -12,6 +12,7 @@
 [ext_resource type="Material" uid="uid://2wlcudfpwpdh" path="res://Art/3D/Environment/blockout_small_red.material" id="9_bdlbp"]
 [ext_resource type="Texture2D" uid="uid://bgp11h7ommmed" path="res://Art/3D/Environment/Textures/Blockout/greybox_grey_grid.png" id="10_2h8qs"]
 [ext_resource type="AudioStream" uid="uid://dhe53s6m64rj4" path="res://Art/Sound/STD/fuck_them_rentners.ogg" id="12_rpty4"]
+[ext_resource type="PackedScene" uid="uid://dbdid3w7g4ok5" path="res://Scenes/SettingsMenu.tscn" id="13_6jj8j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tdnec"]
 size = Vector3(50, 1, 50)
@@ -1912,6 +1913,8 @@ autoplay = true
 bus = &"Background"
 playback_type = 1
 script = SubResource("GDScript_ey1tb")
+
+[node name="SettingsMenu" parent="." unique_id=1746060566 instance=ExtResource("13_6jj8j")]
 
 [editable path="Enemy"]
 [editable path="Enemy2"]

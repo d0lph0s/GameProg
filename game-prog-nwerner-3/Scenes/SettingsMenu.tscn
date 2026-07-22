@@ -1,0 +1,197 @@
+[gd_scene format=3 uid="uid://dbdid3w7g4ok5"]
+
+[ext_resource type="Theme" uid="uid://cs4l0psoivy8d" path="res://Art/2D/UI/MainFontTheme.tres" id="1_8uw7q"]
+[ext_resource type="Script" uid="uid://hq2ffcoe06y7" path="res://Scripts/settings_menu.gd" id="2_bxjf0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tdnec"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_writ7"]
+font_size = 36
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_i6fqs"]
+color = Color(0.49354547, 0.49354553, 0.49354553, 1)
+grow_begin = -4.0
+thickness = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhdh6"]
+bg_color = Color(0.57254905, 0.61960787, 0.5254902, 0)
+draw_center = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_i6fqs"]
+font_size = 42
+font_color = Color(0.69135666, 0.6913569, 0.69135684, 1)
+
+[node name="SettingsMenu" type="Control" unique_id=1746060566]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8uw7q")
+script = ExtResource("2_bxjf0")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1902734112]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer" unique_id=130418917]
+custom_minimum_size = Vector2(650, 800)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(25, 25)
+color = Color(0.06879827, 0.06879828, 0.06879828, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=86024424]
+custom_minimum_size = Vector2(600, 750)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/HBoxContainer" unique_id=2091431320]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Exit" type="Button" parent="CenterContainer/HBoxContainer/MarginContainer" unique_id=1679415]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "X"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer" unique_id=1879425237]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TopMargin" type="CenterContainer" parent="CenterContainer/HBoxContainer/VBoxContainer" unique_id=1407370013]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer/TopMargin" unique_id=524746996]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_tdnec")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/HBoxContainer/VBoxContainer" unique_id=1916864184]
+custom_maximum_size = Vector2(-1, 150)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=870657979]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Sensitivity"
+label_settings = SubResource("LabelSettings_writ7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sensitivity" type="HSlider" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1192376664]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/slider = SubResource("StyleBoxLine_i6fqs")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_vhdh6")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MarginContainer" type="CenterContainer" parent="CenterContainer/HBoxContainer/VBoxContainer" unique_id=1170485822]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.45
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer/MarginContainer" unique_id=886727017]
+layout_mode = 2
+text = "Volume"
+label_settings = SubResource("LabelSettings_i6fqs")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/HBoxContainer/VBoxContainer" unique_id=1445332894]
+custom_maximum_size = Vector2(-1, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1188623055]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_writ7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Master" type="HSlider" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=884003490]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/slider = SubResource("StyleBoxLine_i6fqs")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_vhdh6")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/HBoxContainer/VBoxContainer" unique_id=1616077846]
+custom_maximum_size = Vector2(-1, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer3" unique_id=896171803]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Music Volume"
+label_settings = SubResource("LabelSettings_writ7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Music" type="HSlider" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer3" unique_id=1881816467]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/slider = SubResource("StyleBoxLine_i6fqs")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_vhdh6")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CenterContainer/HBoxContainer/VBoxContainer" unique_id=730974526]
+custom_maximum_size = Vector2(-1, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer4" unique_id=809747181]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Sfx Volume"
+label_settings = SubResource("LabelSettings_writ7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sfx" type="HSlider" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer4" unique_id=886562436]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/slider = SubResource("StyleBoxLine_i6fqs")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_vhdh6")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[connection signal="pressed" from="CenterContainer/HBoxContainer/MarginContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="drag_ended" from="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer/Sensitivity" to="." method="_on_sensitivity_drag_ended"]
+[connection signal="value_changed" from="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Master" to="." method="_on_master_value_changed"]
+[connection signal="value_changed" from="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer3/Music" to="." method="_on_music_value_changed"]
+[connection signal="drag_ended" from="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer4/Sfx" to="." method="_on_sfx_drag_ended"]

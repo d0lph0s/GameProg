@@ -13,6 +13,9 @@ var current_level : int
 var enemy_count : int
 #Settings
 var Mouse_Sensitivity : float = 0.5
+var Master_Volume : float = 1.0
+var Music_Volume : float = 1.0
+var Sfx_Volume : float = 1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
