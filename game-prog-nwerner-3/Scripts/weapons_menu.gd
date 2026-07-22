@@ -1,7 +1,7 @@
 extends Control
 
-@onready var weapon_body_parts: VBoxContainer = $HBoxContainer/CenterContainerLeft/ScrollContainer/VScrollBar/WeaponBodyParts
-@onready var weapon_extras: VBoxContainer = $HBoxContainer/CenterContainerRight/ScrollContainer/VScrollBar/WeaponExtras
+@onready var weapon_body_parts: VBoxContainer = %WeaponBodyParts
+@onready var weapon_extras: VBoxContainer = %WeaponExtras
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -9,60 +9,92 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
-func body_part_selected(index : int) -> void:
-	for i : int in range(1, 4):
-		weapon_body_parts.get_child(i).visible = true
-	for i : int in range(1, 4):
-		#weapon_body_parts.get_child(i).mouse_filter = MOUSE_FILTER_IGNORE
-		weapon_body_parts.get_child(i).visible = false
-		#irtgendwas player feedback
-	if (index == 0):
-		index = 1
-	if(index == 3):
-		show_certain_part(5)
+func flip_flop_of_death() -> void:
+	print("Platform: " + str(%PlatformOptions.get_selected_id()))
+	if %PlatformOptions.get_selected_id() == 0:
+		print("PlatformFunction")
+		for i : int in %WeaponBodyParts.get_child_count():
+			if(i != 0):
+				%WeaponBodyParts.get_child(i).get_child(0).get_child(1).selected = 0
+				%WeaponBodyParts.get_child(i).hide()
+		return
+		
+	if %Magazine_P.visible && %MagazinePOptions.get_selected_id() == 0 || %Magazine_A.visible && %MagazineAOptions.get_selected_id() == 0 || %Magazine_S.visible && %MagazineSOptions.get_selected_id() == 0:
+		print("MagazineFunction")
+		%AmmunitionOptions.selected = 0
+		%Ammunition.hide()
+		return
+	
+	if (%Barrel.visible && %BarrelOptions.get_selected_id() != 2):
+		%Muzzle_P.hide()
+		%MuzzleOptions.selected = 0
+	
+	if (%PlatformOptions.get_selected_id() != 1 && %PlatformOptions.get_selected_id() != 2):
+		%Slide.hide()
+		%SlideOptions.selected = 0
+		%Trigger.hide()
+		%TriggerOptions.selected = 0
+	
+	if (%PlatformOptions.get_selected_id() != 4):
+		%PumpHandle.hide()
+		%PumpHandleOptions.selected = 0
+	
+	if (%Slide.visible && %SlideOptions.get_selected_id() == 0 || %Slide.visible && %SlideOptions.get_selected_id() == 1):
+		%Sight_P.hide()
+		%SightPOptions.selected = 0
+	
+	if(%PlatformContainer.visible) && %PlatformOptions.get_selected_id() != 0:
+		match %PlatformOptions.get_selected_id():
+			0:
+				pass
+			1,2:
+				%Magazine_P.show()
+				%Magazine_A.hide()
+				%Magazine_S.hide()
+				%Slide.show()
+			3:
+				%Magazine_A.show()
+				%Magazine_P.hide()
+				%Magazine_S.hide()
+			4:
+				%Magazine_S.show()
+				%Magazine_P.hide()
+				%Magazine_A.hide()
+				%PumpHandle.show()
+				
+		%Barrel.show()
 	else:
-		hide_certain_part(5)
-	show_certain_part(index)
-	show_certain_part(6)
+		return
+	
+	if (%PlatformOptions.get_selected_id() == 1 || %PlatformOptions.get_selected_id() == 2):
+		%Trigger.show()
+	
+	if (%Barrel.visible && %BarrelOptions.get_selected_id() == 2):
+		%Muzzle_P.show()
+	
+	if(%Magazine_P.visible && %MagazinePOptions.get_selected_id() != 0 || %Magazine_A.visible && %MagazineAOptions.get_selected_id() != 0 || %Magazine_S.visible && %MagazineSOptions.get_selected_id() != 0):
+		%Ammunition.show()
+	
+	if(%Slide.visible && %SlideOptions.get_selected_id() == 2):
+		%Sight_P.show()
 
-func show_certain_part(index : int) -> void:
+func show_left_part(index : int) -> void:
 	weapon_body_parts.get_child(index).visible = true
 
-func hide_certain_part(index : int) -> void:
+func hide_left_part(index : int) -> void:
 	weapon_body_parts.get_child(index).visible = false
 
-func _on_platform_options_item_selected(index: int) -> void:
-	if(index == 0):
-		for i : int in range(1, weapon_body_parts.get_child_count()):
-			weapon_body_parts.get_child(i).find_child("*" + "Options").selected = 0
-			weapon_body_parts.get_child(i).visible = false
-		return
-	if(index != 0):
-		show_certain_part(5)
-	else:
-		hide_certain_part(5)
-	body_part_selected(index-1)
+func show_right_part(index : int) -> void:
+	weapon_extras.get_child(index).visible = true
 
-func _on_magazine_p_options_item_selected(index: int) -> void:
-	if(index == 0): 
-		hide_certain_part(4)
-		return
-	show_certain_part(4)
+func hide_right_part(index : int) -> void:
+	weapon_extras.get_child(index).visible = false
 
-func _on_magazine_a_options_item_selected(index: int) -> void:
-	if(index == 0): 
-		hide_certain_part(4)
-		return
-	show_certain_part(4)
-
-func _on_magazine_s_options_item_selected(index: int) -> void:
-	if(index == 0): 
-		hide_certain_part(4)
-		return
-	show_certain_part(4)
+func _on_options_selected(index: int) -> void:
+	flip_flop_of_death()
 
 
 func _on_confirm_pressed() -> void:

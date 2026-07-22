@@ -50,6 +50,7 @@ func death() -> void:
 
 func start() -> void:
 	var weapon_node : Node3D = WeaponManager.weapon_scene.instantiate()
+	weapon_node.position -= Vector3(0.0, 0.015, 0.0)
 	weapon_node.get_child(6).hide()
 	weapon_node.get_child(0).queue_free()
 	weapon_node.get_child(3).queue_free()

@@ -9,6 +9,8 @@ var magazine_mesh : PackedScene = preload("uid://vtmo0cw83m4t")
 var trigger_mesh : PackedScene = preload("uid://cwypnwf4c7eia")
 var ammunition_mesh : PackedScene = preload("uid://b82nec2sh5hok")
 var pumphandle_mesh : PackedScene = preload("uid://84ndlfvxgif4")
+var sight_mesh : PackedScene = preload("uid://2f1srkg64ga")
+var muzzle_mesh : PackedScene = preload("uid://be54lr7aqqeg7")
 
 #workables
 var platform : Node
@@ -16,6 +18,11 @@ var magazine : Node
 var ammunition : Node
 var pumphandle : Node
 var barrel : Node
+var slide : Node
+var sight : Node
+var muzzle : Node
+var trigger : Node
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	platform_NODE = $Platform
@@ -25,15 +32,19 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func load_weapon() -> void:
+	if($WeaponsMenu.visible == true):
+		WeaponManager.export_parameters()
 	_on_platform_options_item_selected(WeaponManager.weapon_components["Platform"])
 	await get_tree().process_frame
 	
 	if WeaponManager.weapon_components["Magazine"] == null:
 		return
+	
+	#look for where null or 0 is asked for!
 	match WeaponManager.weapon_components["Platform"]:
 		1, 2:
 			_on_magazine_p_options_item_selected(WeaponManager.weapon_components["Magazine"])
@@ -43,23 +54,54 @@ func load_weapon() -> void:
 			_on_magazine_s_options_item_selected(WeaponManager.weapon_components["Magazine"])
 	await get_tree().process_frame
 	
+	if WeaponManager.weapon_components["Magazine"] == null || WeaponManager.weapon_components["Magazine"] == 0:
+		return #maybe just magazine of 1
+		
 	if(WeaponManager.weapon_components["Platform"] == 4):
 		if WeaponManager.weapon_components["PumpHandle"] == null:
-			return
-		_on_pump_handle_options_item_selected(WeaponManager.weapon_components["PumpHandle"])
-	if WeaponManager.weapon_components["Barrel"] == null:
+			pass
+		else:
+			_on_pump_handle_options_item_selected(WeaponManager.weapon_components["PumpHandle"])
+		
+	if WeaponManager.weapon_components["Barrel"] == null || WeaponManager.weapon_components["Barrel"] == 0:
 			return
 	_on_barrel_options_item_selected(WeaponManager.weapon_components["Barrel"])
 	await get_tree().process_frame
-	if WeaponManager.weapon_components["Ammunition"] == null:
+	
+	if WeaponManager.weapon_components["Ammunition"] == null || WeaponManager.weapon_components["Ammunition"] == 0:
 			return
 	_on_ammunition_options_item_selected(WeaponManager.weapon_components["Ammunition"])
 	SignalManager.ammo_selected.emit()
+	await get_tree().process_frame
+	
+	if(WeaponManager.weapon_components["Platform"] == 1 || WeaponManager.weapon_components["Platform"] == 2):
+		if WeaponManager.weapon_components["Slide"] == null || WeaponManager.weapon_components["Slide"] == 0:
+			return
+		_on_slide_options_item_selected(WeaponManager.weapon_components["Slide"])
+	
+	if WeaponManager.weapon_components["Slide"] != null:
+		if WeaponManager.weapon_components["Sight"] == null || WeaponManager.weapon_components["Sight"] == 0:
+			pass
+		else:
+			_on_sight_p_options_item_selected(WeaponManager.weapon_components["Sight"])
+	
+	if(WeaponManager.weapon_components["Platform"] == 1 || WeaponManager.weapon_components["Platform"] == 2):
+		if WeaponManager.weapon_components["Barrel"] == 2:
+			if WeaponManager.weapon_components["Muzzle"] == null || WeaponManager.weapon_components["Muzzle"] == 0:
+				pass
+			else:
+				_on_muzzle_options_item_selected(WeaponManager.weapon_components["Muzzle"])
+		if WeaponManager.weapon_components["Trigger"] != null && WeaponManager.weapon_components["Trigger"] != 0:
+			_on_trigger_options_item_selected(WeaponManager.weapon_components["Trigger"])
+	
 	
 	$WeaponFunctionality.process_mode = Node.PROCESS_MODE_INHERIT
 	$WeaponFunctionality.active = true
 	$WeaponFunctionality.load_muzzle_flash()
+	$WeaponFunctionality.start()
+	
 
+#ich hasse diese function (Grüße vom 22.07.2026 00:31 Uhr)
 func weapon_modified(type : int) -> void:
 	match type:
 		0:
@@ -139,6 +181,73 @@ func weapon_modified(type : int) -> void:
 			barrel_NODE.add_child(barrel)
 			WeaponManager.barrel_mesh = barrel.get_child(0).mesh
 			#endregion
+		5:
+			#region slide
+			var slide_NODE = platform.get_child(0).find_child("Socket_Slide" + "*", true)
+			if(slide_mesh == null):
+				if(slide.get_child_count() == 0):
+					return
+				slide_NODE.get_child(0).queue_free()
+				return
+				
+			if(slide_NODE.get_child_count() != 0 && slide_NODE.get_child(0) != null):
+				slide_NODE.get_child(0).queue_free()
+			slide = slide_mesh.instantiate()
+			slide.get_child(0).set_surface_override_material(0, load("res://Art/3D/Weapons/Master_Material.material"))
+			slide.get_child(0).get_child(0).set_surface_override_material(0, load("res://Art/3D/Weapons/Master_Material.material"))
+			slide.get_child(0).get_child(0).set_surface_override_material(1, load("res://Art/3D/Weapons/Master_Material.material"))
+			slide_NODE.add_child(slide)
+			#endregion
+		6:
+			#region sight
+			var sight_NODE = slide.find_child("Socket_Sight" + "*", true)
+			if(sight_mesh == null):
+				if(sight.get_child_count() == 0):
+					return
+				sight_NODE.get_child(0).queue_free()
+				return
+				
+			if(sight_NODE.get_child_count() != 0 && sight_NODE.get_child(0) != null):
+				sight_NODE.get_child(0).queue_free()
+			sight = sight_mesh.instantiate()
+			#correction
+			sight.position -= Vector3(0.0, 0.005, 0.0)
+			sight.get_child(0).set_surface_override_material(0, load("res://Art/3D/Weapons/Master_Material.material"))
+			if(sight.get_child(0).get_child_count() != 0):
+				sight.get_child(0).get_child(0).set_surface_override_material(0, load("res://Art/3D/Weapons/Lens_Material.material"))
+			sight_NODE.add_child(sight)
+			#endregion
+		7:
+			#region muzzle
+			var muzzle_NODE = barrel.find_child("Socket_Muzzle", true)
+			if(muzzle_mesh == null):
+				if(muzzle.get_child_count() == 0):
+					return
+				muzzle_NODE.get_child(0).queue_free()
+				return
+				
+			if(muzzle_NODE.get_child_count() != 0 && muzzle_NODE.get_child(0) != null):
+				muzzle_NODE.get_child(0).queue_free()
+			muzzle = muzzle_mesh.instantiate()
+			muzzle.get_child(0).set_surface_override_material(0, load("res://Art/3D/Weapons/Master_Material.material"))
+			muzzle_NODE.add_child(muzzle)
+			#endregion
+		8:
+			#region trigger
+			var trigger_NODE = platform.find_child("Socket_Trigger" + "*", true)
+			if(trigger_mesh == null):
+				if(trigger.get_child_count() == 0):
+					return
+				trigger_NODE.get_child(0).queue_free()
+				return
+				
+			if(trigger_NODE.get_child_count() != 0 && trigger_NODE.get_child(0) != null):
+				trigger_NODE.get_child(0).queue_free()
+			trigger = trigger_mesh.instantiate()
+			trigger.get_child(0).set_surface_override_material(0, load("res://Art/3D/Weapons/Master_Material.material"))
+			trigger_NODE.add_child(trigger)
+			#endregion
+	#region deprecated
 	"""
 	
 	#region slide
@@ -155,24 +264,51 @@ func weapon_modified(type : int) -> void:
 	trigger_NODE.add_child(trigger)
 	#endregion
 	"""
-	
+	#endregion
+	WeaponManager.export_parameters()
+
 
 func _on_platform_options_item_selected(index: int) -> void:
 	match index:
 		0: platform_mesh = null
-		1: platform_mesh = load("uid://b4wcc0ej50o7u")
-		2: platform_mesh = load("uid://cdbi5wdcrh8co")
-		3: platform_mesh = load("uid://dt0emhsqb3bvm")
-		4: platform_mesh = load("uid://cb3fdcg3h7ldb")
+		1: 
+			platform_mesh = load("uid://b4wcc0ej50o7u")
+			WeaponManager.weapon_damage = 12.0
+			WeaponManager.weapon_accuracy = 50.0
+			WeaponManager.weapon_reload_time = 2.25
+		2: 
+			platform_mesh = load("uid://cdbi5wdcrh8co")
+			WeaponManager.weapon_damage = 10.0
+			WeaponManager.weapon_accuracy = 60.0
+			WeaponManager.weapon_reload_time = 2.0
+		3: 
+			platform_mesh = load("uid://dt0emhsqb3bvm")
+			WeaponManager.weapon_damage = 8.0
+			WeaponManager.weapon_accuracy = 40.0
+			WeaponManager.weapon_reload_time = 3.25
+		4: 
+			platform_mesh = load("uid://cb3fdcg3h7ldb")
+			WeaponManager.weapon_damage = 25.0
+			WeaponManager.weapon_accuracy = 5.0
+			WeaponManager.weapon_reload_time = 3.75
 		_: return
 	WeaponManager.weapon_components["Platform"] = index
 	weapon_modified(0)
 
 func _on_magazine_p_options_item_selected(index: int) -> void:
 	match index:
-		0: magazine_mesh = null
-		1: magazine_mesh = load("uid://vtmo0cw83m4t")
-		2: magazine_mesh = load("uid://rfh3mntmk5q5")
+		0: 
+			magazine_mesh = null
+			WeaponManager.magazine_size = 1
+			WeaponManager.magazine_reload_mult = 0.3
+		1: 
+			magazine_mesh = load("uid://vtmo0cw83m4t")
+			WeaponManager.magazine_size = 7
+			WeaponManager.magazine_reload_mult = 0.9
+		2: 
+			magazine_mesh = load("uid://rfh3mntmk5q5")
+			WeaponManager.magazine_size = 10
+			WeaponManager.magazine_reload_mult = 1.1
 		_: return
 	WeaponManager.weapon_components["Magazine"] = index
 	weapon_modified(1)
@@ -227,13 +363,95 @@ func _on_pump_handle_options_item_selected(index: int) -> void:
 
 func _on_barrel_options_item_selected(index: int) -> void:
 	match index:
-		0: barrel_mesh = null
-		1: barrel_mesh = load("uid://dilq3y31dtass")
-		2: barrel_mesh = load("uid://bl6d5fwvfhn47")
-		3: barrel_mesh = load("uid://cx2rfuc4uia2r")
-		4: barrel_mesh = load("uid://dggehpa1xc4l4")
-		5: barrel_mesh = load("uid://cnrw24clwicr2")
-		6: barrel_mesh = load("uid://fxyfxrjto6cv")
+		0: 
+			barrel_mesh = null
+			WeaponManager.barrel_damage_mult = 0.0
+			WeaponManager.barrel_accuracy_mult = 0.2
+		1: 
+			barrel_mesh = load("uid://dilq3y31dtass")
+			WeaponManager.barrel_damage_mult = 1.0
+			WeaponManager.barrel_accuracy_mult = 1.1
+			
+		2: 
+			barrel_mesh = load("uid://bl6d5fwvfhn47")
+			WeaponManager.barrel_damage_mult = 0.9
+			WeaponManager.barrel_accuracy_mult = 1.0
+		3: 
+			barrel_mesh = load("uid://cx2rfuc4uia2r")
+			WeaponManager.barrel_damage_mult = 1.1
+			WeaponManager.barrel_accuracy_mult = 1.25
+		4: 
+			barrel_mesh = load("uid://dggehpa1xc4l4")
+			WeaponManager.barrel_damage_mult = 1.15
+			WeaponManager.barrel_accuracy_mult = 1.05
+		5: 
+			barrel_mesh = load("uid://cnrw24clwicr2")
+			WeaponManager.barrel_damage_mult = 1.45
+			WeaponManager.barrel_accuracy_mult = 0.45
+		6: 
+			barrel_mesh = load("uid://fxyfxrjto6cv")
+			WeaponManager.barrel_damage_mult = 1.5
+			WeaponManager.barrel_accuracy_mult = 0.4
 		_: return
 	WeaponManager.weapon_components["Barrel"] = index
 	weapon_modified(4)
+
+func _on_slide_options_item_selected(index: int) -> void:
+	match index:
+		0: 
+			slide_mesh = null
+			WeaponManager.slide_reload_mult = 1.0
+		1: 
+			slide_mesh = load("uid://wrbw77g0kvbo")
+			WeaponManager.slide_reload_mult = 0.95
+		2: 
+			slide_mesh = load("uid://cf6uagrdjie38")
+			WeaponManager.slide_reload_mult = 0.9
+	WeaponManager.weapon_components["Slide"] = index
+	weapon_modified(5)
+
+func _on_sight_p_options_item_selected(index: int) -> void:
+	match index:
+		0: 
+			sight_mesh = null
+			WeaponManager.sight_accuracy = 1.0
+		1: 
+			sight_mesh = load("uid://2f1srkg64ga")
+			WeaponManager.sight_accuracy = 5.0
+		2: 
+			sight_mesh = load("uid://bnatebxjb77hv")
+			WeaponManager.sight_accuracy = 7.5
+		3: 
+			sight_mesh = load("uid://ba0qfeugjq7xo")
+			WeaponManager.sight_accuracy = 6.9
+	WeaponManager.weapon_components["Sight"] = index
+	weapon_modified(6)
+
+func _on_muzzle_options_item_selected(index: int) -> void:
+	match index:
+		0: 
+			muzzle_mesh = null
+			WeaponManager.muzzle_damage_mult = 1.0
+			WeaponManager.muzzle_accuracy_mult = 1.0
+		1: 
+			muzzle_mesh = load("uid://be54lr7aqqeg7")
+			WeaponManager.muzzle_damage_mult = 0.85
+			WeaponManager.muzzle_accuracy_mult = 1.7
+		2: 
+			muzzle_mesh = load("uid://bq1btucugyruw")
+			WeaponManager.muzzle_damage_mult = 0.95
+			WeaponManager.muzzle_accuracy_mult = 1.15
+		3: 
+			muzzle_mesh = load("uid://bmevrocnbn8ul")
+			WeaponManager.muzzle_damage_mult = 1.2
+			WeaponManager.muzzle_accuracy_mult = 0.95
+	WeaponManager.weapon_components["Muzzle"] = index
+	weapon_modified(7)
+
+func _on_trigger_options_item_selected(index: int) -> void:
+	match index:
+		0: trigger_mesh = null
+		1: trigger_mesh = load("uid://cwypnwf4c7eia")
+		2: trigger_mesh = load("uid://bfyxa366bacjf")
+	WeaponManager.weapon_components["Trigger"] = index
+	weapon_modified(8)

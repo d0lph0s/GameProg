@@ -36,7 +36,8 @@
 				"b30757a2-18ba-4b44-8f33-f0fff28853a8",
 				"5c403e74-abbb-4449-92bf-48090e5210d7",
 				"d87b1e68-9209-4696-9367-ae670bb4f46b",
-				"b0b966e8-33d0-4187-8522-99d9d834afec"
+				"fa382fff-2d5c-4b11-a8bd-1c137cf8b816",
+				"ab2461a0-666b-4d07-a896-3613e0d6d214"
 			]
 		},
 		{
@@ -51,6 +52,7 @@
 			"uuid": "601ff683-b062-4228-b3ca-83040c12fd8d",
 			"title": "Done",
 			"tasks": [
+				"b0b966e8-33d0-4187-8522-99d9d834afec",
 				"a882d13b-8669-4a98-80d7-196d14426885",
 				"36b7453d-4927-4dd9-9930-28e664f1c5b9",
 				"38812962-09c6-4d3b-ba68-8d699d69432f",
@@ -221,7 +223,7 @@
 			"uuid": "e7d98190-4bfc-4d32-a10d-47189033c90f",
 			"title": "BUGFIXING",
 			"description": "",
-			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"category": "b52acf7e-3b8f-4647-8295-84504a05076c",
 			"steps": []
 		},
 		{
@@ -299,6 +301,20 @@
 			"title": "Load WeaponMenu from Mainmenu differently",
 			"description": "",
 			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "fa382fff-2d5c-4b11-a8bd-1c137cf8b816",
+			"title": "shader when hit",
+			"description": "",
+			"category": "cc002a09-6ed8-4407-976b-a3823d80f8ff",
+			"steps": []
+		},
+		{
+			"uuid": "ab2461a0-666b-4d07-a896-3613e0d6d214",
+			"title": "Need to select everything for pistol to work",
+			"description": "",
+			"category": "76532ce0-4b17-4a76-abe7-e283134be21a",
 			"steps": []
 		}
 	],

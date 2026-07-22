@@ -115,6 +115,7 @@ process_mode = 3
 stream = ExtResource("9_cmrfp")
 volume_db = -3.0
 autoplay = true
+bus = &"Background"
 playback_type = 1
 
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]

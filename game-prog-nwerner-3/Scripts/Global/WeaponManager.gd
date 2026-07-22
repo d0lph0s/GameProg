@@ -2,35 +2,94 @@ extends Node
 
 #for loading after modification
 var weapon_scene : PackedScene
-var weapon_components : Dictionary = {"Platform" : null, "Magazine" : null, "Ammunition" : null, "PumpHandle" : null, "Barrel" : null, "Trigger" : null}
+var weapon_components : Dictionary = {"Platform" : null, "Magazine" : null, "Ammunition" : null, "PumpHandle" : null, "Barrel" : null, "Trigger" : null, "Slide" : null, "Sight" : null, "Muzzle" : null}
+
+#Exportready Stats
+var fin_damage : int = 0
+var fin_damage_flat : int = 0
+var fin_damage_mult : float = 0
+var fin_reload_time : float = 1.0
+var fin_reload_time_flat : float = 1.0
+var fin_reload_mult : float = 1.0
+var fin_accuracy : float = 0.0
+var fin_accuracy_flat : float = 0.0
+var fin_accuracy_mult : float = 1.0
+var fin_magazine_size : int = 1
 
 #Stats
-var reload_speed_mod : float = 1.2
-var normal_reload_time : float = 3.0
-var accuracy_mod : float = 50.0
-var normal_damage : float = 10
-var damage_mod : float = 1.0
+
+#weapon
+var weapon_reload_time : float = 3.0
+var weapon_accuracy : float
+var weapon_damage : float = 10.0
+
+#extras
+var sight_accuracy : float = 1.0
+var muzzle_damage_mult : float = 1.0
+var muzzle_accuracy_mult : float = 1.0
+var barrel_damage_mult : float = 1.0
+var barrel_accuracy_mult : float = 1.0
+var slide_reload_mult : float = 1.0
+
+#ammunition
+var magazine_reload_mult : float = 1.0
+var magazine_size : int = 1
 var ammunition_type : int = -1
 
 #for calculation of other stuff (HALLO MANU/ALEX) (Ja ich habe diesen Lösungsansatz tatsächlich selber gewählt XD)
 var barrel_mesh : Mesh
 var barrel_socket : Vector3
 
+func export_parameters() -> void:
+	fin_reload_time = reload_time()
+	fin_accuracy = accuracy()
+	fin_damage = damage()
+	c_fin_magazine_size_comp()
+	SignalManager.stats_updated.emit()
+
+func c_fin_magazine_size_comp() -> void:
+	fin_magazine_size = magazine_size
+
+func c_fin_reload_comp() -> void:
+	fin_reload_mult = magazine_reload_mult * slide_reload_mult
+	fin_reload_time_flat = weapon_reload_time
+
+func c_fin_accuracy_comp() -> void:
+	fin_accuracy_mult = muzzle_accuracy_mult * barrel_accuracy_mult
+	fin_accuracy_flat = weapon_accuracy + sight_accuracy
+
+func c_fin_damage_comp() -> void:
+	fin_damage_flat = weapon_damage
+	fin_damage_mult = barrel_damage_mult * muzzle_damage_mult
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	weapon_scene = PackedScene.new()
 	SignalManager.ammo_selected.connect(set_ammunition_type)
 
 func damage() -> float:
-	return normal_damage * damage_mod
+	c_fin_damage_comp()
+	return fin_damage_flat * fin_damage_mult
 
 func accuracy() -> float:
-	if accuracy_mod > 100.0:
-		accuracy_mod = 100
-	return (100.0 - accuracy_mod)/10
+	c_fin_accuracy_comp()
+	var combined_accuracy : float = fin_accuracy_flat * fin_accuracy_mult
+	if (combined_accuracy) > 100.0:
+		combined_accuracy = 100
+	return (combined_accuracy)
+
+func usable_accuracy() -> float:
+	c_fin_accuracy_comp()
+	var combined_accuracy : float = fin_accuracy_flat * fin_accuracy_mult
+	if (combined_accuracy) > 100.0:
+		combined_accuracy = 100
+	return (100.0 - combined_accuracy)
 
 func reload_time() -> float:
-	return (1/reload_speed_mod * normal_reload_time)
+	c_fin_reload_comp()
+	if fin_reload_mult <= 0.0:
+		fin_reload_mult = 0.0001
+	return (fin_reload_time_flat * fin_reload_mult)
 
 func set_ammunition_type(ammo_name : StringName) -> void:
 	match ammo_name:

@@ -11,14 +11,16 @@ var active : bool = false
 var can_shoot : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	pass
+
+func start() -> void:
+	max_ammo = WeaponManager.magazine_size
 	ammo = max_ammo
 	PlayerManager.current_ammo = ammo
 	SignalManager.ammo_used.emit()
-	
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(!active):
 		return
 	if(Input.is_action_pressed("Aim")):
@@ -55,7 +57,7 @@ func _process(delta: float) -> void:
 			bullet_mesh.queue_free()
 			bullet.get_child(get_child_count()-1).set_surface_override_material(0, load("res://Art/3D/Weapons/Master_Material.material"))
 			var weapon_origin = find_parent("Player").find_child("WeaponOriginPistol")
-			var direction : Vector3 = (weapon_origin.global_transform.basis.z + Vector3(randf_range(-0.01, 0.01) * WeaponManager.accuracy(), randf_range(-0.01, 0.01) * WeaponManager.accuracy(), randf_range(-0.01, 0.01) * WeaponManager.accuracy())).normalized()
+			var direction : Vector3 = (weapon_origin.global_transform.basis.z + Vector3(randf_range(-0.001, 0.001) * WeaponManager.usable_accuracy(), randf_range(-0.001, 0.001) * WeaponManager.usable_accuracy(), randf_range(-0.001, 0.001) * WeaponManager.usable_accuracy())).normalized()
 			bullet.look_at_from_position(position, direction)
 			bullet.global_transform = weapon_origin.global_transform
 			bullet.mass = 0.02
