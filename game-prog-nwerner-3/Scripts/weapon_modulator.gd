@@ -38,13 +38,19 @@ func _process(_delta: float) -> void:
 func load_weapon() -> void:
 	if($WeaponsMenu.visible == true):
 		WeaponManager.export_parameters()
-	_on_platform_options_item_selected(WeaponManager.weapon_components["Platform"])
+	if (WeaponManager.weapon_components["Platform"] == null || WeaponManager.weapon_components["Platform"] == 0):
+		_on_platform_options_item_selected(1)
+	else:
+		_on_platform_options_item_selected(WeaponManager.weapon_components["Platform"])
 	await get_tree().process_frame
 	
 	if WeaponManager.weapon_components["Magazine"] == null:
-		return
+		_on_magazine_p_options_item_selected(1)
 	
 	#look for where null or 0 is asked for!
+	if WeaponManager.weapon_components["Magazine"] == null || WeaponManager.weapon_components["Magazine"] == 0:
+		_on_magazine_p_options_item_selected(0)
+	
 	match WeaponManager.weapon_components["Platform"]:
 		1, 2:
 			_on_magazine_p_options_item_selected(WeaponManager.weapon_components["Magazine"])
@@ -54,8 +60,7 @@ func load_weapon() -> void:
 			_on_magazine_s_options_item_selected(WeaponManager.weapon_components["Magazine"])
 	await get_tree().process_frame
 	
-	if WeaponManager.weapon_components["Magazine"] == null || WeaponManager.weapon_components["Magazine"] == 0:
-		return #maybe just magazine of 1
+		#maybe just magazine of 1
 		
 	if(WeaponManager.weapon_components["Platform"] == 4):
 		if WeaponManager.weapon_components["PumpHandle"] == null:
@@ -64,35 +69,41 @@ func load_weapon() -> void:
 			_on_pump_handle_options_item_selected(WeaponManager.weapon_components["PumpHandle"])
 		
 	if WeaponManager.weapon_components["Barrel"] == null || WeaponManager.weapon_components["Barrel"] == 0:
-			return
-	_on_barrel_options_item_selected(WeaponManager.weapon_components["Barrel"])
+		_on_barrel_options_item_selected(0)
+	else:
+		_on_barrel_options_item_selected(WeaponManager.weapon_components["Barrel"])
 	await get_tree().process_frame
 	
 	if WeaponManager.weapon_components["Ammunition"] == null || WeaponManager.weapon_components["Ammunition"] == 0:
-			return
-	_on_ammunition_options_item_selected(WeaponManager.weapon_components["Ammunition"])
+		_on_ammunition_options_item_selected(1)
+	else:
+		_on_ammunition_options_item_selected(WeaponManager.weapon_components["Ammunition"])
 	SignalManager.ammo_selected.emit()
 	await get_tree().process_frame
 	
 	if(WeaponManager.weapon_components["Platform"] == 1 || WeaponManager.weapon_components["Platform"] == 2):
 		if WeaponManager.weapon_components["Slide"] == null || WeaponManager.weapon_components["Slide"] == 0:
-			return
-		_on_slide_options_item_selected(WeaponManager.weapon_components["Slide"])
+			_on_slide_options_item_selected(0)
+		else:
+			_on_slide_options_item_selected(WeaponManager.weapon_components["Slide"])
 	
 	if WeaponManager.weapon_components["Slide"] != null:
 		if WeaponManager.weapon_components["Sight"] == null || WeaponManager.weapon_components["Sight"] == 0:
-			pass
+			_on_sight_p_options_item_selected(0)
 		else:
 			_on_sight_p_options_item_selected(WeaponManager.weapon_components["Sight"])
 	
 	if(WeaponManager.weapon_components["Platform"] == 1 || WeaponManager.weapon_components["Platform"] == 2):
 		if WeaponManager.weapon_components["Barrel"] == 2:
 			if WeaponManager.weapon_components["Muzzle"] == null || WeaponManager.weapon_components["Muzzle"] == 0:
-				pass
+				_on_muzzle_options_item_selected(0)
 			else:
 				_on_muzzle_options_item_selected(WeaponManager.weapon_components["Muzzle"])
-		if WeaponManager.weapon_components["Trigger"] != null && WeaponManager.weapon_components["Trigger"] != 0:
-			_on_trigger_options_item_selected(WeaponManager.weapon_components["Trigger"])
+		if WeaponManager.weapon_components["Trigger"] == null && WeaponManager.weapon_components["Trigger"] == 0:
+			_on_trigger_options_item_selected(0)
+		else:
+			if WeaponManager.weapon_components["Trigger"] != null:
+				_on_trigger_options_item_selected(WeaponManager.weapon_components["Trigger"])
 	
 	
 	$WeaponFunctionality.process_mode = Node.PROCESS_MODE_INHERIT
@@ -103,6 +114,7 @@ func load_weapon() -> void:
 
 #ich hasse diese function (Grüße vom 22.07.2026 00:31 Uhr)
 func weapon_modified(type : int) -> void:
+	WeaponManager.export_parameters()
 	match type:
 		0:
 			#region platform
@@ -122,10 +134,12 @@ func weapon_modified(type : int) -> void:
 			#endregion 
 		1:
 			#region magazine"
+			if magazine_mesh != null:
+				PlayerManager.current_ammuniton = magazine_mesh
 			var magazine_NODE = platform.get_child(0).find_child("Socket_Magazine" + "*")
 			if(magazine_mesh == null):
 				
-				if(magazine.get_child_count() == 0):
+				if(magazine == null || magazine.get_child_count() == 0):
 					return
 				magazine_NODE.get_child(0).queue_free()
 				return
@@ -137,9 +151,13 @@ func weapon_modified(type : int) -> void:
 			#endregion
 		2:
 			#region ammunition
-			var ammunition_NODE = magazine.get_child(0).get_child(0)
+			var ammunition_NODE
+			if magazine != null:
+				if magazine.get_child(0).get_child(0) != null:
+					ammunition_NODE = magazine.get_child(0).get_child(0)
 			if(ammunition_mesh == null):
-				ammunition_NODE.get_child(0).queue_free()
+				if(ammunition_NODE.get_child(0) != null):
+					ammunition_NODE.get_child(0).queue_free()
 				return
 			if(ammunition_NODE.get_child_count() != 0 && ammunition_NODE.get_child(0) != null):
 				ammunition_NODE.get_child(0).queue_free()
@@ -155,9 +173,11 @@ func weapon_modified(type : int) -> void:
 			#region pumphandle
 			var pumphandle_NODE = platform.get_child(0).get_child(8)
 			if(pumphandle_mesh == null):
-				if(pumphandle.get_child_count() == 0):
+				if pumphandle != null:
+					if(pumphandle.get_child_count() == 0):
+						return
+					pumphandle_NODE.get_child(0).queue_free()
 					return
-				pumphandle_NODE.get_child(0).queue_free()
 				return
 			if(pumphandle_NODE.get_child_count() != 0 && pumphandle_NODE.get_child(0) != null):
 				pumphandle_NODE.get_child(0).queue_free()
@@ -169,9 +189,11 @@ func weapon_modified(type : int) -> void:
 			#region barrel
 			var barrel_NODE = platform.get_child(0).find_child("Socket_Barrel" + "*", true)
 			if(barrel_mesh == null):
-				if(barrel.get_child_count() == 0):
+				if barrel != null:
+					if(barrel.get_child_count() == 0):
+						return
+					barrel_NODE.get_child(0).queue_free()
 					return
-				barrel_NODE.get_child(0).queue_free()
 				return
 				
 			if(barrel_NODE.get_child_count() != 0 && barrel_NODE.get_child(0) != null):
@@ -185,9 +207,11 @@ func weapon_modified(type : int) -> void:
 			#region slide
 			var slide_NODE = platform.get_child(0).find_child("Socket_Slide" + "*", true)
 			if(slide_mesh == null):
-				if(slide.get_child_count() == 0):
+				if(slide != null):
+					if(slide.get_child_count() == 0):
+						return
+					slide_NODE.get_child(0).queue_free()
 					return
-				slide_NODE.get_child(0).queue_free()
 				return
 				
 			if(slide_NODE.get_child_count() != 0 && slide_NODE.get_child(0) != null):
@@ -200,11 +224,15 @@ func weapon_modified(type : int) -> void:
 			#endregion
 		6:
 			#region sight
-			var sight_NODE = slide.find_child("Socket_Sight" + "*", true)
+			var sight_NODE
+			if slide != null:
+				sight_NODE = slide.find_child("Socket_Sight" + "*", true)
 			if(sight_mesh == null):
-				if(sight.get_child_count() == 0):
+				if sight != null:
+					if(sight.get_child_count() == 0):
+						return
+					sight_NODE.get_child(0).queue_free()
 					return
-				sight_NODE.get_child(0).queue_free()
 				return
 				
 			if(sight_NODE.get_child_count() != 0 && sight_NODE.get_child(0) != null):
@@ -219,11 +247,15 @@ func weapon_modified(type : int) -> void:
 			#endregion
 		7:
 			#region muzzle
-			var muzzle_NODE = barrel.find_child("Socket_Muzzle", true)
+			var muzzle_NODE
+			if slide != null:
+				muzzle_NODE = barrel.find_child("Socket_Muzzle", true)
 			if(muzzle_mesh == null):
-				if(muzzle.get_child_count() == 0):
+				if muzzle != null:
+					if(muzzle.get_child_count() == 0):
+						return
+					muzzle_NODE.get_child(0).queue_free()
 					return
-				muzzle_NODE.get_child(0).queue_free()
 				return
 				
 			if(muzzle_NODE.get_child_count() != 0 && muzzle_NODE.get_child(0) != null):
@@ -236,9 +268,11 @@ func weapon_modified(type : int) -> void:
 			#region trigger
 			var trigger_NODE = platform.find_child("Socket_Trigger" + "*", true)
 			if(trigger_mesh == null):
-				if(trigger.get_child_count() == 0):
+				if trigger != null:
+					if(trigger.get_child_count() == 0):
+						return
+					trigger_NODE.get_child(0).queue_free()
 					return
-				trigger_NODE.get_child(0).queue_free()
 				return
 				
 			if(trigger_NODE.get_child_count() != 0 && trigger_NODE.get_child(0) != null):
@@ -265,7 +299,6 @@ func weapon_modified(type : int) -> void:
 	#endregion
 	"""
 	#endregion
-	WeaponManager.export_parameters()
 
 
 func _on_platform_options_item_selected(index: int) -> void:

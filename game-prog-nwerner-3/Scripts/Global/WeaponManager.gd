@@ -65,6 +65,7 @@ func c_fin_damage_comp() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	weapon_scene = PackedScene.new()
+	weapon_scene.set_meta("edited", false)
 	SignalManager.ammo_selected.connect(set_ammunition_type)
 
 func damage() -> float:
@@ -117,6 +118,10 @@ func calc_accuracy(value : float) -> float:
 
 func calculate_muzzle_point() -> Vector3:
 	#das berechnet ne primitive bounding box um das mesh herum und gibt mir die größe in jede richtung als vector3, woraus ich dann die länge des jeweiligen barrels ermitteln kann :D
-	var aabb = barrel_mesh.get_aabb()
+	var aabb : AABB
+	if barrel_mesh == null:
+		aabb = AABB()
+	else:
+		aabb = barrel_mesh.get_aabb()
 	var true_size = aabb.size 
 	return barrel_socket + Vector3(0.0, 0.0, true_size.z)

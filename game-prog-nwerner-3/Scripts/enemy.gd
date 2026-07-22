@@ -48,13 +48,14 @@ var speed : float = 5.0
 func _ready() -> void:
 	instantiate_weapon()
 	shot_timer = Timer.new()
+	self.add_child(shot_timer)
 	
 	#PLACEHOLDER
-	var label3d : Label3D = Label3D.new()
+	'var label3d : Label3D = Label3D.new()
 	label3d.text = "Arschhaare"
 	label3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	label3d.position = Vector3(0.0, 1.0, 0.0)
-	$DamageFeedback.add_child(label3d)
+	$DamageFeedback.add_child(label3d)'
 	
 	GameManager.enemy_count += 1
 	await get_tree().physics_frame
@@ -267,9 +268,9 @@ func follow_player() -> void:
 	look_at(player.global_position, Vector3.UP)
 	var richtung : Vector3 = (global_position - player.global_position).normalized()
 	nav_agent.target_position = player.global_position + richtung * 9.5
-	if global_position.distance_to(player.global_position + richtung * 9.5) <= 0.05 && shot_timer.timeout:
+	if global_position.distance_to(player.global_position + richtung * 9.5) <= 0.05 : #&& shot_timer.time_left == 0.0
 		if(!shooting):
-			shot_timer.start(randf_range(5.0, 6.9))
+			shot_timer.start(1.0)
 			shooting = true
 			shoot_player()
 			#find fix for timer!!!!!!!!!!!!!!!!!!!!!!!!!

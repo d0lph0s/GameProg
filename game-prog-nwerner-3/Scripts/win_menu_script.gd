@@ -8,6 +8,7 @@ func _ready() -> void:
 
 func win() -> void:
 		show()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		%Time.text = "Time: " + str(GameManager.actual_time) + " s"
 
 func _on_restart_pressed() -> void:

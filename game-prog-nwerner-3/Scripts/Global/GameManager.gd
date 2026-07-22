@@ -18,14 +18,22 @@ var Mouse_Sensitivity : float = 0.5
 func _ready() -> void:
 	get_tree().paused = true
 	SignalManager.enemy_killed.connect(enemy_killed)
+	
+func _process(_delta: float) -> void:
+	if (Input.is_action_just_pressed("Escape")):
+		pause_flip()
+
+func pause_flip() -> void:
+	get_tree().paused = !get_tree().paused
+	if(get_tree().paused):
+		SignalManager.pause.emit(true)
+	if(!get_tree().paused):
+		SignalManager.pause.emit(false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if(timing):
 		highscore_timer()
-	
-	if (Input.is_action_just_pressed("Escape")):
-		get_tree().paused = true
 
 func highscore_timer() -> void:
 	timer += 1.0
@@ -49,6 +57,8 @@ func death() -> void:
 	get_tree().paused = true
 
 func start() -> void:
+	if WeaponManager.weapon_scene == null:
+		WeaponManager.weapon_scene = weapon_menu
 	var weapon_node : Node3D = WeaponManager.weapon_scene.instantiate()
 	weapon_node.position -= Vector3(0.0, 0.015, 0.0)
 	weapon_node.get_child(6).hide()
@@ -61,6 +71,9 @@ func start() -> void:
 	get_tree().root.get_child(-1).find_child("Player").find_child("WeaponOriginPistol").add_child(weapon_node)
 	weapon_node.show()
 	weapon_node.load_weapon()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	await get_tree().process_frame
+	SignalManager.reset_audio.emit(false)
 
 func load_level(scene : PackedScene) -> void:
 	GameManager.enemy_count = 0
@@ -74,4 +87,5 @@ func load_level(scene : PackedScene) -> void:
 		await get_tree().process_frame
 		start()
 	else:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		timing = false

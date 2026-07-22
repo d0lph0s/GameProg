@@ -120,10 +120,11 @@ doppler_tracking = 2
 
 [node name="HitSound" type="AudioStreamPlayer3D" parent="." unique_id=23584059]
 stream = ExtResource("1_vlxeq")
-volume_db = 12.0
-unit_size = 0.8
-max_distance = 10.0
+volume_db = 24.0
+unit_size = 0.9
+max_distance = 12.5
 bus = &"Weapon"
+playback_type = 1
 doppler_tracking = 2
 script = SubResource("GDScript_14k46")
 

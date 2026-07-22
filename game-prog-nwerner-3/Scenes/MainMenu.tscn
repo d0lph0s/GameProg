@@ -13,6 +13,25 @@
 [ext_resource type="Texture2D" uid="uid://becyhppjmg7ow" path="res://Art/2D/UI/button_wide_weapon_hover.png" id="8_8e205"]
 [ext_resource type="AudioStream" uid="uid://bdsaihufvsa48" path="res://Art/Sound/STD/rentner_waltz.ogg" id="9_cmrfp"]
 
+[sub_resource type="GDScript" id="GDScript_tdnec"]
+script/source = "extends AudioStreamPlayer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	SignalManager.reset_audio.connect(dampen)
+	
+func dampen(paused : bool) -> void:
+	var lp_tween : Tween = create_tween()
+	print(AudioServer.get_bus_effect(0, 0))
+	if(paused):
+		lp_tween.tween_property(AudioServer.get_bus_effect(0, 0), \"cutoff_hz\", 2000.0, 0.65)
+		lp_tween.play()
+	else:
+		lp_tween.tween_property(AudioServer.get_bus_effect(0, 0), \"cutoff_hz\", 20500.0, 1.5)
+		lp_tween.play()
+"
+
 [node name="MainMenu" type="Control" unique_id=1736592503]
 process_mode = 3
 layout_mode = 3
@@ -60,6 +79,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.3
 
 [node name="Start" type="TextureButton" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1764996390]
+unique_name_in_owner = true
 custom_maximum_size = Vector2(1000, -1)
 layout_mode = 2
 size_flags_vertical = 3
@@ -117,6 +137,18 @@ volume_db = -3.0
 autoplay = true
 bus = &"Background"
 playback_type = 1
+script = SubResource("GDScript_tdnec")
+
+[node name="AcceptDialog" type="AcceptDialog" parent="." unique_id=1260734824]
+oversampling_override = 1.0
+title = "Halt Stop!"
+position = Vector2i(696, 433)
+size = Vector2i(500, 200)
+ok_button_text = "Alrighty"
+dialog_text = "Du musst erst deine Waffe modifizieren, bevor du ins Gefecht aufbrichst.
+Du willst doch nicht unvorbereitet auf die Rentner treffen.
+Öffne das \"Weapon\"-Menü und rüste dich aus!"
+dialog_autowrap = true
 
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/Weapon" to="." method="_on_weapon_pressed"]

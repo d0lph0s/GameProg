@@ -8,6 +8,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://iwa0upeh5chu" path="res://Art/3D/Characters/Player/Animations/FPS_Hands.res" id="4_megsn"]
 [ext_resource type="PackedScene" uid="uid://c5qcpfn0lhjkj" path="res://Scenes/WinMenu.tscn" id="8_bhhdu"]
 [ext_resource type="PackedScene" uid="uid://tf621qvffkst" path="res://Scenes/PlayerUI.tscn" id="9_megsn"]
+[ext_resource type="PackedScene" uid="uid://vuntrd5x8ytc" path="res://Scenes/PauseMenu.tscn" id="10_ksbbd"]
 [ext_resource type="PackedScene" uid="uid://b7m2ayjt63u2t" path="res://Scenes/DeathMenu.tscn" id="10_yoq75"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_writ7"]
@@ -502,12 +503,8 @@ graph_offset = Vector2(26, -55)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i6fqs"]
 shader = ExtResource("4_dewec")
-shader_parameter/levels = 5
-shader_parameter/spread = 0.005
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tdnec"]
-width = 20
-height = 20
+shader_parameter/levels = 3
+shader_parameter/spread = 0.0
 
 [node name="Player" type="CharacterBody3D" unique_id=38466257]
 collision_layer = 64
@@ -809,7 +806,6 @@ debug_shape_custom_color = Color(0, 3.4822285, 2.3525748, 1)
 
 [node name="Control" type="Control" parent="." unique_id=429013575]
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -820,7 +816,7 @@ mouse_filter = 2
 script = ExtResource("4_5ixxa")
 
 [node name="ColorRect" type="ColorRect" parent="Control" unique_id=1576975646]
-visible = false
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_i6fqs")
 layout_mode = 1
 anchors_preset = 15
@@ -829,32 +825,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-
-[node name="CrossHair" type="Control" parent="Control" unique_id=657769826]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="Control/CrossHair" unique_id=710600093]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="Control/CrossHair/CenterContainer" unique_id=1010313544]
-custom_maximum_size = Vector2(20, 20)
-layout_mode = 2
-offset_transform_enabled = true
-offset_transform_position = Vector2(-10, -10)
-texture = SubResource("NoiseTexture2D_tdnec")
-stretch_mode = 2
 
 [node name="WinMenu" parent="Control" unique_id=711515340 instance=ExtResource("8_bhhdu")]
 visible = false
@@ -865,4 +835,7 @@ layout_mode = 1
 
 [node name="DeathMenu" parent="Control" unique_id=1066113762 instance=ExtResource("10_yoq75")]
 visible = false
+layout_mode = 1
+
+[node name="PauseMenu" parent="Control" unique_id=299682778 instance=ExtResource("10_ksbbd")]
 layout_mode = 1

@@ -9,3 +9,5 @@ signal ammo_used
 signal ammo_selected
 signal death
 signal stats_updated
+signal pause(variant : bool)
+signal reset_audio(variant : bool)

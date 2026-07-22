@@ -7,6 +7,8 @@ func _ready() -> void:
 	SignalManager.damage_taken.connect(damage_taken)
 	SignalManager.ammo_selected.connect(ammo_selected)
 	SignalManager.ammo_used.connect(ammo_used)
+	SignalManager.stage_cleared.connect(hide)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

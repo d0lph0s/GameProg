@@ -84,7 +84,9 @@ label_settings = SubResource("LabelSettings_f1gli")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer" unique_id=636954442]
+[node name="GIF" type="TextureRect" parent="HBoxContainer/VBoxContainer" unique_id=636954442]
+unique_name_in_owner = true
+process_mode = 4
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6

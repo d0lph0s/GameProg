@@ -35,6 +35,7 @@ func _collision(body : Node) -> void:
 		$Trail.reparent(get_tree().root)
 	if(body.process_mode == PROCESS_MODE_DISABLED):
 		return
+	queue_free()
 	if(body.has_meta("Enemy")):
 		if (!body.has_method("take_damage")):
 			return
@@ -43,13 +44,13 @@ func _collision(body : Node) -> void:
 		if final_damage < 0:
 			final_damage = 0
 		if body.get_meta("Type") == WeaponManager.ammunition_type:
-			bonus = 5
+			bonus = 3
 			body.display_damage(bonus, current_position, bonus_hit_color)
 		body.take_damage(final_damage + bonus)
 		body.display_damage(final_damage, current_position, regular_hit_color)
 		return
 	if body.has_meta("Player"):
-		body.take_damage(10)
+		body.take_damage(randi_range(6, 12))
 		$HitSound.global_position =  current_position
 		$HitSound.stream = load("res://Art/Sound/SFX/shit_hit_player.ogg")
 	else:
@@ -59,4 +60,4 @@ func _collision(body : Node) -> void:
 	if(has_node("HitSound")):
 		$HitSound.await_death()
 		$HitSound.reparent(get_tree().root)
-	queue_free()
+	

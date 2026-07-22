@@ -100,5 +100,6 @@ func _on_options_selected(index: int) -> void:
 func _on_confirm_pressed() -> void:
 	await get_tree().process_frame
 	GameManager.weapon_menu.pack($"../..")
+	WeaponManager.weapon_scene.set_meta("edited", true)
 	WeaponManager.weapon_scene.pack($"../..")
 	GameManager.load_level(GameManager.main_menu)

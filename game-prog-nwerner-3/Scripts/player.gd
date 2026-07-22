@@ -32,15 +32,20 @@ func do_delayed()->void:
 	print(get_viewport().get_camera_3d())
 	print(get_viewport().get_camera_3d() == $CameraHead/Camera3D)
 	$Control._on_confirm_pressed()
+	get_tree().paused = false
 
 func take_damage(damage : int) -> void:
 	health -= damage
 	PlayerManager.current_health = health
 	SignalManager.damage_taken.emit()
 	if(health > 0):
-		return
-	if(health >= 0):
+		pass
+	if(health <= 0):
 		GameManager.death()
+	var tween : Tween = create_tween()
+	%ColorRect.material.set_shader_parameter("spread", 0.025)
+	tween.tween_property(%ColorRect.material, "shader_parameter/spread", 0.0, 0.7)
+
 
 
 func _unhandled_input(event: InputEvent) -> void:

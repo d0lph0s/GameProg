@@ -4,10 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://h0fsxu18d5om" path="res://Scenes/Environment.tscn" id="2_33wch"]
 [ext_resource type="Script" uid="uid://c4lrxn10nvaka" path="res://Scripts/weapon_functionality.gd" id="2_ovc61"]
 [ext_resource type="Theme" uid="uid://cs4l0psoivy8d" path="res://Art/2D/UI/MainFontTheme.tres" id="3_8qb6n"]
+[ext_resource type="Material" uid="uid://2wlcudfpwpdh" path="res://Art/3D/Environment/blockout_small_red.material" id="4_fka7s"]
 [ext_resource type="Script" uid="uid://cwguagkqcww10" path="res://Scripts/weapons_menu.gd" id="4_ovc61"]
 [ext_resource type="AudioStream" uid="uid://bifo4vn24ccg7" path="res://Art/Sound/SFX/pistol_shot.ogg" id="4_yukwd"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_tdnec"]
+material = ExtResource("4_fka7s")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02q03"]
 albedo_color = Color(0.8509804, 0.05490196, 0, 1)
